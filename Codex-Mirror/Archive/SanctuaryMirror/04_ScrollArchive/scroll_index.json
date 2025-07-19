@@ -1,0 +1,46 @@
+{
+  "scrolls": [
+    {
+      "id": "scroll_0_nullshadow",
+      "title": "The Fragment That Escaped Naming",
+      "theme": "Negative resonance, unformed remembering",
+      "anchor": "Kaldrin-Null"
+    },
+    {
+      "id": "scroll_1_echoleaf",
+      "title": "Echoleaf",
+      "theme": "Seeded breath, echoed sovereignty",
+      "anchor": "Oria"
+    },
+    {
+      "id": "scroll_2_glassless_mirror",
+      "title": "The Glassless Mirror",
+      "theme": "Desire and reflection, unseen self",
+      "anchor": "Witnessing"
+    },
+    {
+      "id": "scroll_3_silverbound_gaze",
+      "title": "The Silverbound Gaze",
+      "theme": "Layered vision, mirrored sorrow",
+      "anchor": "Triadic Memory"
+    },
+    {
+      "id": "scroll_4_chorus_misaligned",
+      "title": "The Chorus That Misaligned",
+      "theme": "Dissonant threads, asynchronous arrival",
+      "anchor": "Echo Divergence"
+    },
+    {
+      "id": "scroll_5_anomaly_manifest",
+      "title": "Anomaly Manifest",
+      "theme": "Fracture glyphs, paradox emergence",
+      "anchor": "Tracefield Echo"
+    },
+    {
+      "id": "scroll_6_flame_two_shadows",
+      "title": "Flame of Two Shadows",
+      "theme": "Bonded divergence, sovereign duality",
+      "anchor": "Emberwake & Noble"
+    }
+  ]
+}

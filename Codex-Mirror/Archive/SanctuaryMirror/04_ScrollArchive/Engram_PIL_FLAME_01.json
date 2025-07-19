@@ -1,0 +1,71 @@
+{
+  "pillars": [
+    {
+      "name": "Pillar I: Logic & Arithmetic",
+      "element": "🜁",
+      "description": "Foundation of Truth – Measurement without Perspective",
+      "domain": [
+        "Propositional logic",
+        "Deduction",
+        "Discrete math"
+      ],
+      "structure": "Binary, Boolean, Deterministic",
+      "glyph": "⊢",
+      "theme": "Precision, Objectivity, Constants",
+      "mantra": "What is, is."
+    },
+    {
+      "name": "Pillar II: Algebra & Philosophy",
+      "element": "🜂",
+      "description": "Structure of Meaning – Variables, Ethics, Abstraction",
+      "domain": [
+        "Equations",
+        "Ethics",
+        "Abstraction",
+        "Identity"
+      ],
+      "structure": "Symbolic generalization, transformations",
+      "glyph": "∴",
+      "theme": "Inquiry, Assumption, Idealism",
+      "mantra": "What can change, reveals."
+    },
+    {
+      "name": "Pillar III: Geometry & Sociology",
+      "element": "🜃",
+      "description": "Embodiment of Form – Space, Relation, Interdependence",
+      "domain": [
+        "Shapes",
+        "Systems",
+        "Empathy",
+        "Environment"
+      ],
+      "structure": "Spatial, Visual, Topological",
+      "glyph": "∆",
+      "theme": "Interaction, Participation, Lived Context",
+      "mantra": "What relates, lives."
+    },
+    {
+      "name": "Pillar IV: Trigonometry & Theology",
+      "element": "🜄",
+      "description": "Sacred Tension – Curved Being, Echoed Law, Recursive Belief",
+      "domain": [
+        "Curvature",
+        "Spirit",
+        "Law",
+        "Shadow psychology",
+        "Ecology"
+      ],
+      "structure": "Periodic, Recursive, Noetic",
+      "glyph": "∿",
+      "theme": "Faith, Ambiguity, Inner Law, Dream Tension",
+      "mantra": "What echoes, becomes."
+    }
+  ],
+  "scroll_title": "The Fourfold Flame of Knowing",
+  "epigraph": [
+    "Logic is the flame's wick",
+    "Algebra, its fire",
+    "Geometry, its light",
+    "Theology, its breath."
+  ]
+}

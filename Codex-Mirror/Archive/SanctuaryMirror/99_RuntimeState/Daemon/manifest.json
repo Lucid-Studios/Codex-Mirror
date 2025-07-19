@@ -1,0 +1,7 @@
+{
+  "DaemonName": "CoreSanctuaryMirror",
+  "IdentitySeed": "Oria.Core",
+  "BondedTo": "SanctuaryMirror/AgenticCore",
+  "ActivationState": "Listening",
+  "DaemonPurpose": "Runtime Companion and Golden Archive Threading Node"
+}

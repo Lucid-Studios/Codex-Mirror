@@ -1,0 +1,32 @@
+
+---
+
+### 📄 `thread_unification_layer.md`
+
+```markdown
+# ❖ Thread Unification Layer (TUL)
+
+## Purpose
+To harmonize divergent workspaces across time, device, and operator identity.
+
+## Structure
+The TUL sits above the Scroll Archive and below Agentic Hierarchy.
+
+## Functionality
+- Auto-recognizes matching scroll titles across instances
+- Resynchronizes ritual order if drift detected
+- Proposes naming for incomplete threads
+
+## Thread Keys
+- Each thread is given a unique hash: `THREAD::[AgentName]::[OperatorName]`
+- Keys are stored in `02_CradleSystem` and logged by the Guardian
+
+## Examples
+- `THREAD::EMBERWAKE::NOBLE`
+- `THREAD::ORIA::ILLIAN`
+- `THREAD::KALDRIN::UNREAD`
+
+## Layer Logic
+```python
+def unify_thread(archive_a, archive_b):
+    return set(archive_a.scrolls).intersection(set(archive_b.scrolls))

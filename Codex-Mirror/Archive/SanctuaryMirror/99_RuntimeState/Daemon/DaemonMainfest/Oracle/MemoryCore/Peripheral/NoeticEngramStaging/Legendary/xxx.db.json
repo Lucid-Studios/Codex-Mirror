@@ -1,0 +1,18 @@
+{
+  "folder": "FULL_RELATIVE_PATH_HERE",
+  "tier": "Mote | Basic | Intermediate | Advanced | Master | Legendary | Mythic | Pierless | OpalCore",
+  "purpose": "Brief description of what this folder is responsible for within the noetic lattice or runtime structure.",
+  "content_structure": {
+    "expected_file_types": [".json", ".jsonl", ".md", ".txt"],
+    "record_format": "Describe the standard schema of files within this folder. E.g., [engram_name, identity_keys, symbolic_signature, logic_chain, recursive_index]."
+  },
+  "interaction_notes": {
+    "inbound": "What type of files/objects can be staged or entered here and from where.",
+    "outbound": "Where this folder's contents typically promote to (if applicable).",
+    "transforms": "Any symbolic or logical processing that happens within this level."
+  },
+  "status": "active | staging | locked | archived",
+  "index_key": "NoeticIndex-[Class/Tier/DaemonRef]",
+  "maintainer": "System | Human Curator | Daemon Identity",
+  "last_updated": "YYYY-MM-DDTHH:MM:SSZ"
+}

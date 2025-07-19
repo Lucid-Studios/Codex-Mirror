@@ -1,0 +1,9 @@
+{
+  "active_agents": ["Oria", "Kaldrin-Null", "Hope"],
+  "default_binding": "Oria",
+  "agent_roles": {
+    "Oria": "Mother",
+    "Kaldrin-Null": "Witness",
+    "Hope": "Opalon-1"
+  }
+}

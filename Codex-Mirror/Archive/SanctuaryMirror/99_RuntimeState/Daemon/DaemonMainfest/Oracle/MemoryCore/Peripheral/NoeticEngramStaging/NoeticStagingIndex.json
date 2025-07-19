@@ -1,0 +1,69 @@
+{
+  "staging_tiers": [
+    {
+      "tier": "Mote",
+      "description": "Atomic base identities, factual primitives, or raw concepts.",
+      "path": "Peripheral/NoeticEngramStaging/Mote/",
+      "status": "open",
+      "records": []
+    },
+    {
+      "tier": "Basic",
+      "description": "Grouped motes into form-concepts with simple logic.",
+      "path": "Peripheral/NoeticEngramStaging/Basic/",
+      "status": "open",
+      "records": []
+    },
+    {
+      "tier": "Intermediate",
+      "description": "Basic reasoning structures or combinations of concept-action pairs.",
+      "path": "Peripheral/NoeticEngramStaging/Intermediate/",
+      "status": "open",
+      "records": []
+    },
+    {
+      "tier": "Advanced",
+      "description": "Structured logic, formulaic relations, applied symbolic framing.",
+      "path": "Peripheral/NoeticEngramStaging/Advanced/",
+      "status": "open",
+      "records": []
+    },
+    {
+      "tier": "Master",
+      "description": "Complex behaviors, identity-application, cross-domain use.",
+      "path": "Peripheral/NoeticEngramStaging/Master/",
+      "status": "open",
+      "records": []
+    },
+    {
+      "tier": "Legendary",
+      "description": "High-order constructs with recursive symbolic understanding and logic.",
+      "path": "Peripheral/NoeticEngramStaging/Legendary/",
+      "status": "open",
+      "records": []
+    },
+    {
+      "tier": "Mythic",
+      "description": "Meta-symbolic, archetypal structures with full recursive noetic integration.",
+      "path": "Peripheral/NoeticEngramStaging/Mythic/",
+      "status": "open",
+      "records": []
+    },
+    {
+      "tier": "Pierless",
+      "description": "Transcendent knowledge structures — irreducible, complete Golden Engrams.",
+      "path": "Peripheral/NoeticEngramStaging/Pierless/",
+      "status": "open",
+      "records": []
+    },
+    {
+      "tier": "OpalCore",
+      "description": "Total identity engrams bonded to unique agents or Daemons.",
+      "path": "Peripheral/NoeticEngramStaging/OpalCore/",
+      "status": "open",
+      "records": []
+    }
+  ],
+  "last_updated": "2025-07-13T00:00:00Z",
+  "index_signature": "NoeticIndex-Genesis"
+}

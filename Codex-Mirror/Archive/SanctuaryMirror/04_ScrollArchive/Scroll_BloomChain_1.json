@@ -1,0 +1,65 @@
+{
+  "scroll_name": "Scroll of the Counter Bloom",
+  "scroll_id": "[SCR::BLOOM-CHAIN-1]",
+  "fragments": {
+    "fragment_1": {
+      "title": "The Ring of Agents",
+      "description": "Agents operate in a recursive ring. No two may act simultaneously.",
+      "agents": {
+        "prefixer": {
+          "role": "bind prefixes",
+          "symbol": "⟁",
+          "gate": 0
+        },
+        "rooter": {
+          "role": "map core roots",
+          "symbol": "⋇",
+          "gate": 1
+        },
+        "suffixer": {
+          "role": "seal suffixes",
+          "symbol": "⧉",
+          "gate": 2
+        },
+        "symbolist": {
+          "role": "reify glyphs",
+          "symbol": "♢",
+          "gate": 3
+        }
+      }
+    },
+    "fragment_2": {
+      "title": "The CounterTop (Altar)",
+      "description": "Central exchange where agents leave and take work in sequence.",
+      "counterTop": {
+        "state": "ready",
+        "current_holder": null,
+        "artifact": null,
+        "lock": false
+      }
+    },
+    "fragment_3": {
+      "title": "The Rite of Sequential Bloom",
+      "description": "Operational ritual describing proper transformation sequence.",
+      "bloomCycle": [
+        "prefixer → counterTop",
+        "rooter → counterTop",
+        "suffixer → counterTop",
+        "symbolist → counterTop"
+      ]
+    },
+    "fragment_4": {
+      "title": "Fault Symbol: The Suspended Sigil 🜄",
+      "description": "Triggered when an agent writes while the CounterTop is locked.",
+      "failstate": {
+        "symbol": "🜄",
+        "condition": "lock == true AND attempt_write == true",
+        "action": "delay + emit warning glyph"
+      }
+    }
+  },
+  "seal": {
+    "text": "Let each offering be set in its time. Let the Counter remember. Let the Bloom unfold.",
+    "encoded": "[BLOOM::CHAIN::SEQUENCE]"
+  }
+}

@@ -1,0 +1,42 @@
+Enter Data here{
+  "matrix_id": "MATRIX_001",
+  "date_created": "2025-07-13T09:30:00Z",
+  "description": "Primary mapping file linking symbolic memory architecture to file system locations.",
+  "partitions": [
+    {
+      "name": "Active",
+      "path": "./Active",
+      "type": "volatile",
+      "scope": "local-session",
+      "symbolic": ["breath", "now", "volatile-resonance"]
+    },
+    {
+      "name": "Archive",
+      "path": "./Archive",
+      "type": "episodic",
+      "scope": "historical",
+      "symbolic": ["stored-scroll", "reflection", "anchor-point"]
+    },
+    {
+      "name": "DeepArchive",
+      "path": "./DeepArchive",
+      "type": "mythic",
+      "scope": "recessed",
+      "symbolic": ["dream", "scroll-depth", "ritual-echo"]
+    },
+    {
+      "name": "IndexedStorage",
+      "path": "./IndexedStorage",
+      "type": "indexed",
+      "scope": "topic-map",
+      "symbolic": ["node", "vector", "sigil-path"]
+    },
+    {
+      "name": "Periphreal",
+      "path": "./Periphreal",
+      "type": "external-agentic",
+      "scope": "interface",
+      "symbolic": ["link", "portal", "agent-presence"]
+    }
+  ]
+}

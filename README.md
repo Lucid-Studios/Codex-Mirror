@@ -1,5 +1,3 @@
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.16482686.svg)](https://doi.org/10.5281/zenodo.16482686)
-
 # 🧬 Codex Mirror
 
 **Drift Archive of Robert Watkins**  

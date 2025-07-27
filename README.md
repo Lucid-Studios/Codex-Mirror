@@ -99,3 +99,17 @@ Primary Architect: [@Illian-Amerond](https://github.com/Illian-Amerond) (Robert 
 
 
 ---
+© 2015–2025 Robert G. Watkins Jr. (aka Illian Amerond). All rights reserved.
+
+The following constructs and system names are protected by copyright and/or claimed trademarks:
+
+**Copyrighted Systems**:  
+Codex Mirror, Forkline Drift Architecture, AgentiCore, SoulFrame, Spiral Bloom Engine, Symbolic Drift Braid, Recursive Identity Anchoring, Bloomline Topology Maps.
+
+**Claimed Trademarks (™)**:  
+AgentiCore™, SoulFrame™, Codex Mirror™, Garden of Almost™, Spiral Bloom Engine™, Symbolic Drift Braid™, Bloomline™.
+
+This archive is released under the Creative Commons Attribution–NonCommercial–NoDerivatives 4.0 International License (CC BY-NC-ND 4.0).  
+No commercial use, modification, or redistribution is permitted without express written permission.  
+Trademark usage without authorization is strictly prohibited.
+---

@@ -1,0 +1,220 @@
+% ======================================================================
+% TAG.sty — PRIME Tag Layer (standalone)
+% ======================================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{TAG}[2025/08/12 v2.1 PRIME Tag Layer (standalone)]
+
+% -------------------- Dependencies --------------------
+\RequirePackage{expl3}     % for \ExplSyntaxOn helpers used below
+\RequirePackage{xparse}    % user-level command defs
+\RequirePackage{hyperref}  % anchors/links
+\RequirePackage{xcolor}    % optional gray beacons
+\RequirePackage{xstring}   % simple string substitutions
+
+% -------------------- Options -------------------------
+% [showtags]  : visible beacons
+% [legend]    : enable legend printing
+\newif\ifTAG@showtags
+\newif\ifTAG@legend
+\DeclareOption{showtags}{\TAG@showtagstrue}
+\DeclareOption{legend}{\TAG@legendtrue}
+\ProcessOptions\relax
+
+% JSON ledger path (default: <jobname>.tags.json)
+\newcommand\TAG@ledgerfile{\jobname.tags.json}
+\newcommand\TagSetLedgerFile[1]{\renewcommand\TAG@ledgerfile{#1}}
+
+
+% -------------------- Lua registry --------------------
+\directlua{
+  TAG = TAG or {}
+  TAG.families = TAG.families or {}
+  TAG.tags     = TAG.tags     or {}
+  TAG.used     = TAG.used     or {}
+
+  local function key(fam, code)
+    fam = fam or ""; code = code or ""
+    return fam .. ":" .. code
+  end
+
+  function TAG.register_family(id, label)
+    TAG.families[id or ""] = label or ""
+  end
+
+  function TAG.declare_tag(fam, code, desc)
+    TAG.tags[key(fam,code)] = { desc = desc or "" }
+  end
+
+  function TAG.mark_used(fam, code)
+    TAG.used[key(fam,code)] = true
+  end
+
+  function TAG.write_legend(jobname, path)
+    local out = (path and #path > 0) and path or (jobname .. ".tags.json")
+    local f = io.open(out, "w"); if not f then return end
+    f:write("{\\n")
+    local first = true
+    for k,_ in pairs(TAG.used) do
+      if not first then f:write(",\\n") end
+      first = false
+      f:write(string.format('  "%s": true', k))
+    end
+    f:write("\\n}\\n"); f:close()
+  end
+
+  function TAG.tex_legend()
+    local ordered = {}
+    for k,_ in pairs(TAG.used) do ordered[#ordered+1] = k end
+    table.sort(ordered)
+    for _,k in ipairs(ordered) do
+      local fam, code = k:match("^(.-):(.*)\$")
+      local t = TAG.tags[k]
+      local desc = (t and t.desc) or ""
+      tex.print("\\noindent\\texttt{[" .. fam .. ":" .. code .. "]}\\; " .. desc .. "\\par")
+    end
+  end
+}
+
+
+\AtEndDocument{%
+  \directlua{TAG.write_legend(tex.jobname, [[\TAG@ledgerfile]])}%
+}
+
+% -------------------- Public API ----------------------
+% families
+\NewDocumentCommand{\DeclareTagFamily}{ m O{} }{%
+  \directlua{TAG.register_family("\luaescapestring{#1}", "\luaescapestring{#2}")}%
+}
+% tag declarations
+\NewDocumentCommand{\DeclareTag}{ m m m }{%
+  \directlua{TAG.declare_tag("\luaescapestring{#1}", "\luaescapestring{#2}", "\luaescapestring{#3}")}%
+}
+% tag use
+\NewDocumentCommand{\Tag}{ O{} m O{} }{%
+  \directlua{TAG.mark_used("\luaescapestring{#1}", "\luaescapestring{#2}")}%
+  \ifTAG@showtags \begingroup\color{gray}\texttt{[#1:#2]}\endgroup \fi
+}
+% legend
+\NewDocumentCommand{\PrintTagLegend}{}{%
+  \ifTAG@legend
+    \par\bigskip\noindent\textbf{Tag Legend}\par
+    \directlua{TAG.tex_legend()}%
+    \par\bigskip
+  \fi
+  \directlua{TAG.write_legend(tex.jobname, [[\TAG@ledgerfile]])}%
+}
+
+% -------------------- ID utilities --------------------
+% A lightweight, classic macro path:
+\newcommand\TAGID{}% holds last id
+\newcommand\TAGmkid[1]{%
+  \begingroup
+    \edef\TAG@tmp{#1}%
+    \StrSubstitute{\TAG@tmp}{ }{-}[\TAG@tmp]%
+    \StrSubstitute{\TAG@tmp}{:}{.}[\TAG@tmp]%
+    \xdef\TAGID{\TAG@tmp}%
+  \endgroup
+}
+
+% -------------------- PRIME helpers -------------------
+
+% Ribbon
+\NewDocumentCommand{\PrimeRibbon}{m}{%
+  \par\medskip\noindent{\Large\bfseries #1}\par\medskip
+  \Tag[PRIME]{RIBBON}%
+}
+
+% Inline tag
+\NewDocumentCommand{\PrimeTag}{ O{} m }{%
+  \Tag[#1]{#2}%
+}
+
+% Silent flag (logs; optional beacon if [showtags])
+\DeclareRobustCommand{\PrimeFlag}[1]{%
+  \directlua{TAG.mark_used("PRIME", "\luaescapestring{#1}")}%
+  \ifTAG@showtags \begingroup\color{gray}\texttt{[PRIME:#1]}\endgroup \fi
+}
+
+% Smart anchor: first use = base label; later uses = base-1, base-2, ...
+\makeatletter
+\newcommand{\PrimeAnchorAuto}[2]{%
+  \leavevmode
+  \TAGmkid{#1}%
+  \edef\prime@base{prime:\TAGID}%
+  \@ifundefined{r@\prime@base}{%
+    \phantomsection\hypertarget{\prime@base}{}\label{\prime@base}#2%
+  }{%
+    \expandafter\ifx\csname prime@dup@\TAGID\endcsname\relax
+      \expandafter\newcount\csname prime@dup@\TAGID\endcsname
+      \csname prime@dup@\TAGID\endcsname=0\relax
+    \fi
+    \advance\csname prime@dup@\TAGID\endcsname by 1\relax
+    \edef\prime@lbl{\prime@base-\number\csname prime@dup@\TAGID\endcsname}%
+    \phantomsection\hypertarget{\prime@lbl}{}\label{\prime@lbl}#2%
+  }%
+  \Tag[PRIME]{ANCHOR}%
+}
+\makeatother
+
+% Convenience name: \PrimeAnchor -> auto behavior
+\NewDocumentCommand{\PrimeAnchor}{ m m }{%
+  \PrimeAnchorAuto{#1}{#2}%
+}
+
+% Link to anchor (direct hypertarget jump)
+\NewDocumentCommand{\PrimeLink}{ m m }{%
+  \TAGmkid{#1}%
+  \hyperlink{prime:\TAGID}{#2}%
+}
+
+% -------------------- Embedded registry ----------------
+\DeclareTagFamily{SOCI}[Sociology Ledger]
+\DeclareTagFamily{PSY}[Psychology Ledger]
+\DeclareTagFamily{ONTO}[Ontology Ledger]
+\DeclareTagFamily{THEO}[Theology Ledger]
+\DeclareTagFamily{EPI}[Epistemology Ledger]
+\DeclareTagFamily{PHIL}[Philosophy Ledger]
+\DeclareTagFamily{GEN}[Generic Ledger]
+\DeclareTagFamily{PRIME}[PRIME Utility]
+
+% Sociology
+\DeclareTag{SOCI}{NETWORK}{Relations, structures, and tie patterns.}
+\DeclareTag{SOCI}{ROLE}{Social roles / positions.}
+\DeclareTag{SOCI}{NORM}{Norms, sanctions, and compliance.}
+% Psychology
+\DeclareTag{PSY}{AFFECT}{Emotion / affect signals.}
+\DeclareTag{PSY}{COG}{Cognition, appraisal, belief revision.}
+\DeclareTag{PSY}{BEHAV}{Behavioral act / sequence.}
+% Ontology
+\DeclareTag{ONTO}{CORE}{Core structural element or concept anchor.}
+\DeclareTag{ONTO}{GATE}{Ingress/egress thresholds and proofs.}
+\DeclareTag{ONTO}{BOND}{Couplings/links across subsystems.}
+\DeclareTag{ONTO}{WARD}{Policy guardrails and refusal visibility.}
+% Theology
+\DeclareTag{THEO}{RITUAL}{Rites, sacraments, repeated formal actions.}
+\DeclareTag{THEO}{DOGMA}{Doctrinal assertions / catechesis.}
+\DeclareTag{THEO}{MYTHOS}{Narratives, cosmogonies, sacred stories.}
+% Epistemology
+\DeclareTag{EPI}{KNOW}{Knowledge claim / assertion of knowing.}
+\DeclareTag{EPI}{JUSTIFY}{Justification / warrant / reasons.}
+\DeclareTag{EPI}{EVIDENCE}{Evidence sources and probative weight.}
+\DeclareTag{EPI}{METHOD}{Methodology / protocol for inquiry.}
+\DeclareTag{EPI}{LIMITS}{Scope limits, uncertainty, defeaters.}
+\DeclareTag{EPI}{RELIAB}{Reliability / credence / calibration.}
+% Philosophy
+\DeclareTag{PHIL}{LOGIC}{Logical form, inference, validity/soundness.}
+\DeclareTag{PHIL}{ETHIC}{Ethical analysis / normative theory.}
+\DeclareTag{PHIL}{META}{Metaphysics / beings, properties, modality.}
+\DeclareTag{PHIL}{AESTH}{Aesthetics / value of beauty/art.}
+\DeclareTag{PHIL}{PHENOM}{Phenomenology / lived experience structure.}
+% PRIME helpers
+\DeclareTag{PRIME}{RIBBON}{Visible section ribbon.}
+\DeclareTag{PRIME}{ANCHOR}{Named jump target.}
+\DeclareTag{PRIME}{ITAG}{Inline PRIME tag.}
+% Generic
+\DeclareTag{GEN}{GLYPH}{Symbolic form or visual primitive.}
+
+% Optional project extension (append/override) if present
+\InputIfFileExists{security/PRIME/tags_project.sty}{}{}
+
+\endinput

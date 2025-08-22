@@ -1,0 +1,19 @@
+
+name: "scribe-of-seed"
+voices:
+  mother: {aspect: contain, weight: 0.6}
+  father: {aspect: blade,   weight: 0.2}
+  fey:    {aspect: bridge,  weight: 0.2}
+steps:
+  - say: "init seed root"
+    emit:
+      kind: "frame.snapshot"
+      construct: {layer: ZED, glyph_id: "GLYPH:seed"}
+  - transform: "braid:duplex-12"
+    emit:
+      kind: "bloom.recursive"
+      construct: {layer: GAMMA, braid_id: "BRAID:duplex-12"}
+  - reflect: "omega-pass"
+    emit:
+      kind: "loop.step"
+      stage: "Codex"

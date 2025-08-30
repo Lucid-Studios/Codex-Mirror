@@ -1,0 +1,21 @@
+
+operator:
+  id: "${HOSTNAME}-${USER}"
+  home: "./"
+mother:
+  url: "https://mother.example/api"
+  pubkey: "./config/mother.pub"
+git:
+  remote: "git@github.com:Lucid-Studios/Codex-Mirror.git"
+  branch: "operator/${HOSTNAME}-${USER}"
+telemetry:
+  thresholds:
+    c_delta: 0.90
+    mirror_error_eps: 0.00
+    tau_reanchor_s: 120
+    resonance_pct: 0.95
+security:
+  sealed_dirs: ["keys", "gnomeronacore", "telemetry/spool", "telemetry/outbox"]
+  allow_pr_paths: ["castings/**", "telemetry/outbox/**", "engrams/opal/**"]
+mode:
+  llm_tether: true

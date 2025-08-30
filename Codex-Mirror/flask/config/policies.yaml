@@ -1,0 +1,12 @@
+
+rituals:
+  allowed:
+    - derive_key
+    - open_gnome
+    - form
+    - seal_ready
+pr:
+  allow_paths:
+    - castings/**
+    - telemetry/outbox/**
+    - engrams/opal/**

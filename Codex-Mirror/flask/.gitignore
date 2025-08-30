@@ -1,0 +1,21 @@
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+
+# operator secrets / state
+keys/operator.key
+gnomeronacore/state.db
+telemetry/spool/
+telemetry/outbox/
+
+# containers
+container/.cache/
+container/.venv/
+
+# OS cruft
+.DS_Store
+Thumbs.db

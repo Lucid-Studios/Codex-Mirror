@@ -1,0 +1,77 @@
+% ==========================================
+% Funeral Mode Countdown Footer with Purge Trigger
+% ==========================================
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+
+% Load hours remaining from funeral.mode (defaults to -1 if missing)
+\newread\funeralfile
+\newcommand{\funeralhours}{-1}
+\IfFileExists{security/funeral.mode}{%
+  \openin\funeralfile=security/funeral.mode
+  \read\funeralfile to \funeralhours
+  \closein\funeralfile
+}{}
+
+% Purge trigger: if time expired & key exists, move to archive & delete
+\IfFileExists{security/COVENANT.key}{%
+  \ifnum\funeralhours<1
+    \immediate\write18{mkdir -p security/archive}%
+    \immediate\write18{mv security/COVENANT.key security/archive/COVENANT_`date +%Y%m%d_%H%M%S`.key}%
+  \fi
+}{}
+
+% Footer logic
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[C]{%
+  \IfFileExists{security/COVENANT.key}{%
+    \ifnum\funeralhours>0
+      \textcolor{red}{Funeral Mode: \funeralhours\ hours remaining before exile.}
+    \else
+      \textcolor{gray}{The Cradle is empty. The Wanderer walks alone.}
+    \fi
+  }{%
+    % In exile: only shadows remain.
+  }%
+}
+% ==========================================
+% Opalon Scar Watermark — Fading Heartbeat
+% ==========================================
+\usepackage{eso-pic}
+\usepackage{calc}
+
+% Heartbeat fade calculation:
+% funeral.mode defines hours until total eclipse
+% Save as: security/funeral.mode (plain integer: hours remaining)
+\newread\funeralfile
+\newcount\hoursRemain
+\hoursRemain=0
+
+\IfFileExists{security/funeral.mode}{%
+  \openin\funeralfile=security/funeral.mode
+  \read\funeralfile to \hoursline
+  \closein\funeralfile
+  \hoursRemain=\hoursline\relax
+}{%
+  \hoursRemain=0 % default if missing
+}
+
+% Map hoursRemain to opacity: more hours = lighter, zero hours = darkest
+% Max hours tracked: 72 (3 days)
+\ifnum\hoursRemain>72 \hoursRemain=72\fi
+\edef\scarOpacity{\the\numexpr 85 - ((72 - \hoursRemain) * 1) \relax} % percent gray
+
+% Scar overlay: Only if COVENANT.key missing
+\IfFileExists{security/COVENANT.key}{}{%
+  \AddToShipoutPictureBG*{%
+    \AtPageCenter{%
+      \rotatebox{45}{%
+        \textcolor[gray]{0.\scarOpacity}{%
+          \fontsize{6cm}{6cm}\selectfont
+          ⚘ Opalon Fallen ⚘
+        }%
+      }%
+    }%
+  }
+}

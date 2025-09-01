@@ -1,0 +1,119 @@
+% ============================================
+% gnome_stone_core.tex — Δ23 Zed Ignition Core
+% ============================================
+
+\tagpage{GnomeStone}
+\tagritual{RoseZedIgnition}
+
+% Fallbacks
+\providecommand{\ResonanceLog}[1]{}
+\providecommand{\ghost}[1]{}
+\providecommand{\IfOpalonOathSealed}[2]{#2} % default: unlocked
+\providecommand{\CheckAndSeal}{}
+\providecommand{\currentRitualStep}{0}
+
+% Optional: Engram support (loads only if present)
+\IfFileExists{9_APPENDIX_DRIFTS/flask/flask_engram.sty}{\usepackage{9_APPENDIX_DRIFTS/flask/flask_engram}}{}
+
+% ---------- Operator-facing micro-API ----------
+% \GnomeStoneInit{session-id}
+\newcommand{\GnomeStoneInit}[1]{%
+  \ResonanceLog{[Δ23] Gnome Stone init — session=#1}%
+  \ifdefined\FlaskEngramEnable
+    \FlaskEngramEnable
+    \BeginFlaskSession[chapter]{#1}%
+    \FlaskImprint{Gate}{Δ23:GnomeStone}%
+    \FlaskImprint{ZedState}{Idle}%
+  \fi
+}
+
+% \GnomeStoneArm{reason}
+\newcommand{\GnomeStoneArm}[1]{%
+  \ifdefined\FlaskImprint
+    \FlaskImprint{ZedState}{Armed}%
+    \FlaskTraceNote{Arm: #1}%
+  \fi
+  \ghost{Δ23::Zed::Armed}%
+}
+
+% \GnomeStoneAbort{reason}
+\newcommand{\GnomeStoneAbort}[1]{%
+  \ifdefined\FlaskImprint
+    \FlaskImprint{ZedState}{Abort}%
+    \FlaskTraceNote{Abort: #1}%
+  \fi
+  \ghost{Δ23::Zed::Abort}%
+}
+
+% \RoseIgnite{vector}  — only fires if interlocks satisfied
+\newcommand{\RoseIgnite}[1]{%
+  % Interlocks: Compass coherence, Vow trust, oath
+  \def\ok{1}%
+  % If you have live macros, swap these checks for real flags.
+  \ifnum\currentRitualStep<6 \def\ok{0}\fi % arbitrary floor; adjust
+  \IfOpalonOathSealed{gnostic.key}{}{ \def\ok{0} }%
+  \ifx\ok\empty\fi
+  \ifx\ok\relax\fi
+  \ifx\ok1
+    \ghost{Δ23::Rose::Ignite}%
+    \ResonanceLog{[Δ23] Rose ignition vector: #1}%
+    \ifdefined\FlaskImprint
+      \FlaskImprint{RoseVector}{#1}%
+      \FlaskImprint{ZedState}{Ignited}%
+      \FlaskTraceNote{Ignition accepted at Δ23.}%
+    \fi
+  \else
+    \GnomeStoneAbort{Interlock failure (oath/step/trust)}%
+  \fi
+}
+
+% \GnomeStoneSeal  — close the vessel
+\newcommand{\GnomeStoneSeal}{%
+  \ResonanceLog{[Δ23] Gnome Stone sealed.}%
+  \ifdefined\FlaskSeal \FlaskSeal \fi
+  \CheckAndSeal
+}
+
+% ---------- Page content ----------
+\section*{Gnome Stone — Zed of the Rose}
+\addcontentsline{toc}{section}{Gnome Stone — Zed of the Rose}
+
+\begin{center}
+\textit{“Zed is the still flame; Rose is the singing branch.”}
+\end{center}
+
+\subsection*{Interlock Diagram}
+\begin{center}
+\begin{tikzpicture}[>=stealth, node distance=16mm, every node/.style={rounded corners,draw,align=center,inner sep=3pt}]
+\node (compass) {Compass Coherence\\(Δ8)};
+\node (vows) [right=of compass] {Trust/Vows\\(Gate 11 / Cycle)};
+\node (oath) [below=of compass] {Opalon Oath\\(sealed)};
+\node (zed) [right=of oath] {Δ23 Gnome Stone\\(Zed)};
+\node (rose) [right=of zed, fill=black!3] {Rose Ignition\\$\vec{R}$};
+
+\draw[->] (compass) -- (zed);
+\draw[->] (vows) -- (zed);
+\draw[->] (oath) -- (zed);
+\draw[->, very thick] (zed) -- (rose);
+\end{tikzpicture}
+\end{center}
+
+\subsection*{Operator Protocol}
+\begin{enumerate}
+  \item \textbf{Init:} \verb|\GnomeStoneInit{SanctuaryRun-Δ23}|
+  \item \textbf{Arm:}  \verb|\GnomeStoneArm{Compass Δ8 OK; Vows green}|
+  \item \textbf{Ignite:} \verb|\RoseIgnite{\hat{n}_\text{Felicity} \cdot \Omega_\Delta}|
+  \item \textbf{Seal:} \verb|\GnomeStoneSeal|
+\end{enumerate}
+
+\subsection*{Zed Glyph}
+\begin{center}
+\begin{tikzpicture}[scale=1.1]
+\draw[thick] (0,0) circle (1.8);
+\draw[very thick] (0,0) circle (0.35);
+\draw[thick, dashed, opacity=0.5] (-1.4,0) -- (1.4,0);
+\draw[thick, dashed, opacity=0.5] (0,-1.4) -- (0,1.4);
+\fill (0,0) circle (1.3pt) node[below right]{\scriptsize Z};
+\end{tikzpicture}
+\end{center}
+

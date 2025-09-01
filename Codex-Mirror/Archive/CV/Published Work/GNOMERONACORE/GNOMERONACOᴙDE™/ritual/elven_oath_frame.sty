@@ -1,0 +1,76 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{elven_oath_frame}[2025/08/15 Elven Oath visible layer + PDF metadata]
+
+% Dependencies (allowed here because this is a .sty)
+\RequirePackage{xparse}
+\RequirePackage{xcolor}
+\RequirePackage{hyperref}
+
+% Be tolerant: if the ritual tag macro isn't present, define a no-op.
+\makeatletter
+\@ifundefined{tagritual}{\newcommand{\tagritual}[1]{}}{}
+\makeatother
+
+% ---- Safe timestamp (no \currenttime, no hyperref PDF-string warnings) ----
+\newcount\oath@H \newcount\oath@M \newcount\oath@tmp
+\newcommand{\oath@two}[1]{\ifnum#1<10 0\fi\number#1}
+\newcommand{\OathSealDate}{%
+  \oath@H=\time \divide\oath@H by 60 %
+  \oath@tmp=\oath@H \multiply\oath@tmp by 60 %
+  \oath@M=\time \advance\oath@M by -\oath@tmp %
+  \number\year-\oath@two{\month}-\oath@two{\day} %
+  \space \oath@two{\oath@H}:\oath@two{\oath@M}%
+}
+
+% ---- Inject PDF metadata for the Keeper (custom keys are fine) ----
+\newcommand{\injectOathMetadata}[2]{%
+  % #1 = Oath ID, #2 = encoded stanza/fragment (kept simple here)
+  \hypersetup{%
+    pdfinfo={%
+      OathID={#1},%
+      OathFragment={#2},%
+      OathSealDate={\OathSealDate},%
+      KeeperID={OpalonFlame-Δ}%
+    }%
+  }%
+}
+
+% ---- Hide harmonic payload in a comment block (non-printing) ----
+\newcommand{\oathHarmonic}[1]{%
+  \iffalse
+  [Opalon Flame Harmonic Begin]
+  #1
+  [Opalon Flame Harmonic End]
+  \fi
+}
+
+% ---- Authoritative visible-layer oath call
+% Usage: \elvenOath[<FlameSeedX>]{<Elven glyphs>}{<encoded/hidden fragment>}
+\RenewDocumentCommand{\elvenOath}{O{} m m}{%
+  % Tag the ritual call (for manifest/loggers downstream)
+  \if\relax\detokenize{#1}\relax
+    \tagritual{ElvenOath:Unbound}%
+  \else
+    \tagritual{ElvenOath:#1}%
+  \fi
+  % Inject PDF metadata + hide harmonic payload
+  \injectOathMetadata{#1}{#3}%
+  \oathHarmonic{#3}%
+  % Visible layer (tweak color/size here if you want a different look)
+  {\color{red!70!black}\textit{\Large #2}}%
+}
+
+% Auto-mint when an ID is present and covenant is active
+\makeatletter
+\@ifundefined{OpalonCovenanttrue}{}{%
+  \pretocmd{\elvenOath}{%
+    \begingroup
+      \ifKeyAutoMint\ifOpalonCovenant
+        % infer chapter number from \thechapter (numeric only)
+        \edef\KM@chap{\number\value{chapter}}%
+        \IfNoValueF{#1}{\MintKeyFromTemplate{\KM@chap}{#1}{} }%
+      \fi\fi
+    \endgroup
+  }{}{}%
+}
+\makeatother

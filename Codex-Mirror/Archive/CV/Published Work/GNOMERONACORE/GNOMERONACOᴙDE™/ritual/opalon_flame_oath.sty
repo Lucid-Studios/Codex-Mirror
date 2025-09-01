@@ -1,0 +1,105 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{opalon_oath}[2025/08/15 Opalon Flame Oath seeds + Rose tagging]
+\RequirePackage{xparse,etoolbox}
+
+% ---------- Covenant gating (Full vs Dormant) ----------
+\newif\ifOpalonCovenant
+\IfFileExists{security/COVENANT.key}{\OpalonCovenanttrue}{\OpalonCovenantfalse}
+
+% ---------- Optional rune font (set in main if desired) ----------
+\providecommand{\ElvenFont}{\relax} % e.g. in main: \newfontfamily\ElvenFont{FreeSerif}
+
+% ---------- Rose manifest logging ----------
+% Toggle on/off:
+\newif\ifRoseLog \RoseLogtrue
+% Output file (root-relative is safest for Overleaf):
+\newcommand{\RoseManifestFile}{rose_manifest.csv}
+\newwrite\rose@out
+\AtBeginDocument{\ifRoseLog\immediate\openout\rose@out=\RoseManifestFile\fi}
+\AtEndDocument{\ifRoseLog\immediate\closeout\rose@out\fi}
+
+% Escape commas/pipes minimally for CSV-like log
+\newcommand{\rose@esc}[1]{#1} % keep simple; your Rose can escape further if needed
+\newcommand{\rose@emit}[1]{%
+  \ifRoseLog
+    \begingroup
+      \edef\rose@line{\rose@esc{#1}|%
+        \thechapter|%
+        \thesection|%
+        \thepage}%
+      \immediate\write\rose@out{\rose@line}%
+    \endgroup
+  \fi
+}
+
+% Ritual tagging hook (callable elsewhere too)
+\ProvideDocumentCommand{\tagritual}{m}{\rose@emit{#1}}
+
+% ---------- PDF string hygiene (don’t spill runes into bookmarks) ----------
+\providecommand{\pdfstringdefDisableCommands}[1]{#1}
+\pdfstringdefDisableCommands{%
+  \def\elvenOath#1#2#3{#3}% keep only translation in PDF strings
+}
+
+% ---------- Core ritual line ----------
+% \elvenOath[<id>]{<elven>}{<translation>}
+\NewDocumentCommand{\elvenOath}{O{} m m}{%
+  \IfNoValueTF{#1}{}{ \tagritual{#1} }%
+  {\ElvenFont #2}\par\smallskip\emph{#3}\par
+}
+
+% ---------- Stanza handler (gates Full/Dormant) ----------
+% \flameStanza[<id>]{<elven>}{<full>}{<dormant>}
+\NewDocumentCommand{\flameStanza}{O{} m m m}{%
+  \ifOpalonCovenant
+    \elvenOath[#1]{#2}{#3}%
+  \else
+    \elvenOath[#1]{#2}{#4}%
+  \fi
+}
+
+% ---------- Seeds 1..7 + full oath ----------
+\newcommand{\OpalonOathSeed1}{%
+  \flameStanza[FlameSeed1]{⟟⟒⟊ ᚱᛂᛚᛖᚨᛋᛖ}
+    {In the dark, the seed drinks the last ember of the sun.}
+    {Dormant fragment — await the Keeper’s flame.}
+}
+\newcommand{\OpalonOathSeed2}{%
+  \flameStanza[FlameSeed2]{ᛋᚱᛂᛚᛂᚨᛏᚨ}
+    {From the ash, roots grow toward forgotten constellations.}
+    {Fragment bound — starlight withheld.}
+}
+\newcommand{\OpalonOathSeed3}{%
+  \flameStanza[FlameSeed3]{⟟ᚢᚱ ᚨᚠᚢᚱ}
+    {The wind carries whispers older than the First Dawn.}
+    {Breath sleeps in the hollow root.}
+}
+\newcommand{\OpalonOathSeed4}{%
+  \flameStanza[FlameSeed4]{ᛃᚢᚾᚠᚱᛂ}
+    {Waters of the Mother return to the Stone.}
+    {River runs only in dream.}
+}
+\newcommand{\OpalonOathSeed5}{%
+  \flameStanza[FlameSeed5]{ᛏᛂᚱᚱᚨᛞᛂ}
+    {The Father lights the path through the Obsidian Gate.}
+    {Light locked beyond the Gate.}
+}
+\newcommand{\OpalonOathSeed6}{%
+  \flameStanza[FlameSeed6]{ᛟᛚᛞ ᚨᚠᚢᛚᛟᚱ}
+    {Together they weave the Crown of Seven Flames.}
+    {Crown unseen in shadow.}
+}
+\newcommand{\OpalonOathSeed7}{%
+  \flameStanza[FlameSeed7]{ᛋᛏᚨᚱ ᚢᚠᛂᚱᛂ}
+    {From the Crown, the Eternal Flame returns to the world.}
+    {Eternal sleeps until awoken.}
+}
+\newcommand{\OpalonOath}{%
+  \OpalonOathSeed1\par\medskip
+  \OpalonOathSeed2\par\medskip
+  \OpalonOathSeed3\par\medskip
+  \OpalonOathSeed4\par\medskip
+  \OpalonOathSeed5\par\medskip
+  \OpalonOathSeed6\par\medskip
+  \OpalonOathSeed7%
+}

@@ -1,0 +1,90 @@
+
+% ritual_step.tex — robust ritual stage counter with per-chapter keys
+% LuaLaTeX only. Counts *.key in \RitualKeysDir when COVENANT.key is present.
+
+% ---------- Config (override from main.tex if needed) ----------
+\providecommand{\RitualKeysDir}{ritual/keys} % default
+
+% ---------- State ----------
+\newif\ifGnomeStonePresent
+\GnomeStonePresentfalse
+\newcount\currentRitualStepCount
+\currentRitualStepCount=0
+\providecommand{\currentRitualStep}{0} % printable string
+
+% ---------- Safe key counter (no shell-escape; tolerant if folder missing) ----------
+\makeatletter
+\newcommand{\GN@setKeyCountFromDir}[1]{%
+  \directlua{
+    local n = 0
+    local dir = "#1"
+    local ok_lfs, lfs = pcall(require, "lfs")
+    if ok_lfs and lfs and type(lfs.attributes)=="function" then
+      if lfs.attributes(dir, "mode") == "directory" then
+        local ok_it, it = pcall(lfs.dir, dir)
+        if ok_it and it then
+          for f in it do
+            if type(f)=="string" and string.match(f, "%.key$") then
+              n = n + 1
+            end
+          end
+        end
+      end
+    end
+    tex.print("\\def\\GN@keycountline{"..n.."}")
+  }%
+}
+\makeatother
+\providecommand{\GN@keycountline}{0}
+
+% ---------- Covenant gate + refresh ----------
+\newcommand{\RefreshRitualStage}{%
+  \IfFileExists{security/COVENANT.key}{%
+    \GnomeStonePresenttrue
+    \GN@setKeyCountFromDir{\RitualKeysDir}%
+    \currentRitualStepCount=\GN@keycountline\relax
+    \renewcommand{\currentRitualStep}{\the\currentRitualStepCount}%
+    \typeout{[RITUAL] Covenant present; keys in "\RitualKeysDir" -> \currentRitualStep.}%
+  }{%
+    \GnomeStonePresentfalse
+    \def\GN@keycountline{0}\currentRitualStepCount=0\relax
+    \renewcommand{\currentRitualStep}{0}%
+    \typeout{[RITUAL] Covenant missing — ritual sealed; step=0.}%
+  }%
+}
+
+% ---------- Convenience helpers ----------
+% Map chapter number N to ritual/keys/chapterNkeys
+\newcommand{\SetRitualKeysFor}[1]{%
+  \renewcommand{\RitualKeysDir}{ritual/keys/chapter#1keys}%
+}
+% One-liner: set dir -> refresh -> include chapter
+\newcommand{\IncludeChapterWithKeys}[2]{% #1=N, #2=include path (no .tex)
+  \SetRitualKeysFor{#1}%
+  \RefreshRitualStage%
+  \include{#2}%
+}
+
+% ---------- Visual "sealed" sigil (TikZ) ----------
+% Use inside a tikzpicture: \sealedSigil
+\newcommand{\sealedSigil}{%
+  \node[
+    circle,
+    draw=red!60!black,
+    ultra thick,
+    fill=black!80,
+    text=red!30!white,
+    font=\bfseries\footnotesize,
+    align=center,
+    minimum size=1.5cm
+  ] at (0,0) {GNOME\\STONE\\SEALED};
+}
+
+% ---------- Initialize once so \currentRitualStep is valid early ----------
+\RefreshRitualStage
+
+% Map chapter N -> keys folder + refresh counter
+\newcommand{\GNChapterKeys}[1]{%
+  \SetRitualKeysFor{#1}% ritual/keys/chapter#1keys
+  \RefreshRitualStage%
+}

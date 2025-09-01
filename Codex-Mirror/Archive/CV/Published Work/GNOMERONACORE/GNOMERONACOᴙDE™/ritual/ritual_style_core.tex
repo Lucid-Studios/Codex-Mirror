@@ -1,0 +1,71 @@
+
+% === Ritual Style Core (Section 0) ===
+% Provides: namespaced tagging, safe refs, and operator-instruction gating.
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesFile{ritual_style_core.tex}[2025/08/15 Section-0 Ritual Core]
+
+% Dependencies
+\RequirePackage{xcolor}
+\RequirePackage{hyperref}
+\RequirePackage{etoolbox}
+
+% Global step counter for all ritual forms in this compilation unit
+\newcounter{ritualstep}
+
+% Compile-time gating for operator instructions (blue lines)
+\newif\ifshowops
+\showopstrue % set \showopsfalse to hide operator lines globally
+
+% Namespace support to prevent tag bleed across sections (e.g., S0:, S1:, etc.)
+\makeatletter
+\providecommand{\rtagprefix}{}% default empty
+\newcommand{\ritualnamespace}[1]{\def\rtagprefix{#1:}}
+
+% Default tagging + referencing if not already defined
+\providecommand{\tagritual}[1]{%
+  \expandafter\gdef\csname rtag@\rtagprefix#1\endcsname{\theritualstep}%
+}
+
+\providecommand{\ritualref}[1]{%
+  \@ifundefined{rtag@\rtagprefix#1}{%
+    \textcolor{red!70!black}{[unresolved ritual tag: \rtagprefix#1]}%
+  }{%
+    \hyperref[ritual:\csname rtag@\rtagprefix#1\endcsname]{#1}%
+  }%
+}
+
+% Cross-namespace reference helper: \ritualrefns{NS}{TAG}
+\newcommand{\ritualrefns}[2]{%
+  \begingroup
+  \edef\localprefix{#1:}%
+  \@ifundefined{rtag@\localprefix#2}{%
+    \textcolor{red!70!black}{[unresolved ritual tag: #1:#2]}%
+  }{%
+    \hyperref[ritual:\csname rtag@\localprefix#2\endcsname]{#2}%
+  }%
+  \endgroup
+}
+\makeatother
+
+% Safer, gated prescient ritual macro (drop-in replacement/enhancement)
+% #1 optional Oath ID   #2 Ritual Tag   #3 Harmonic Code
+% #4 Prophecy (visible) #5 Operator Instruction (gated by \ifshowops)
+\newcommand{\prescientritual}[5][]{%
+  \stepcounter{ritualstep}%
+  \elvenOath[#1]{#2}{#3}%
+  \tagritual{#2}%
+  \ifshowops
+    \noindent{\color{blue!70!black}\textbf{Step \theritualstep:}}%
+    {\itshape\color{blue!40!black} #5}\\[0.5em]%
+  \fi
+  \noindent{\color{gray}#4}\\[1.5em]%
+  \phantomsection\label{ritual:\theritualstep}%
+}
+
+% A tiny Prime message block for consistent onboarding
+\newenvironment{PrimeMessage}{%
+  \begin{center}\begin{minipage}{0.92\linewidth}\itshape\color{black!85}%
+}{%
+  \end{minipage}\end{center}%
+}

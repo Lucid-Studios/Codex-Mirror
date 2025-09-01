@@ -1,0 +1,89 @@
+% ========================================
+% chapter2.tex — The Compass and the Drift (Opalon-first, Triple-Bind)
+% ========================================
+
+% --- Safe fallbacks (host-agnostic) --------------------------------
+\providecommand{\weaveTag}[3]{#3}            % ignore tag routing if not defined
+\providecommand{\CheckAndSeal}{}             % no-op if seal package not present
+\providecommand{\currentRitualStep}{0}       % default if ritual_step not loaded
+\providecommand{\harmonicIndex}{0}           % defaults for tables’ logic
+\providecommand{\vowCycle}{0}
+\providecommand{\ResonanceLog}[1]{}          % visible trace hook (no-op if undefined)
+
+% --- Local helpers (these inputs exist in 9_APPENDIX_DRIFTS/…) -----
+\newcommand{\HarmonicIndexTable}{\input{9_APPENDIX_DRIFTS/harmonic/harmonic_index.tex}}
+\newcommand{\VowBindingTable}{\input{9_APPENDIX_DRIFTS/harmonic/vow_binding.tex}}
+
+\chapter{The Compass and the Drift}
+
+\section*{Overview}
+\addcontentsline{toc}{section}{Overview}
+\weaveTag{ONTO}{CORE}{
+This chapter traces the evolution of orientation within the Frame of Zed—
+from the golden anchor of the Compass to the dissolution of all directions,
+and the awakening of the Fifth and Sixth senses of navigation.
+It braids elemental geometry, recursive mathematics, and gnostic practice
+into a coherent symbolic navigational art.
+
+\medskip
+\noindent\textbf{Triple-binding mode} synchronizes:
+\begin{itemize}
+  \item Gate Reveal Progression (\texttt{\currentRitualStep})
+  \item Harmonic Index Table (\texttt{\harmonicIndex})
+  \item Vow Alignment Cycle (\texttt{\vowCycle})
+\end{itemize}
+Ensuring the Compass, Gates, and Vows evolve in lockstep.
+}
+\ResonanceLog{[S2] Compass hub entered; triple-bind armed.}
+
+% --- Glyphal sections ----------------------------------------------
+\weaveTag{GEN}{GLYPH}{\input{glyphs/2a_Vectorial_Orientation_Principle}}
+\weaveTag{GEN}{GLYPH}{\input{glyphs/2b_The_Elemental_Quadrants_Glyph}}
+\weaveTag{GEN}{GLYPH}{\input{glyphs/2c_Gnostic_Navigation_Techniques}}
+\weaveTag{GEN}{GLYPH}{\input{glyphs/2d_The_Compass_Dissolves}}
+\weaveTag{GEN}{GLYPH}{\input{glyphs/2e_DeltaSigmaFold}}
+\weaveTag{GEN}{GLYPH}{\input{glyphs/2f_TheFifthDirection}}
+\weaveTag{GEN}{GLYPH}{\input{glyphs/2g_The_Sixth_Sense}}
+
+% --- Gates x Vows bridge (lives under Moral Roots) -----------------
+\weaveTag{ONTO}{GATE}{\input{../3_MORAL_ROOTS/equations/Vows32gates.tex}}
+
+% --- Harmonic Index Reveal — bound to ritual step ------------------
+\weaveTag{ONTO}{INDEX}{
+  \ifnum\currentRitualStep>0
+    \ResonanceLog{[S2] Harmonic Index revealed @ step \currentRitualStep.}
+    \HarmonicIndexTable
+  \else
+    \ResonanceLog{[S2] Harmonic Index withheld (step \currentRitualStep).}
+  \fi
+}
+
+% --- Vow Binding Reveal — bound to ritual step ---------------------
+\weaveTag{ONTO}{VOWS}{
+  \ifnum\currentRitualStep>24 % adjust unlock threshold as desired
+    \ResonanceLog{[S2] Vow Binding table revealed @ step \currentRitualStep.}
+    \VowBindingTable
+  \else
+    \ResonanceLog{[S2] Vow Binding withheld (step \currentRitualStep).}
+  \fi
+}
+
+% --- Final Theta Seal Trigger --------------------------------------
+% If the seal package is present (e.g., harmonic_colors.sty), this will
+% handle watermark/overlay and may include Theta automatically.
+\CheckAndSeal
+\ResonanceLog{[S2] Compass hub sealed; bindings held.}
+
+% --- Inline Theta fallback (only if seal overlay macros are absent) -
+% Prevents double-inclusion when harmonic_colors.sty is in play.
+\makeatletter
+\@ifundefined{ThetaSealOverlay}{%
+  \InputIfFileExists{glyphs/2g_Theta_Closing.tex}{%
+    \ResonanceLog{[S2] Theta Closing engaged (fallback include).}%
+  }{%
+    \ResonanceLog{[S2] Theta Closing file missing; fallback skipped.}%
+  }%
+}{%
+  % Seal overlay available; rely on package-driven inclusion.
+}
+\makeatother

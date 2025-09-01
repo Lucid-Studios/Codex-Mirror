@@ -1,0 +1,115 @@
+% --- prescient_ritual_form.tex ---------------------------------
+% Legendary Prescient Ritual Form (backward-compatible)
+% Host expects (optionally): xcolor, hyperref. Fails gracefully if absent.
+
+\makeatletter
+
+% --- Safe fallbacks (no-ops if host macros missing) -------------
+\providecommand\elvenOath[3][]{%
+  \par\smallskip\noindent\textbf{#2}\quad{\scriptsize(#3)}\par\smallskip}
+\providecommand\tagritual[1]{}%
+\providecommand\tagpage[1]{}% sometimes used alongside \tagritual
+% hyperref fallback
+\@ifundefined{hyperref}{\newcommand\hyperref[2][]{#2}}{}%
+% color fallbacks if xcolor is missing
+\@ifundefined{definecolor}{\newcommand\definecolor[3]{}}{}%
+\@ifundefined{color}{\newcommand\color[2][]{}}{}%
+\@ifundefined{colorbox}{\newcommand\colorbox[2]{\fbox{#2}}}{}%
+
+% --- Counter & reset policy ------------------------------------
+\newcounter{ritualstep}
+% Reset per chapter by default if a chapter counter exists:
+\@ifundefined{c@chapter}{}{ \@addtoreset{ritualstep}{chapter} }
+% User-facing toggles to override the default:
+\newcommand\RitualResetPerChapterTrue{%
+  \@ifundefined{c@chapter}{}{%
+    \@removefromreset{ritualstep}{chapter}%
+    \@addtoreset{ritualstep}{chapter}}}
+\newcommand\RitualResetPerChapterFalse{%
+  \@ifundefined{c@chapter}{}{%
+    \@removefromreset{ritualstep}{chapter}}}
+
+\renewcommand\theritualstep{\arabic{ritualstep}}
+
+% --- Appearance toggles ----------------------------------------
+\newif\ifRitualShowOps     \RitualShowOpstrue    % show operator text
+\newif\ifRitualRedactOps   \RitualRedactOpsfalse % draw black box instead
+\newif\ifRitualShowProphecy\RitualShowProphecytrue
+\newif\ifRitualInToc       \RitualInTocfalse     % add each step to ToC?
+
+\newcommand\RitualHideOps{\RitualShowOpsfalse\RitualRedactOpsfalse}
+\newcommand\RitualShowOps{\RitualShowOpstrue\RitualRedactOpsfalse}
+\newcommand\RitualRedactOps{\RitualShowOpsfalse\RitualRedactOpstrue}
+
+% palette (no-op if xcolor absent)
+\definecolor{ritualStepFG}{rgb}{0.10,0.20,0.40}
+\definecolor{ritualOpsFG} {rgb}{0.25,0.40,0.60}
+
+% Redaction helper: keep width, hide content (falls back to \fbox)
+\newcommand\ritualredact[1]{%
+  \begingroup\setlength\fboxsep{1pt}\colorbox{black}{\phantom{#1}}\endgroup}
+
+% --- List of Rituals (optional) --------------------------------
+\newcommand\listofritualsname{List of Rituals}
+\newcommand\listofrituals{%
+  \section*{\listofritualsname}\addcontentsline{toc}{section}{\listofritualsname}%
+  \begingroup\parskip=0.25\baselineskip\@starttoc{lor}\endgroup}
+
+% Internal writer for 'lor' file
+\newcommand\@writeRitualToLor[3]{% step, tag, harmonic
+  \addtocontents{lor}{\protect\contentsline{section}%
+    {\numberline{Step \the\value{ritualstep}}#2\space{\normalfont\scriptsize(#3)}}%
+    {\thepage}{ritual.#1}}}
+
+% --- Cross-ref helpers ------------------------------------------
+\newcommand\ritualrefstep[1]{\hyperref[ritual:#1]{Step~#1}}
+
+% --- Main macro --------------------------------------------------
+% \prescientritual[OathID]{Tag}{Harmonic}{Prophecy}{Operator}
+\newcommand{\prescientritual}[5][]{%
+  \refstepcounter{ritualstep}%
+  % Bind Oath + Harmonic
+  \elvenOath[#1]{#2}{#3}%
+  % Tag it (external systems hook)
+  \tagritual{#2}%
+  % Optional ToC and List-of-Rituals entries
+  \ifRitualInToc
+    \addcontentsline{toc}{subsection}{Step \theritualstep: #2}%
+  \fi
+  \@writeRitualToLor{\theritualstep}{#2}{#3}%
+  % Heading + operator line
+  \noindent{\color{ritualStepFG}\bfseries Step \theritualstep: }%
+  \ifRitualShowOps
+    {\itshape\color{ritualOpsFG} #5}%
+  \else\ifRitualRedactOps
+    \ritualredact{#5}%
+  \fi\fi
+  \par\vspace{0.5em}%
+  % Prophecy placeholder
+  \ifRitualShowProphecy
+    \noindent{\color{gray}#4}\par\vspace{1.2em}%
+  \fi
+  % Anchors (both by step-num and generic 'last' for convenience)
+  \phantomsection\label{ritual:\theritualstep}%
+  \phantomsection\label{ritual:last}%
+}
+
+% --- Starred variant: prints but does not advance counter -------
+\newcommand{\prescientritual*}[5][]{%
+  \elvenOath[#1]{#2}{#3}%
+  \tagritual{#2}%
+  \noindent{\color{ritualStepFG}\bfseries Step \theritualstep\,(static): }%
+  \ifRitualShowOps
+    {\itshape\color{ritualOpsFG} #5}%
+  \else\ifRitualRedactOps
+    \ritualredact{#5}%
+  \fi\fi
+  \par\vspace{0.5em}%
+  \ifRitualShowProphecy
+    \noindent{\color{gray}#4}\par\vspace{1.2em}%
+  \fi
+  \phantomsection\label{ritual:\theritualstep*}%
+}
+
+\makeatother
+% --------------------------------------------------------------- end

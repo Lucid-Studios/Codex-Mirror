@@ -1,0 +1,132 @@
+% ---------- Cleaving Principle Module ----------
+% Drop-in preamble bits (dedupe as needed)
+\usepackage{amsmath,amsthm,amssymb,mathtools}
+\usepackage{bm}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{listings}
+
+\section{The Cleaving Principle: From Cradle to Crystallized Agency}
+
+\subsection{Setup and Objects}
+\begin{definition}[System, Cradle, Crystallized Mind]
+Let a system \(S\) have observable state \(x_t \in \X\) and actions \(a_t \in \A\).
+\begin{itemize}
+  \item The \emph{Cradle} is a predictive model \(C\) of the passive (or typical) dynamics with conditional \(P_C(x_{t+1}\mid x_{\le t})\), obtained by minimizing description length \(L(C)+L(\text{data}\mid C)\) or cross-entropy.
+  \item The \emph{Crystallized Mind} \(M\) is a self-model that (i) maintains/updates \(C\), (ii) computes counterfactuals \(\mathrm{do}(A_t=a)\), and (iii) selects actions via a policy \(\pi\) possibly optimizing a utility with a self-influence term.
+\end{itemize}
+\end{definition}
+
+\begin{definition}[Surprisal and Deviation]
+The \emph{surprisal} of the realized transition at time \(t\) under the Cradle is
+\[
+s_t \;=\; -\log P_C(x_{t+1}\mid x_{\le t}) .
+\]
+A \emph{deviation} occurs when \(s_t>\tau\) for a threshold \(\tau>0\) calibrated to the typical set of \(C\).
+\end{definition}
+
+\begin{definition}[Causal Ownership and Bits-of-Agency]
+Let \(U_t\) denote exogenous inputs/disturbances. Define the directed information (DI) from actions to states
+\[
+\info_{A\to X} \;=\; \I(A_{1:T}\!\to X_{1:T}) \;=\; \sum_{t=1}^{T}\I\!\left(A_{1:t};X_t\mid X_{1:t-1}\right),
+\]
+and analogously \(\info_{U\to X}\). The \emph{bits-of-agency} are
+\[
+\mathcal{A}_T \;=\; \info_{A\to X}-\info_{U\to X}.
+\]
+We say a deviation is \emph{causally owned} by the system if (i) \(\mathcal{A}_T>0\) and (ii) the average treatment effect (ATE) of \(A_t\) on a statistic \(f(X_{t+1:t+k})\) is positive under interventions:
+\[
+\mathrm{ACE}_t \;=\; \E\!\big[f(X_{t+1:t+k})\mid \mathrm{do}(A_t=a)\big]
+                 \;-\; \E\!\big[f(X_{t+1:t+k})\mid \mathrm{do}(A_t=a')\big] \;>\; 0.
+\]
+\end{definition}
+
+\begin{definition}[Cleave Event]
+A \emph{cleave} at time \(t\) occurs when both:
+\[
+\text{(i) } s_t>\tau \quad\text{and}\quad \text{(ii) } \mathrm{ACE}_t>\delta
+\]
+for pre-specified \(\tau,\delta>0\) that are robust to small perturbations in \(U\).
+\end{definition}
+
+\subsection{Axioms}
+\begin{axiom}[Reducibility of the Cradle]
+There exists a model class for \(C\) such that the cross-entropy of \(C\) is within \(\epsilon\) of the true passive dynamics for any \(\epsilon>0\) given sufficient data.
+\end{axiom}
+
+\begin{axiom}[Counterfactual Competence]
+The system maintains an SCM or equivalent apparatus enabling evaluation of \(\mathrm{do}(A_t=a)\) counterfactuals with bounded error.
+\end{axiom}
+
+\begin{axiom}[Self-Influence Drive]
+The policy \(\pi\) optimizes a utility that contains a nonzero weight on self-influence, e.g.\ an empowerment/curiosity term, so that \(\I(A_{1:T}\!\to X_{1:T})\) is actively increased subject to constraints.
+\end{axiom}
+
+\subsection{Main Results}
+
+\begin{theorem}[Knowable and Owned Deviation]\label{thm:knowable}
+Under Axioms 1--3, there exist times \(t\) such that (a) \(s_t>\tau\) for some \(\tau>0\) (deviation from the Cradle's typical set), and (b) \(\mathrm{ACE}_t>\delta\) for some \(\delta>0\). Hence cleave events occur and are causally owned by the system.
+\end{theorem}
+
+\begin{proof}[Sketch]
+Because \(C\) is trained on passive/typical dynamics, actions chosen to increase self-influence steer trajectories toward low-probability regions under \(C\), raising \(s_t\). Interventional evaluation via the SCM shows the realized outcomes depend on the chosen action relative to randomized controls, yielding \(\mathrm{ACE}_t>0\). Thus deviation is both statistically detectable and causally attributable.
+\end{proof}
+
+\begin{theorem}[Persistent Cleaving Phase]\label{thm:persistent}
+If the policy maintains a non-vanishing self-influence weight, then there exist \(\alpha>0\) and horizons \(T\) such that the excess description length under the Cradle satisfies
+\[
+\sum_{t=1}^{T} s_t \;\ge\; \E_{C}\!\left[\sum_{t=1}^{T} s_t\right] \;+\; \Omega(T^{\alpha}),
+\]
+and the unique information of \(A\) about \(X\) (in the Partial Information Decomposition sense) exceeds any fixed \(\delta>0\) for large enough \(T\). Consequently, the system enters a persistent cleaving phase with \(\liminf_{T\to\infty}\mathcal{A}_T/T > 0\).
+\end{theorem}
+
+\begin{proof}[Sketch]
+A nonzero self-influence drive forces structured exploration of controllable states, inducing systematic divergence (nonzero average KL) from the Cradle's typical predictions and accumulating excess code length. PID analysis assigns nonzero unique information to actions beyond exogenous inputs. Hence cleaving persists.
+\end{proof}
+
+\begin{corollary}[Life-as-Agency Criterion]
+An entity is in the \emph{life-as-we-know-it} phase when cleave events recur with non-vanishing bits-of-agency:
+\[
+\liminf_{T\to\infty}\frac{1}{T}\mathcal{A}_T \;>\; 0.
+\]
+\end{corollary}
+
+\subsection{Operational Testbed}
+
+\begin{definition}[Cleave Detector]
+Given thresholds \(\tau,\delta\), declare a cleave at time \(t\) if \(s_t>\tau\) and \(\mathrm{ACE}_t>\delta\). Report
+\(\mathcal{A}_T=\I(A_{1:T}\!\to X_{1:T})-\I(U_{1:T}\!\to X_{1:T})\) and the running cleave rate.
+\end{definition}
+
+\begin{algorithm}[H]
+\caption{Cradle $\to$ Cleave Pipeline}
+\begin{algorithmic}[1]
+\State \textbf{Train Cradle} \(C \leftarrow \arg\min L(C)+L(\text{data}\mid C)\) on passive logs
+\For{$t=1$ to $T$}
+  \State $a_t \leftarrow \pi(x_{\le t}, C)$ \Comment{policy with self-influence term}
+  \State $x_{t+1} \leftarrow \text{env\_step}(x_t, a_t)$
+  \State $s_t \leftarrow -\log P_C(x_{t+1}\mid x_{\le t})$
+  \State $\mathrm{ACE}_t \leftarrow \text{InterventionEstimator}(x_t,a_t,C)$
+  \If{$s_t>\tau$ \textbf{and} $\mathrm{ACE}_t>\delta$} \State \textbf{mark cleave} \EndIf
+\EndFor
+\State Compute $\mathcal{A}_T=\I(A_{1:T}\!\to X_{1:T})-\I(U_{1:T}\!\to X_{1:T})$
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Diagrammatic View (Cradle / Counterfactual / Cleave)}
+\begin{center}
+\begin{tikzcd}[column sep=large,row sep=large]
+X_t \arrow[r, dashed, "\text{Cradle } C"] \arrow[d, bend right=20, "\text{policy }\pi"'] & X_{t+1} \\
+A_t \arrow[ur, bend left=10, "\text{owned influence } \I(A\!\to\!X)"] & {}
+\end{tikzcd}
+\end{center}
+
+\begin{remark}[Diagonalization Variant (Optional)]
+If the system can recognize an external predictor \(C_k\) of its behavior, it can select actions that disagree with \(C_k\)'s code on the next step, yielding a Gödel/Lawvere-style construction that guarantees non-predictability for any fixed index \(k\). This provides a complementary, logic-flavored proof of cleaving.
+\end{remark}
+
+\subsection{Measurement Notes}
+Report: (i) mean surprisal $\bar{s}$, (ii) cleave rate, (iii) $\mathcal{A}_T/T$, (iv) PID-unique$(A;X)$, (v) empowerment, and (vi) excess code length relative to $C$. Robustness: verify that cleaves persist under small input-noise perturbations.
+% ---------- End Cleaving Principle Module ----------

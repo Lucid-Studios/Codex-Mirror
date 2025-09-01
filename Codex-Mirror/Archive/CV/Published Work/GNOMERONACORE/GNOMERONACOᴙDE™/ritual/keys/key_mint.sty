@@ -1,0 +1,93 @@
+% ritual/key_mint.sty
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{key_mint}[2025/08/15 Chapter key minting (LuaLaTeX)]
+\RequirePackage{xparse}
+
+% -------- switches ----------
+\newif\ifKeyAutoMint  \KeyAutoMinttrue % call from \elvenOath when an ID is present
+\newif\ifKeyAllowWrite \KeyAllowWritetrue % set false to dry-run
+
+% -------- config ----------
+\newcommand{\KeyTemplate}{ritual/keys/template_key.key}
+
+% Utility: yyyy-mm-dd hh:mm from \time (no hyperref warnings)
+\newcount\km@H \newcount\km@M \newcount\km@tmp
+\newcommand{\KeyStamp}{%
+  \km@H=\time \divide\km@H by 60 %
+  \km@tmp=\km@H \multiply\km@tmp by 60 %
+  \km@M=\time \advance\km@M by -\km@tmp %
+  \number\year-\ifnum\month<10 0\fi\number\month-\ifnum\day<10 0\fi\number\day
+  \space \ifnum\km@H<10 0\fi\number\km@H:\ifnum\km@M<10 0\fi\number\km@M
+}
+
+% Ensure we have tagritual available
+\makeatletter
+\@ifundefined{tagritual}{\newcommand{\tagritual}[1]{}}{}
+\makeatother
+
+% -------- low-level Lua: clone template with token replacement ----------
+% \KM@Clone{<chapterN>}{<id>}{<payload>} -> ritual/keys/chapterNkeys/<id>.key
+\newcommand{\KM@Clone}[3]{%
+  \ifKeyAllowWrite
+  \directlua{
+    local chap = tostring(#1)
+    local id   = tostring("#2")
+    local payload = tostring("#3")
+    local lfs_ok,lfs = pcall(require,"lfs")
+    local outdir = "ritual/keys/chapter"..chap.."keys"
+    local tpl = "\luaescapestring{\KeyTemplate}"
+    local function exists(path)
+      local f=io.open(path,"rb"); if f then f:close(); return true else return false end
+    end
+    if lfs_ok and lfs and lfs.attributes then
+      if not (lfs.attributes(outdir,"mode")=="directory") then pcall(lfs.mkdir,outdir) end
+    end
+    local outpath = outdir.."/"..id..".key"
+    if not exists(outpath) then
+      local t = ""
+      local tf = io.open(tpl,"rb")
+      if tf then t = tf:read("*a") tf:close() end
+      -- token replace
+      local stamp = "\luaescapestring{\KeyStamp}"
+      local page  = tostring(tex.count[0])  -- \count0 is page number in LaTeX
+      local chapnum = tostring(tex.count[1]) -- usually \count1=\thechapter (OK if not exact)
+      t = t:gsub("{{ID}}", id)
+           :gsub("{{CHAPTER}}", chap)
+           :gsub("{{STAMP}}", stamp)
+           :gsub("{{PAGE}}", page)
+           :gsub("{{CHAPNUM}}", chapnum)
+           :gsub("{{PAYLOAD}}", payload)
+      local of = io.open(outpath,"wb")
+      if of then of:write(t) of:close() end
+    end
+    tex.print("") -- quiet
+  }%
+  \fi
+}
+
+% -------- public API ----------
+% \MintKeyFromTemplate{<chapterN>}{<id>}{<payload>}
+\NewDocumentCommand{\MintKeyFromTemplate}{m m m}{%
+  \KM@Clone{#1}{#2}{#3}%
+  \tagritual{KeyMint:#2@chapter#1}%
+}
+
+% convenience: mint with empty payload
+\NewDocumentCommand{\MintKey}{m m}{\MintKeyFromTemplate{#1}{#2}{}}
+
+% -------- mass reset (delete all *.key) ----------
+\newcommand{\ResetAllKeys}{%
+  \directlua{
+    local lfs_ok,lfs = pcall(require,"lfs")
+    if not (lfs_ok and lfs and lfs.dir) then return end
+    local base = "ritual/keys"
+    for sub in lfs.dir(base) do
+      if sub:match("^chapter%d+keys$") then
+        local d = base.."/"..sub
+        for f in lfs.dir(d) do
+          if f:match("%.key$") then os.remove(d.."/"..f) end
+        end
+      end
+    end
+  }%
+}

@@ -1,0 +1,146 @@
+% glitch.sty -- Safe Glitch Text Renderer (LuaLaTeX)
+% -----------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{custom/glitch}[2025/08/02 Safe Glitch Renderer]
+
+\RequirePackage{xcolor}
+\RequirePackage{luacode}
+\RequirePackage{fontspec}
+
+% --- Color Definitions ---
+\definecolor{glitchRed}{RGB}{255,0,0}
+\definecolor{glitchGreen}{RGB}{0,255,0}
+\definecolor{glitchBlue}{RGB}{0,0,255}
+\definecolor{glitchCyan}{RGB}{0,255,255}
+\definecolor{glitchMagenta}{RGB}{255,0,255}
+\definecolor{glitchYellow}{RGB}{255,255,0}
+\definecolor{glitchWhite}{RGB}{255,255,255}
+\definecolor{glitchBlack}{RGB}{0,0,0}
+
+\begin{luacode*}
+math.randomseed(os.time())
+
+local colors = {
+  "glitchRed", "glitchGreen", "glitchBlue", "glitchCyan",
+  "glitchMagenta", "glitchYellow", "glitchWhite", "glitchBlack"
+}
+
+local fonts = {
+  "\\glitchmain{}", "\\glitchaltA{}", "\\glitchaltB{}",
+  "\\glitchaltC{}", "\\glitchaltD{}"
+}
+
+local greek = {
+  A="\\Alpha", B="B", C="\\Xi", D="\\Delta", E="\\Epsilon", F="\\Phi", G="\\Gamma",
+  H="\\Eta", I="\\Iota", J="J", K="\\Kappa", L="\\Lambda", M="\\Mu", N="\\Nu",
+  O="O", P="\\Pi", Q="Q", R="\\Rho", S="\\Sigma", T="\\Tau", U="\\Upsilon",
+  V="V", W="\\Omega", X="\\Chi", Y="\\Psi", Z="\\Zeta",
+  a="\\alpha", b="b", c="c", d="\\delta", e="\\epsilon", f="\\phi", g="\\gamma",
+  h="\\eta", i="\\iota", j="j", k="\\kappa", l="\\lambda", m="\\mu", n="\\nu",
+  o="o", p="\\pi", q="q", r="\\rho", s="\\sigma", t="\\tau", u="\\upsilon",
+  v="v", w="\\omega", x="\\chi", y="\\psi", z="\\zeta",
+  ["0"]="0", ["1"]="1", ["2"]="2", ["3"]="3", ["4"]="4", ["5"]="5",
+  ["6"]="6", ["7"]="7", ["8"]="8", ["9"]="9"
+}
+
+local function rand_color()
+  return colors[math.random(#colors)]
+end
+
+local function rand_font()
+  return fonts[math.random(#fonts)]
+end
+
+local function rand_kern()
+  return string.format("%.3f", -0.07 + 0.14 * math.random())
+end
+
+local function rand_raise()
+  return string.format("%.3f", -0.1 + 0.2 * math.random())
+end
+
+function glitch(text, mode)
+  local out = {}
+  for char in text:gmatch(utf8.charpattern) do
+    if char == " " then
+      table.insert(out, "\\hspace{0.3em}")
+    else
+      local rep = char
+
+      -- Suppress math substitution by commenting this block:
+      -- if mode:match("M") and greek[char] and math.random() < 0.3 then
+      --   rep = greek[char]
+      -- end
+
+      local color = mode:match("C") and rand_color() or "black"
+      local font = mode:match("F") and rand_font() or "\\glitchmain{}"
+      local kern = rand_kern()
+      local raise = rand_raise()
+
+      -- Safely bracket font+text for LaTeX compatibility
+      local part = string.format(
+        "\\raisebox{%sem}{\\textcolor{%s}{{%s%s}}}\\kern%sem",
+        raise, color, font, rep, kern
+      )
+
+      table.insert(out, part)
+    end
+  end
+  return table.concat(out)
+end
+
+
+
+function glitch_math(text, mode)
+  return glitch(text, mode)
+end
+\end{luacode*}
+
+\NewDocumentCommand{\glitch}{m m}{%
+  \leavevmode
+  \directlua{tex.sprint(glitch("\luaescapestring{#1}", "#2"))}%
+}
+
+\NewDocumentCommand{\glitchmath}{m m}{%
+  \leavevmode
+  \directlua{tex.sprint(glitch_math("\luaescapestring{#1}", "#2"))}%
+}
+
+% --- Font Families ---
+\newfontfamily\glitchmain{Latin Modern Roman}
+\newfontfamily\glitchaltA{TeX Gyre Pagella}
+\newfontfamily\glitchaltB{Courier New}
+\newfontfamily\glitchaltC{Arial}
+\newfontfamily\glitchaltD{Fira Code}
+
+% --- Usage ---
+% \glitch{string}{C}    -- Color
+% \glitch{string}{F}    -- Font
+% \glitch{string}{M}    -- Math Substitution
+% \glitch{string}{CFM}  -- Full Chaos
+
+
+% ----------------------------------------
+% CUSTOM CORE + GLITCH STYLE INJECTIONS
+% ----------------------------------------
+%################################################################%
+%##                                                            ##%
+%##   ██████╗ ██╗     ██╗████████╗ ██████╗  ██████╗            ##%
+%##   ██╔══██╗██║     ██║╚══██╔══╝██╔═══██╗██╔════╝            ##%
+%##   ██║  ██║██║     ██║   ██║   ██║   ██║██║  ███╗           ##%
+%##   ██║  ██║██║     ██║   ██║   ██║   ██║██║   ██║           ##%
+%##   ██████╔╝███████╗██║   ██║   ╚██████╔╝╚██████╔╝           ##%
+%##   ╚═════╝ ╚══════╝╚═╝   ╚═╝    ╚═════╝  ╚═════╝            ##%
+%##                                                            ##%
+%##   ΓLITCH TƎCK  —  S P A R K L I N G   M A L F O R M        ##%
+%##                                                            ##%
+%##   Quantum Drift Encryption | Codewall Glyph Compression    ##%
+%##   Vault Status: ⚡Live | ☠ ICE Active | ∴ Hashbloomed     ##%
+%##                                                            ##%
+%################################################################%
+% PResEnting the WOrDS FaAMousS:                               ##%
+\usepackage{custom/glitch}%                                    ##%
+%##                                                            ##%
+%## Your symbolic package. Running FULL METAL \glitch{string}({C},{F},{M})
+% Explicity DO NOT RUN GLITCH ON FULL STACK MODE!!! It will FRAG YOUR STACK!
+%Chooms goona try this and let out the CHAOS!                  ##%

@@ -1,0 +1,23 @@
+% -----------------------------------------------------------------
+% Ritual Binding: Reads the step number to control reveal order
+% -----------------------------------------------------------------
+\CatchFileDef{\ritualSteps}{security/RITUAL.txt}{}
+
+% Manual step set by Operator before compilation
+\newcommand{\currentRitualStep}{1} % <-- Change per stage
+
+% Conditional reveal by ritual stage
+\newcommand{\revealIfStep}[3]{%
+  % #1 = required step number
+  % #2 = content to reveal
+  % #3 = optional debug label
+  \ifthenelse{\currentRitualStep=#1}{#2}{\loomTrace{Blocked: #3}}%
+}
+
+% Combined key + ritual check
+\newcommand{\weaveRitual}[4]{%
+  % #1 = family, #2 = tag, #3 = step number, #4 = content
+  \revealIfKey{\covenantKey}{%
+    \revealIfStep{#3}{\tagged{#1}{#2}{#4}}{#1:#2 Step #3}%
+  }%
+}

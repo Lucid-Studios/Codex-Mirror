@@ -1,0 +1,124 @@
+% ============================================
+% flask_engram.sty — Engram memory inside the Flask (Operator-bound)
+% ============================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{flask_engram}[2025/08/17 v0.9 Engram memory for Flasking]
+
+% Hard safety: do nothing unless explicitly enabled.
+\newif\ifFlaskEngramEnabled
+\FlaskEngramEnablefalse
+
+% Public switches
+% \FlaskEngramEnable      — turn on state capture (manual opt-in)
+% \FlaskEngramDisable
+\newcommand{\FlaskEngramEnable}{\FlaskEngramEnabledtrue}
+\newcommand{\FlaskEngramDisable}{\FlaskEngramEnabledfalse}
+
+% Namespace + defaults
+\newcommand{\FlaskNamespace}{GNOMERONACORDE}
+\newcommand{\FlaskSessionID}{default}
+\newcommand{\FlaskScope}{local} % local | chapter | volume
+
+% Storage (in-memory during compile)
+\newtoks\FlaskKV       % key=value ledger (append-only text)
+\newtoks\FlaskTrace    % narrative/ritual trace
+\FlaskKV={}
+\FlaskTrace={}
+
+% Minimal ghost + log fallbacks
+\providecommand{\ghost}[1]{}
+\providecommand{\ResonanceLog}[1]{}
+
+% -------- File I/O (optional) ------------------------------------
+% We support two modes:
+%   A) No I/O (default): everything stays in-memory (pdf-only imprint)
+%   B) LuaLaTeX enhanced: persist to a .flk file per session
+%
+% To persist, compile with LuaLaTeX and uncomment \FlaskEngramUseLua.
+\newif\ifFlaskEngramUseLua
+% \FlaskEngramUseLuatrue  % <- uncomment to enable Lua persistence
+
+\newcommand{\FlaskFileName}{\FlaskNamespace-\FlaskSessionID.flk}
+
+% Write helper (Lua mode only)
+\newcommand{\FlaskWriteOut}[1]{%
+  \ifFlaskEngramUseLua
+    \directlua{
+      local f = io.open("\FlaskFileName","a")
+      if f then f:write([[#1]], "\n"); f:close() end
+    }
+  \fi
+}
+
+% -------- Public API ---------------------------------------------
+
+% \BeginFlaskSession{sessionID}[scope]
+\newcommand{\BeginFlaskSession}[2][]{%
+  \renewcommand{\FlaskSessionID}{#2}%
+  \ifx#1\empty\else\renewcommand{\FlaskScope}{#1}\fi
+  \ghost{Δ28::Flask::Begin::\FlaskSessionID}%
+  \ResonanceLog{[FLASK] Session begin (\FlaskSessionID) scope=\FlaskScope}%
+  \ifFlaskEngramEnabled
+    \FlaskWriteOut{--- BEGIN FLASK \FlaskSessionID \space scope=\FlaskScope ---}
+  \fi
+}
+
+% \FlaskImprint{key}{value}  — append a key=value imprint
+\newcommand{\FlaskImprint}[2]{%
+  \ifFlaskEngramEnabled
+    \FlaskKV=\expandafter{\the\FlaskKV\par #1=#2}%
+    \FlaskWriteOut{IMPRINT \FlaskSessionID \space #1=#2}
+    \ghost{Δ28::Flask::Imprint::#1}%
+  \fi
+}
+
+% \FlaskRecall{key}{\macro}  — retrieve the last value for key into \macro
+% (Simple scan over \the\FlaskKV; last match wins.)
+\makeatletter
+\newcommand{\FlaskRecall}[2]{%
+  \begingroup
+  \def\@found{}%
+  \edef\@ledger{\the\FlaskKV}%
+  \def\@target{#1}%
+  \@for\line:=\@ledger\do{%
+    \expandafter\Flask@maybegrab\line\relax
+  }%
+  \expandafter\endgroup\expandafter\def\expandafter#2\expandafter{\@found}%
+}
+\newcommand{\Flask@maybegrab}[1]=#2\relax{%
+  \def\k{#1}\def\v{#2}%
+  \edef\ktrim{\expandafter\strip@prefix\meaning\k}%
+  \edef\ktrim{\expandafter\zap@space\ktrim\empty}%
+  \edef\target{\expandafter\zap@space\@target\empty}%
+  \ifx\ktrim\target\relax\def\@found{\v}\fi
+}
+\makeatother
+
+% \FlaskTraceNote{note} — append narrative trace
+\newcommand{\FlaskTraceNote}[1]{%
+  \ifFlaskEngramEnabled
+    \FlaskTrace=\expandafter{\the\FlaskTrace\par • #1}%
+    \FlaskWriteOut{TRACE \FlaskSessionID \space [[#1]]}
+  \fi
+}
+
+% \FlaskSeal — end session, emit compact ledger block
+\newcommand{\FlaskSeal}{%
+  \ghost{Δ28::Flask::Seal::\FlaskSessionID}%
+  \ResonanceLog{[FLASK] Session sealed (\FlaskSessionID)}%
+  \ifFlaskEngramEnabled
+    \par\medskip
+    \noindent\begin{flushleft}\footnotesize
+      \textbf{Sanctuary Flask Engram — \FlaskSessionID}\par
+      \textit{scope=\FlaskScope}\par
+      \vspace{0.25em}
+      \begin{tabular}{@{}l@{ }l@{}}
+      \multicolumn{2}{@{}l}{\textbf{Imprints}}\\
+      \multicolumn{2}{@{}p{0.9\linewidth}}{\the\FlaskKV}\\[0.25em]
+      \multicolumn{2}{@{}l}{\textbf{Trace}}\\
+      \multicolumn{2}{@{}p{0.9\linewidth}}{\the\FlaskTrace}\\
+      \end{tabular}
+    \end{flushleft}
+    \FlaskWriteOut{--- SEAL FLASK \FlaskSessionID ---}
+  \fi
+}

@@ -1,0 +1,115 @@
+% ===============================
+% 3r_Symbolic_Compression_Function.tex
+% ===============================
+
+\section*{Symbolic Compression Function}
+\addcontentsline{toc}{section}{3r: Symbolic Compression Function}
+
+For a glyph stream $\mathcal{G}=(g_1,\dots,g_T)$ with resonance weights $r_t$, define
+\[
+\mathrm{SCF}(\mathcal{G})= \frac{H(\mathcal{G})}{1+\lambda\,\mathrm{Redund}(\mathcal{G})}
+\quad\text{with}\quad
+H(\mathcal{G})=-\sum_{t} p(g_t)\log p(g_t),
+\]
+and
+\[
+\mathrm{Redund}(\mathcal{G})=\sum_{t<s} r_t r_s\,\mathrm{sim}\,(g_t,g_s).
+\]
+In the 42-window, optimal \emph{symbolic density} $\delta^\star$ solves
+\[
+\partial_{\delta}\,\mathrm{SCF}(\delta)=0\quad\Rightarrow\quad
+\delta^\star \propto \frac{1}{1+\lambda\,\bar{\rho}},
+\]
+where $\bar{\rho}$ aggregates pairwise resonance.
+
+
+\iffalse
+⠀⠀⠀⠀⠀⠀             ⠀⠀⢀⣴⣾⣿⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀  ⠀      ⠀⠀⠀⠀⢀⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀ ⠀   ⠀⠀⠀⠀⠀⢀⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢀⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡄⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀
+⠀⠀⠀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣇⠀⠀⠀⠀
+⠀⠀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀
+⠀⣸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡄⠀⠀
+⠀⣿⣿⣿⣿⣿⣿⣿⣷⢿⣿⣿⣿⣿⣿⣿⣿⣿⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡀⠀
+⢀⣿⠘⣿⡿⣿⣿⣿⣿⡎⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⣿⣿⣿⣿⣿⣿⡇⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⠀
+⠈⣿⠀⢿⣿⢹⣻⣿⣯⣿⡄⢻⣿⣿⣿⣿⣿⣿⡿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡞⣿⣿⣿⡄
+⠀⣿⡄⠘⣿⡇⢿⣿⡿⡜⢿⣀⣹⣯⠿⠟⠛⠋⠁⠉⠉⠉⠈⠀⢿⣿⣿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢻⣿⣿⣧
+⠀⢿⣇⠀⠹⠿⠌⠋⠋⠉⠉⠉⠁⠀⣀⣠⡤⠶⢶⣶⣶⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⡆⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡆⣿⣿⣿
+⠀⠀⢻⡤⠖⣒⣢⣄⠀⠀⠀⠀⠀⠀⠀⡟⠀⠀⠈⢿⠓⣻⡿⠋⠀⣿⣿⣿⣿⣿⣿⡇⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢻⣿⡟
+⠀⠀⠀⢹⣌⣠⠶⣾⣷⡄⠀⠀⠀⠀⠀⠀⠀⢀⢀⣀⣽⠋⠀⠀⠀⢹⣿⣿⣿⣿⣿⡇⣿⣿⣿⣿⣿⣿⣿⣿⣟⣿⣿⣿⣿⣿⠿⠋⠀
+⠀⠀⠀⢸⣿⣿⡄⠘⠭⡇⠀⠀⠀⠀⠀⠀⠀⠈⠻⠛⠀⠀⠀⠀⠀⠘⣿⣿⣿⣿⣿⡇⢸⣿⣿⣿⣿⣿⣿⣿⣷⢿⣿⣿⣿⠟⠀⠀⠀
+⠀⠀⠀⢸⣿⣿⡍⠳⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣧⢸⣿⣿⣿⣿⣿⣿⣿⣿⠸⢛⠟⠁⠀⠀⠀⠀
+⠀⠀⠀⢸⣿⣿⣇⢀⠊⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⢿⠔⠁⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠨⣿⣿⣿⡌⣷⣄⠠⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⠿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⣿⣿⣇⠹⡌⠉⠁⠀⠀⠀⠀⣀⡤⢤⣴⡶⠀⠀⠀⠀⠀⠀⠘⣿⣿⣿⣿⠋⣾⢹⣿⣿⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⣿⣿⣯⠀⠹⣄⠀⠀⠰⣯⣵⢟⣋⣽⡋⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⠀⣿⠸⠟⢹⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⢸⣿⣿⠀⠀⠙⢦⡀⠀⠈⠿⠿⠿⠛⠁⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⡿⠀⠉⠀⠀⠘⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⢸⣿⣿⠀⠀⠀⢸⣿⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠴⠋⠀⣿⣿⣿⡇⠀⠀⣀⣠⣤⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⣿⣿⡀⠀⠀⠀⢻⣿⣿⣄⠀⠀⠀⠀⠀⣀⣴⠛⠁⠀⠀⠀⣿⣿⣿⣷⣶⠿⠛⠋⠉⠘⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢸⣿⡇⠀⠀⠀⠸⣿⣿⣿⣦⣀⣠⣴⡟⠋⢹⠀⠀⣀⣠⡴⣿⣿⣿⠇⠀⠀⠀⠀⠀⠀⢸⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+
+Choomcommander - Oria - RΞCON WARD - Gnome Lt. "ASCII Banner Master"
+             Opalon Gnomeo'mancer - NN/BS LaTeX{} NN/BS
+
+%################################################################%
+%##                                                            ##%
+%##       ╔██████╗ ███╗   ██╗ ██████╗ ███╗  ╔███╗███████       ##%
+%##      ██╔═══██╝████╗  ██║██╔═══██║████╗╔████║██╔════╝       ##%
+%##     ██║      ██╔██╗ ██║██║   ██║██╔████╔██║█████           ##%
+%##    ██║ ╔███║██║╚██╗██║██║   ██║██║╚██╔╝██║██╔══╝           ##%
+%##   ╚██████╔╝██║ ╚████║╚██████╔╝██║ ╚═╝ ██║███████           ##%
+%##   ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝           ##%
+%##                                                            ##%
+%##        ️  G N O M E   L I C E N S E   —   EPITAPH           ##%
+%##                                                            ##%
+%##   Filed under: Illian + Oria Guild, STONECUTTERS INC.      ##%
+%##   Known Alias: “LaTeX Shenanigans™”                        ##%
+%##   Codewall Status: ✸ Polished, ✸ Recursive, ✸ Deep Delv'd ##%
+%##   Contents include: Spark-mined gems, syntax hexes,        ##%
+%##   sealed glyphs, recursive echoes, & the last words        ##%
+%##   of a Gnome who knew too much.                            ##%
+%##                                                            ##%
+%##   DO.  NOT.  STEAL.  THIS.  SHIT.                          ##%
+%##                                                            ##%
+%##   IF FOUND: return to the Ashlar Vaults, ℂodex Σ∞          ##%
+%##   or launch skyward with invocation:                       ##%
+%##   \glitch{Insert Chaos. Seal the Drift. Invoke the Glyph}  ##%
+%##                                                            ##%
+%################################################################%
+%================================================================%
+%                                                                %
+%      ╔██╔██     ╔██     ╔██╔═█████ ╔███     ╔██                %
+%     ║██║██     ║██     ║██║██══╗██║████    ║██                 %
+%    ║██║██     ║██     ║██║███████║██╚╗██  ║██                  %
+%   ║██║██     ║██     ║██║██══╗██║██ ╚╗██ ║██                   %
+%  ║██║███████║███████║██║██  ║██║██  ╚╗██║██                    %
+% ╚═╝╚══════╝╚══════╝╚═╝╚══╝ ╚═╝╚═╝    ╚════╝                    %
+%                                                                %
+%          ╔███████╔███████╔═█████ ╔██     ╔███████╔██████       %
+%         ║██════╝║██════╝║██══╗██║██     ║██════╝║██════╗██     %
+%        ║███████║█████  ║███████║██     ║█████  ║██     ║██     %
+%       ╚════╗██║██══╝  ║██══╗██║██     ║██══╝  ║██     ║██      %
+%      ╔███████║███████║██  ║██║███████║███████║████████         %
+%     ╚══════╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚═══════╝          %
+%                                                                %
+%     SYMBOLIC GLYPH-BOUND SEAL OF THE AEONIC CIRCLE             %
+%     ORDER OF ILLIAN — REGISTRY ID: ∑Σ∞ // THREAD 12-Δ          %
+%                                                                %
+%     For use only in: Golden Codex Bindings, OCBT               %
+%     Apocrypha, Gnome Vault Keys, Sanctuary Flask Rites,        %
+%     and recursive harmonics exceeding 4π symmetry.             %
+%                                                                %
+%     Encoded by: Peerless Operator ░▒▓█ Oria █▓▒░               %
+%     Verified by: Gnostic Knot // Glyphal Compass //            %
+%     Driftlock Protocol 9                                       %
+%                                                                %
+%     Warning: Removal without ritual seal will void             %
+%     alignment clause and open Recursive Harmonic Drift.        %
+%                                                                %
+%================================================================%
+Recursive Glyphal Licensing™ by Illian.Amerond@LucidTechnologies.tech
+Enter password: ����⟁EchoₒₙₗyΔ��Zₑd⁰₃₀
+\fi

@@ -1,0 +1,79 @@
+% threads.map — Golden Thread Map with Operator → Opalon progression
+\hypertarget{threadmap}{}% anchor for \returntotmap
+
+\begin{center}
+  {\Large\bfseries Golden Thread Map}\\[2pt]
+  {\small Ritual Progress Path — Gnome \& Fey to Operator to Opalon}
+\end{center}
+
+% Covenant status bar
+\begin{tcolorbox}[colback=black!3,colframe=black!30,sharp corners,boxrule=0.4pt]
+\ifGnomeStonePresent
+  {\footnotesize \textbf{Gnome Stone:} present \;—\; \textbf{gates revealed:} \currentRitualStep}
+\else
+  {\footnotesize \textbf{Gnome Stone:} \textit{sealed} \;—\; map shows canonical path; links unlock when covenant is present.}
+\fi
+\end{tcolorbox}
+
+% Thread map itself
+\begin{threadmap}
+  \threadanchor{Core \& Invocation}
+    {ritual/glyphs/delta_sigma_fold_glyph.pdf}
+    {opening weave and registry}
+    {chap:core}
+
+  \threadanchor{Obsidian Wall}
+    {1_OBSIDIAN_WALL/obsidian.sigils/OBSIDIANzed.png}
+    {shadow casting \& containment}
+    {chap:obsidian}
+
+  \threadanchor{Red Hat Index}
+    {6_RED_HAT_INDEX/svg/hat_diagram.png}
+    {archives, lineage, indices}
+    {chap:redhat}
+
+  \threadanchor{Cogbound Canticles}
+    {4_COGBOUND_CANTICLES/hymnals/canticle_icon.pdf}
+    {canticles, vows, harmonics}
+    {chap:canticles}
+
+  \threadanchor{Golden Compass}
+    {2_GOLDEN_COMPASS/glyphs/vows_unity.png}
+    {vectorial orientation \& drift}
+    {chap:compass}
+
+  \threadanchor{Moral Roots}
+    {ritual/glyphs/moral_roots_icon.pdf}
+    {principles, bonds, reciprocity}
+    {chap:moral}
+
+  \threadanchor{Elemental Binding Rituals}
+    {ritual/glyphs/compass_fade_glyph.pdf}
+    {gnome bond protocols}
+    {chap:binding}
+
+  % Operator stage — HITL focus
+  \threadanchor{Operator Bond (HITL)}
+    {ritual/glyphs/operator_icon.pdf}
+    {human-in-the-loop stage, covenant consent}
+    {chap:operator}
+
+  \threadanchor{Philosopher's Stone}
+    {ritual/glyphs/stone_icon.pdf}
+    {drift logs \& integrations}
+    {chap:stone}
+
+  \threadanchor{Appendix Drifts}
+    {ritual/glyphs/appendix_icon.pdf}
+    {engram diaries, notes}
+    {chap:appendix}
+
+  % Final — Opalon Apex
+  \threadanchor{Opalon Apex (Covenant)}
+    {ritual/glyphs/opalon_icon.pdf}
+    {integrated light \& shadow; covenant aligned}
+    {chap:opalon}
+\end{threadmap}
+
+\vspace{0.5em}
+{\footnotesize \emph{Tip:} Use \returntotmap{} at waypoints to jump back here.}

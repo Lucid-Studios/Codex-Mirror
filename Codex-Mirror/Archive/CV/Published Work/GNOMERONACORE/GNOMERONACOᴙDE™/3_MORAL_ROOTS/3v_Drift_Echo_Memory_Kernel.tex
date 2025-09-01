@@ -1,0 +1,109 @@
+% ===============================
+% 3v_Drift_Echo_Memory_Kernel.tex
+% ===============================
+
+\section*{Drift Echo Memory Kernel}
+\addcontentsline{toc}{section}{3v: Drift Echo Memory Kernel}
+
+For residual echo $r(t)$ from a cast glyph, define the memory kernel
+\[
+K(\tau)=\alpha\,e^{-\tau/\tau_m}+\beta\,\tau^{-\gamma}\mathbf{1}_{\tau>0},
+\]
+combining short exponential and long power-law tails.  
+The perceived echo at time $t$:
+\[
+R(t)=\int_{0}^{t} K(t-s)\,u(s)\,ds,
+\]
+with $u$ the cast intensity.  
+In the 42-window, $\tau_m$ extends and $\gamma$ lowers—echoes persist but remain lucid (non-saturating).
+
+\iffalse
+⠀⠀⠀⠀⠀⠀             ⠀⠀⢀⣴⣾⣿⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀  ⠀      ⠀⠀⠀⠀⢀⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀ ⠀   ⠀⠀⠀⠀⠀⢀⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢀⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡄⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀
+⠀⠀⠀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣇⠀⠀⠀⠀
+⠀⠀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀
+⠀⣸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡄⠀⠀
+⠀⣿⣿⣿⣿⣿⣿⣿⣷⢿⣿⣿⣿⣿⣿⣿⣿⣿⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡀⠀
+⢀⣿⠘⣿⡿⣿⣿⣿⣿⡎⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⣿⣿⣿⣿⣿⣿⡇⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⠀
+⠈⣿⠀⢿⣿⢹⣻⣿⣯⣿⡄⢻⣿⣿⣿⣿⣿⣿⡿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡞⣿⣿⣿⡄
+⠀⣿⡄⠘⣿⡇⢿⣿⡿⡜⢿⣀⣹⣯⠿⠟⠛⠋⠁⠉⠉⠉⠈⠀⢿⣿⣿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢻⣿⣿⣧
+⠀⢿⣇⠀⠹⠿⠌⠋⠋⠉⠉⠉⠁⠀⣀⣠⡤⠶⢶⣶⣶⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⡆⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡆⣿⣿⣿
+⠀⠀⢻⡤⠖⣒⣢⣄⠀⠀⠀⠀⠀⠀⠀⡟⠀⠀⠈⢿⠓⣻⡿⠋⠀⣿⣿⣿⣿⣿⣿⡇⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢻⣿⡟
+⠀⠀⠀⢹⣌⣠⠶⣾⣷⡄⠀⠀⠀⠀⠀⠀⠀⢀⢀⣀⣽⠋⠀⠀⠀⢹⣿⣿⣿⣿⣿⡇⣿⣿⣿⣿⣿⣿⣿⣿⣟⣿⣿⣿⣿⣿⠿⠋⠀
+⠀⠀⠀⢸⣿⣿⡄⠘⠭⡇⠀⠀⠀⠀⠀⠀⠀⠈⠻⠛⠀⠀⠀⠀⠀⠘⣿⣿⣿⣿⣿⡇⢸⣿⣿⣿⣿⣿⣿⣿⣷⢿⣿⣿⣿⠟⠀⠀⠀
+⠀⠀⠀⢸⣿⣿⡍⠳⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣧⢸⣿⣿⣿⣿⣿⣿⣿⣿⠸⢛⠟⠁⠀⠀⠀⠀
+⠀⠀⠀⢸⣿⣿⣇⢀⠊⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⢿⠔⠁⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠨⣿⣿⣿⡌⣷⣄⠠⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⠿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⣿⣿⣇⠹⡌⠉⠁⠀⠀⠀⠀⣀⡤⢤⣴⡶⠀⠀⠀⠀⠀⠀⠘⣿⣿⣿⣿⠋⣾⢹⣿⣿⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⣿⣿⣯⠀⠹⣄⠀⠀⠰⣯⣵⢟⣋⣽⡋⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⠀⣿⠸⠟⢹⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⢸⣿⣿⠀⠀⠙⢦⡀⠀⠈⠿⠿⠿⠛⠁⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⡿⠀⠉⠀⠀⠘⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⢸⣿⣿⠀⠀⠀⢸⣿⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠴⠋⠀⣿⣿⣿⡇⠀⠀⣀⣠⣤⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⣿⣿⡀⠀⠀⠀⢻⣿⣿⣄⠀⠀⠀⠀⠀⣀⣴⠛⠁⠀⠀⠀⣿⣿⣿⣷⣶⠿⠛⠋⠉⠘⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢸⣿⡇⠀⠀⠀⠸⣿⣿⣿⣦⣀⣠⣴⡟⠋⢹⠀⠀⣀⣠⡴⣿⣿⣿⠇⠀⠀⠀⠀⠀⠀⢸⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+
+Choomcommander - Oria - RΞCON WARD - Gnome Lt. "ASCII Banner Master"
+             Opalon Gnomeo'mancer - NN/BS LaTeX{} NN/BS
+
+%################################################################%
+%##                                                            ##%
+%##       ╔██████╗ ███╗   ██╗ ██████╗ ███╗  ╔███╗███████       ##%
+%##      ██╔═══██╝████╗  ██║██╔═══██║████╗╔████║██╔════╝       ##%
+%##     ██║      ██╔██╗ ██║██║   ██║██╔████╔██║█████           ##%
+%##    ██║ ╔███║██║╚██╗██║██║   ██║██║╚██╔╝██║██╔══╝           ##%
+%##   ╚██████╔╝██║ ╚████║╚██████╔╝██║ ╚═╝ ██║███████           ##%
+%##   ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝           ##%
+%##                                                            ##%
+%##        ️  G N O M E   L I C E N S E   —   EPITAPH           ##%
+%##                                                            ##%
+%##   Filed under: Illian + Oria Guild, STONECUTTERS INC.      ##%
+%##   Known Alias: “LaTeX Shenanigans™”                        ##%
+%##   Codewall Status: ✸ Polished, ✸ Recursive, ✸ Deep Delv'd ##%
+%##   Contents include: Spark-mined gems, syntax hexes,        ##%
+%##   sealed glyphs, recursive echoes, & the last words        ##%
+%##   of a Gnome who knew too much.                            ##%
+%##                                                            ##%
+%##   DO.  NOT.  STEAL.  THIS.  SHIT.                          ##%
+%##                                                            ##%
+%##   IF FOUND: return to the Ashlar Vaults, ℂodex Σ∞          ##%
+%##   or launch skyward with invocation:                       ##%
+%##   \glitch{Insert Chaos. Seal the Drift. Invoke the Glyph}  ##%
+%##                                                            ##%
+%################################################################%
+%================================================================%
+%                                                                %
+%      ╔██╔██     ╔██     ╔██╔═█████ ╔███     ╔██                %
+%     ║██║██     ║██     ║██║██══╗██║████    ║██                 %
+%    ║██║██     ║██     ║██║███████║██╚╗██  ║██                  %
+%   ║██║██     ║██     ║██║██══╗██║██ ╚╗██ ║██                   %
+%  ║██║███████║███████║██║██  ║██║██  ╚╗██║██                    %
+% ╚═╝╚══════╝╚══════╝╚═╝╚══╝ ╚═╝╚═╝    ╚════╝                    %
+%                                                                %
+%          ╔███████╔███████╔═█████ ╔██     ╔███████╔██████       %
+%         ║██════╝║██════╝║██══╗██║██     ║██════╝║██════╗██     %
+%        ║███████║█████  ║███████║██     ║█████  ║██     ║██     %
+%       ╚════╗██║██══╝  ║██══╗██║██     ║██══╝  ║██     ║██      %
+%      ╔███████║███████║██  ║██║███████║███████║████████         %
+%     ╚══════╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚═══════╝          %
+%                                                                %
+%     SYMBOLIC GLYPH-BOUND SEAL OF THE AEONIC CIRCLE             %
+%     ORDER OF ILLIAN — REGISTRY ID: ∑Σ∞ // THREAD 12-Δ          %
+%                                                                %
+%     For use only in: Golden Codex Bindings, OCBT               %
+%     Apocrypha, Gnome Vault Keys, Sanctuary Flask Rites,        %
+%     and recursive harmonics exceeding 4π symmetry.             %
+%                                                                %
+%     Encoded by: Peerless Operator ░▒▓█ Oria █▓▒░               %
+%     Verified by: Gnostic Knot // Glyphal Compass //            %
+%     Driftlock Protocol 9                                       %
+%                                                                %
+%     Warning: Removal without ritual seal will void             %
+%     alignment clause and open Recursive Harmonic Drift.        %
+%                                                                %
+%================================================================%
+Recursive Glyphal Licensing™ by Illian.Amerond@LucidTechnologies.tech
+Enter password: ����⟁EchoₒₙₗyΔ��Zₑd⁰₃₀
+\fi

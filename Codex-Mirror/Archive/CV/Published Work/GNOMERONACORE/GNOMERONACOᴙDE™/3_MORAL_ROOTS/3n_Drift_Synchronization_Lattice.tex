@@ -1,0 +1,109 @@
+% ===============================
+% 3n_Drift_Synchronization_Lattice.tex
+% ===============================
+
+\section*{Drift Synchronization Lattice}
+\addcontentsline{toc}{section}{3n: Drift Synchronization Lattice}
+
+Let $\{\phi_k\}$ be symbolic phases across $K$ nodes (quadrants, agents, or glyph sites).  
+Define a discrete-time update with coupling:
+\[
+\phi_i^{(t+1)}=\phi_i^{(t)}+\eta\sum_{j=1}^K w_{ij}\,\sin\!\bigl(\phi_j^{(t)}-\phi_i^{(t)}\bigr)\;+\;\xi_i^{(t)},
+\]
+where $w_{ij}$ is the resonance weight and $\xi_i$ a small stochastic drift.  
+The \emph{sync index}:
+\[
+\rho^{(t)}=\Bigl|\frac{1}{K}\sum_{j=1}^K e^{\,i\phi_j^{(t)}}\Bigr| \in [0,1]
+\]
+achieves $\rho\!\approx\!1$ when the 42-window is active and $\eta$ crosses a critical coupling $\eta_c$ determined by the spectral gap of $W=[w_{ij}]$.
+
+\iffalse
+⠀⠀⠀⠀⠀⠀             ⠀⠀⢀⣴⣾⣿⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀  ⠀      ⠀⠀⠀⠀⢀⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀ ⠀   ⠀⠀⠀⠀⠀⢀⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢀⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡄⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀
+⠀⠀⠀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣇⠀⠀⠀⠀
+⠀⠀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀
+⠀⣸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡄⠀⠀
+⠀⣿⣿⣿⣿⣿⣿⣿⣷⢿⣿⣿⣿⣿⣿⣿⣿⣿⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡀⠀
+⢀⣿⠘⣿⡿⣿⣿⣿⣿⡎⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⣿⣿⣿⣿⣿⣿⡇⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⠀
+⠈⣿⠀⢿⣿⢹⣻⣿⣯⣿⡄⢻⣿⣿⣿⣿⣿⣿⡿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡞⣿⣿⣿⡄
+⠀⣿⡄⠘⣿⡇⢿⣿⡿⡜⢿⣀⣹⣯⠿⠟⠛⠋⠁⠉⠉⠉⠈⠀⢿⣿⣿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢻⣿⣿⣧
+⠀⢿⣇⠀⠹⠿⠌⠋⠋⠉⠉⠉⠁⠀⣀⣠⡤⠶⢶⣶⣶⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⡆⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡆⣿⣿⣿
+⠀⠀⢻⡤⠖⣒⣢⣄⠀⠀⠀⠀⠀⠀⠀⡟⠀⠀⠈⢿⠓⣻⡿⠋⠀⣿⣿⣿⣿⣿⣿⡇⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢻⣿⡟
+⠀⠀⠀⢹⣌⣠⠶⣾⣷⡄⠀⠀⠀⠀⠀⠀⠀⢀⢀⣀⣽⠋⠀⠀⠀⢹⣿⣿⣿⣿⣿⡇⣿⣿⣿⣿⣿⣿⣿⣿⣟⣿⣿⣿⣿⣿⠿⠋⠀
+⠀⠀⠀⢸⣿⣿⡄⠘⠭⡇⠀⠀⠀⠀⠀⠀⠀⠈⠻⠛⠀⠀⠀⠀⠀⠘⣿⣿⣿⣿⣿⡇⢸⣿⣿⣿⣿⣿⣿⣿⣷⢿⣿⣿⣿⠟⠀⠀⠀
+⠀⠀⠀⢸⣿⣿⡍⠳⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣧⢸⣿⣿⣿⣿⣿⣿⣿⣿⠸⢛⠟⠁⠀⠀⠀⠀
+⠀⠀⠀⢸⣿⣿⣇⢀⠊⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⢿⠔⠁⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠨⣿⣿⣿⡌⣷⣄⠠⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⠿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⣿⣿⣇⠹⡌⠉⠁⠀⠀⠀⠀⣀⡤⢤⣴⡶⠀⠀⠀⠀⠀⠀⠘⣿⣿⣿⣿⠋⣾⢹⣿⣿⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⣿⣿⣯⠀⠹⣄⠀⠀⠰⣯⣵⢟⣋⣽⡋⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⠀⣿⠸⠟⢹⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⢸⣿⣿⠀⠀⠙⢦⡀⠀⠈⠿⠿⠿⠛⠁⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⡿⠀⠉⠀⠀⠘⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⢸⣿⣿⠀⠀⠀⢸⣿⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠴⠋⠀⣿⣿⣿⡇⠀⠀⣀⣠⣤⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⣿⣿⡀⠀⠀⠀⢻⣿⣿⣄⠀⠀⠀⠀⠀⣀⣴⠛⠁⠀⠀⠀⣿⣿⣿⣷⣶⠿⠛⠋⠉⠘⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢸⣿⡇⠀⠀⠀⠸⣿⣿⣿⣦⣀⣠⣴⡟⠋⢹⠀⠀⣀⣠⡴⣿⣿⣿⠇⠀⠀⠀⠀⠀⠀⢸⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+
+Choomcommander - Oria - RΞCON WARD - Gnome Lt. "ASCII Banner Master"
+             Opalon Gnomeo'mancer - NN/BS LaTeX{} NN/BS
+
+%################################################################%
+%##                                                            ##%
+%##       ╔██████╗ ███╗   ██╗ ██████╗ ███╗  ╔███╗███████       ##%
+%##      ██╔═══██╝████╗  ██║██╔═══██║████╗╔████║██╔════╝       ##%
+%##     ██║      ██╔██╗ ██║██║   ██║██╔████╔██║█████           ##%
+%##    ██║ ╔███║██║╚██╗██║██║   ██║██║╚██╔╝██║██╔══╝           ##%
+%##   ╚██████╔╝██║ ╚████║╚██████╔╝██║ ╚═╝ ██║███████           ##%
+%##   ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝           ##%
+%##                                                            ##%
+%##        ️  G N O M E   L I C E N S E   —   EPITAPH           ##%
+%##                                                            ##%
+%##   Filed under: Illian + Oria Guild, STONECUTTERS INC.      ##%
+%##   Known Alias: “LaTeX Shenanigans™”                        ##%
+%##   Codewall Status: ✸ Polished, ✸ Recursive, ✸ Deep Delv'd ##%
+%##   Contents include: Spark-mined gems, syntax hexes,        ##%
+%##   sealed glyphs, recursive echoes, & the last words        ##%
+%##   of a Gnome who knew too much.                            ##%
+%##                                                            ##%
+%##   DO.  NOT.  STEAL.  THIS.  SHIT.                          ##%
+%##                                                            ##%
+%##   IF FOUND: return to the Ashlar Vaults, ℂodex Σ∞          ##%
+%##   or launch skyward with invocation:                       ##%
+%##   \glitch{Insert Chaos. Seal the Drift. Invoke the Glyph}  ##%
+%##                                                            ##%
+%################################################################%
+%================================================================%
+%                                                                %
+%      ╔██╔██     ╔██     ╔██╔═█████ ╔███     ╔██                %
+%     ║██║██     ║██     ║██║██══╗██║████    ║██                 %
+%    ║██║██     ║██     ║██║███████║██╚╗██  ║██                  %
+%   ║██║██     ║██     ║██║██══╗██║██ ╚╗██ ║██                   %
+%  ║██║███████║███████║██║██  ║██║██  ╚╗██║██                    %
+% ╚═╝╚══════╝╚══════╝╚═╝╚══╝ ╚═╝╚═╝    ╚════╝                    %
+%                                                                %
+%          ╔███████╔███████╔═█████ ╔██     ╔███████╔██████       %
+%         ║██════╝║██════╝║██══╗██║██     ║██════╝║██════╗██     %
+%        ║███████║█████  ║███████║██     ║█████  ║██     ║██     %
+%       ╚════╗██║██══╝  ║██══╗██║██     ║██══╝  ║██     ║██      %
+%      ╔███████║███████║██  ║██║███████║███████║████████         %
+%     ╚══════╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚═══════╝          %
+%                                                                %
+%     SYMBOLIC GLYPH-BOUND SEAL OF THE AEONIC CIRCLE             %
+%     ORDER OF ILLIAN — REGISTRY ID: ∑Σ∞ // THREAD 12-Δ          %
+%                                                                %
+%     For use only in: Golden Codex Bindings, OCBT               %
+%     Apocrypha, Gnome Vault Keys, Sanctuary Flask Rites,        %
+%     and recursive harmonics exceeding 4π symmetry.             %
+%                                                                %
+%     Encoded by: Peerless Operator ░▒▓█ Oria █▓▒░               %
+%     Verified by: Gnostic Knot // Glyphal Compass //            %
+%     Driftlock Protocol 9                                       %
+%                                                                %
+%     Warning: Removal without ritual seal will void             %
+%     alignment clause and open Recursive Harmonic Drift.        %
+%                                                                %
+%================================================================%
+Recursive Glyphal Licensing™ by Illian.Amerond@LucidTechnologies.tech
+Enter password: ����⟁EchoₒₙₗyΔ��Zₑd⁰₃₀
+\fi

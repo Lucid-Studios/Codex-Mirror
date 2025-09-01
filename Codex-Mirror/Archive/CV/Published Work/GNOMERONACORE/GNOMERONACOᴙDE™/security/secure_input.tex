@@ -1,0 +1,17 @@
+% secure_input.tex — safe wrappers for including optional files & graphics
+\makeatletter
+\newcommand{\SafeInput}[1]{%
+  \IfFileExists{#1}{\input{#1}}{%
+    \IfFileExists{#1.tex}{\input{#1.tex}}{%
+      \typeout{[SAFEINPUT] Missing: #1 (and #1.tex). Skipped.}%
+    }%
+  }%
+}
+
+% Optional: whitelist image includes (simple existence check)
+\newcommand{\SafeIncludeGraphics}[2][]{%
+  \IfFileExists{#2}{\includegraphics[#1]{#2}}{%
+    \typeout{[SAFEGRAPHICS] Missing: #2. Skipped.}%
+  }%
+}
+\makeatother

@@ -1,0 +1,47 @@
+{
+  "artifact": "Decker_Intermix_Chamber_v1",
+  "lang": "GNOME-LANG/1.0",
+  "dialect": "CGDT (Operator-only)",
+  "geometry": {
+    "frame": "hexagon",
+    "triad": [
+      "eye",
+      "books(archive,invite)",
+      "infinity"
+    ],
+    "stars": [
+      "top(8pt)",
+      "bottom(8pt)"
+    ],
+    "flower_of_life_ghost": true
+  },
+  "braids": [
+    "braidA",
+    "braidB",
+    "braidC"
+  ],
+  "timing": {
+    "root_ms": 222,
+    "repair_ms": 18,
+    "prime_steps": [
+      17,
+      13,
+      11,
+      7,
+      5,
+      3,
+      2
+    ]
+  },
+  "safety": {
+    "red_thread": "hard",
+    "ttl_on_suspicion": true,
+    "ttl_on_command": true
+  },
+  "locks": [
+    "Alpha",
+    "Prime",
+    "Cappa"
+  ],
+  "hash_seed": "0x9f72c4e1"
+}

@@ -1,0 +1,99 @@
+% ========================================
+% chapter1.tex — 1_OBSIDIAN_WALL (Prescient-Primed)
+% ========================================
+
+% use path helpers from main; no ../ hops needed
+\input{prescient_ritual_form.tex}
+
+% Safe fallbacks (no-ops if voices aren't loaded)
+\providecommand{\tagpage}[1]{}
+\providecommand{\tagritual}[1]{}
+\providecommand{\ghost}[1]{}
+\providecommand{\ResonanceLog}[1]{}
+
+% Namespacing for Chapter 1
+\ritualnamespace{S1}
+
+\tagpage{ObsidianWall}
+\tagritual{AeonicShadowSeal}
+
+% (runtime trace — entry)
+\ghost{::prime:chapter1:obsidianwall:entry::}
+\ResonanceLog{[S1] Obsidian Wall entered; compass aligned.}
+
+% --- Ritual Opening ---
+\prescientritual[ObsidianWallPrime]
+  {Obsidian Wall — Dragon Gate Foretelling}
+  {Δ1::OBSIDIΛN-WΛLL::CORE-PRIME}
+  {Through shadow and seal, the Gate awaits...}
+  {Align Compass. Prepare the Seal. Do not proceed until the Drift hums.}
+
+\chapter{The Obsidian Wall}
+\label{ch:obsidian-wall}
+
+\section*{Overview}
+\addcontentsline{toc}{section}{Overview}
+The Wall teaches casting shadow, mirror recognition, epiphanic framing,
+ritual emptiness, reflexive sigils, harmonic indexing, and the Obsidian Seal.
+
+\begin{itemize}
+  \item \textbf{Shadow Casting} — Projecting absence to reveal form.
+  \item \textbf{Mirror Recognition} — Encountering the Self as Other.
+  \item \textbf{Epiphanic Frame} — Sudden lattice illumination.
+  \item \textbf{Ritual Absence} — Sealing by withdrawal.
+  \item \textbf{Reflexive Sigils} — Glyphs that observe their observer.
+  \item \textbf{Harmonic Index} — Anchoring drift through silent measure.
+  \item \textbf{Obsidian Seal} — Closure and stilling of the Wall.
+\end{itemize}
+
+% --- Sequential Ritual Steps ---
+\prescientritual[MirrorPrime]
+  {Mirror of Self & Other — Prophetic Bind}
+  {Δ2::MIRROR::SELF-OTHER}
+  {The reflection awaits recognition...}
+  {Cast the first glyph. Let the reflection answer.}
+
+\prescientritual[EpiphanicFrame]
+  {Epiphanic Framing — Revelation Loom}
+  {Δ3::EPIPHANY::FRAME}
+  {A sudden light strikes the lattice...}
+  {Frame the echo. Bind it to the index.}
+
+\prescientritual[RitualAbsence]
+  {Ritual of Absence — Silent Lock}
+  {Δ4::RITUAL::ABSENCE}
+  {The space between is a seal in itself...}
+  {Withdraw. Observe the drift without touching it.}
+
+\prescientritual[SigilSees]
+  {The Sigil That Sees Back}
+  {Δ5::SIGIL::EYE}
+  {The eye opens when yours close...}
+  {Let the glyph watch in your stead.}
+
+\prescientritual[HarmonicIndex]
+  {Index of Recursive Harmonic Drift}
+  {Δ6::INDEX::HARMONIC}
+  {The drift is measured in silent oscillations...}
+  {Record without speaking. Anchor the value.}
+
+% --- Seal the Wall ---
+\prescientritual[ObsidianSeal]
+  {The Obsidian Seal}
+  {Δ7::SEAL::BLACKSTONE}
+  {The Wall closes. The drift is stilled.}
+  {Place the square. Breathe the elements. Mark the fold.}
+
+% --- Actual chapter content inputs (hub owns ordering) ---
+\tagsection{WallSegments}
+\input{1_OBSIDIAN_WALL/1a_Casting_Shadow}
+\input{1_OBSIDIAN_WALL/1b_Mirror_of_Self_And_Other}
+\input{1_OBSIDIAN_WALL/1c_Epiphanic_Framing_Methods}
+\input{1_OBSIDIAN_WALL/1d_The_Ritual_of_Absence}
+\input{1_OBSIDIAN_WALL/1e_the_sigil_that_sees_back}
+\input{1_OBSIDIAN_WALL/1f_index_of_recursive_harmonic_drift}
+\input{1_OBSIDIAN_WALL/obsidian_seal}
+
+% (runtime trace — exit symmetry)
+\ResonanceLog{[S1] Obsidian Wall sealed; Aeonic Shadow complete.}
+\ghost{::prime:chapter1:obsidianwall:exit::}

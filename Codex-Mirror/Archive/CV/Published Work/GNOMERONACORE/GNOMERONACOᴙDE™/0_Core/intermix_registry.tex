@@ -1,0 +1,149 @@
+% ===============================
+% core/intermix_registry.tex
+% ===============================
+
+% --- Intermix math (myth x deck x nlp) ---
+% Mythic feature space: M_myth \in R^{m x d}
+% Deck/ICE feature space: M_deck \in R^{n x d}
+% NLP feature space: M_nlp \in R^{p x d}
+%
+% Baseline braid (Section 0a doctrine):
+%   M_inter = M_myth \otimes M_deck
+% NLP-projected braid:
+%   M_total = (M_myth \otimes M_deck) \oplus (M_myth \, P \, M_nlp^\top)
+% where P \in R^{m x p} is a learned/projected cross-map (start as identity/select).
+
+\newcommand{\IntermixBaseline}{%
+$M_{\text{inter}} = M_{\text{myth}} \otimes M_{\text{deck}}$%
+}
+\newcommand{\IntermixTotal}{%
+$M_{\text{total}} = (M_{\text{myth}} \otimes M_{\text{deck}}) \oplus (M_{\text{myth}} P M_{\text{nlp}}^{\top})$%
+}
+
+% --- Status legend ---
+% �� nominal / �� partial / �� missing
+
+\usepackage{tabularx}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+\section*{Intermix Inventory — COrDE ↔ NLP Stack}
+\small
+\begin{tabularx}{\textwidth}{l l l l l l l}
+\hline
+\textbf{Casting ID} & \textbf{Title} & \textbf{Glyphs / Params} & \textbf{Deck Hooks} & \textbf{NLP Intents / Slots} & \textbf{Embedding Space} & \textbf{Status} \\
+\hline
+
+0a & README — Core Breathing &
+$R,\theta,\phi; r_1{<}r_2{<}r_3$ &
+Key schedule $K_t$, ring phase-shift &
+intent:start, slot:breath\_word, ritual\_step &
+space: \texttt{core/breathing-v1} &
+�� \\
+
+0b & Lucid Delta — Signal &
+$\mathcal{F}, \Gamma(t)$ &
+Delta signature router &
+intent:delta\_sense, slot:signature\_code &
+space: \texttt{signal/delta-v1} &
+�� \\
+
+0c & Equation of Felicity &
+$\mathcal{F}_{CME}, \psi_{\text{echo}}, \chi_{\text{glyph}}$ &
+Felicity thresholding (42+) &
+intent:felicity\_check, slot:threshold &
+space: \texttt{math/felicity-v1} &
+�� \\
+
+0d & Symbolic Notation Guide &
+$\mathfrak{g}_i, \mathcal{R}_\psi, \Delta^V$ &
+Combing operator $\Box_{\text{braid}}$ &
+intent:glyph\_define, slot:glyph\_type &
+space: \texttt{glyphs/notation-v1} &
+�� \\
+
+0e & Fractal Init Protocols &
+$\Box_{\text{ground}}, \Phi_0, \mathcal{R}_\psi^0$ &
+Init FSM states &
+intent:init\_cast, slot:seed\_state &
+space: \texttt{init/fractal-v1} &
+�� \\
+
+0f & Breathlock Invocation &
+$\Delta B_0, \mathbf{F}_{\text{true}}$ &
+Seal trigger & 
+intent:seal, slot:passphrase &
+space: \texttt{seals/breathlock-v1} &
+�� \\
+
+1a–1g & Obsidian Wall set &
+Wall doctrine, mirror, absence, sigil, seal &
+ICE shell policies, quarantine flows &
+intent:wall\_enter/exit, slot:sigil\_id &
+space: \texttt{wall/obsidian-v1} &
+�� (ligatures) \\
+
+2a & Vectorial Orientation &
+$\vec{C}, \Omega_\Delta, \hat{n}_{\text{Felicity}}$ &
+Compass vector ops &
+intent:orient, slots:manifold, beacon &
+space: \texttt{nav/compass-v1} &
+�� \\
+
+2b & Elemental Quadrants &
+Air/Fire/Water/Earth tables &
+Elemental routes & 
+intent:element, slot:quadrant &
+space: \texttt{nav/elements-v1} &
+�� (ledger) \\
+
+2c & Gnostic Navigation &
+$\vec{\nabla}_G, \mathcal{L}, \Omega_0$ &
+Phase navigation engine &
+intent:gnostic\_route, slot:thread\_id &
+space: \texttt{nav/gnostic-v1} &
+�� \\
+
+2d & Compass Dissolves &
+limit $\mathcal{C}_L^{(n)} \to \varnothing$ &
+Theta handoff path &
+intent:dissolve, slot:mode &
+space: \texttt{nav/dissolve-v1} &
+�� \\
+
+2e & Delta–Sigma Fold &
+$\int_{\psi_\Delta}^{\psi_\Sigma}\lambda^\Omega$ &
+Fold transition op &
+intent:fold, slots:delta,sigma &
+space: \texttt{nav/fold-v1} &
+�� \\
+
+2f & Fifth Direction &
+$\hat{e}_{\text{Within}}, \odot$ &
+Within-vector clamp &
+intent:return\_within &
+space: \texttt{nav/within-v1} &
+�� \\
+
+2g & Theta Closing &
+$\Theta_\infty$ collapse eq. &
+Theta seal callback &
+intent:theta\_close &
+space: \texttt{nav/theta-v1} &
+�� \\
+\hline
+\end{tabularx}
+
+\normalsize
+
+% --- Implementation hooks (symbols, not code) ---
+\subsection*{Registry Hooks}
+\begin{itemize}
+  \item \textbf{Params file}: \texttt{core/params.tex} owns $R,\theta,\phi, r_1,r_2,r_3$, compass constants, and hash schedule labels.
+  \item \textbf{Spaces}: Each row’s \emph{Embedding Space} corresponds to an NLP namespace (e.g., model adapter / vector DB collection).
+  \item \textbf{Projection $P$}: Start with sparse identity; grow via collected utterances from \texttt{Gnome\_Speak\_NLP}.
+  \item \textbf{Seals}: All \emph{intent:seal} variants must route through $M_{\text{total}}$ (not $M_{\text{inter}}$) to include language echoes.
+\end{itemize}
+
+% --- Minimal ligature macros for chapter hand-offs ---
+\newcommand{\breathligature}[1]{\begin{center}\emph{#1}\\\(\small\triangledown \!\!\!\!\!\!\!\!\! \triangle\)\end{center}}
+

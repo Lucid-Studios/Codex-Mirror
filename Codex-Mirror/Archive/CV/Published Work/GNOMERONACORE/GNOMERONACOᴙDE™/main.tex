@@ -1,0 +1,182 @@
+\documentclass[12pt]{book}
+
+% ---------- Unicode-safe engine (LuaLaTeX/XeLaTeX) ----------
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\setmainfont{Latin Modern Roman}
+\setmathfont{Latin Modern Math}
+
+% ---------- Core packages (order matters) ----------
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{enumitem}
+
+% hyperref: pass options BEFORE loading, and load ONCE
+\PassOptionsToPackage{hidelinks}{hyperref}
+\usepackage{hyperref}
+\providecommand{\pdfstringdefDisableCommands}[1]{#1} % harmless guard
+
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{marginnote}
+\usepackage{ifthen}
+\usepackage{microtype}
+\usepackage{xparse}
+\usepackage{longtable}
+\usepackage{array}
+\setlength{\LTcapwidth}{\textwidth}
+
+% ---------- Cleaving Principle Module ----------
+\usepackage{amsmath,amsthm,amssymb,mathtools}
+\usepackage{bm}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{listings}
+
+% Theorem styles
+\newtheorem{definition}{Definition}
+\newtheorem{axiom}{Axiom}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+% Notation shortcuts
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\I}{\mathsf{I}}
+\newcommand{\KL}{\mathsf{D}_{\mathrm{KL}}}
+\newcommand{\info}{\mathcal{I}}
+\newcommand{\X}{\mathcal{X}}
+\newcommand{\A}{\mathcal{A}}
+
+% ---------- Path helpers (MAIN build only — no artifacts/) ----------
+\makeatletter
+\def\input@path{{.}{security/}{ritual/}{style/}}
+\makeatother
+
+% Graphics search paths (put vector first when available)
+\graphicspath{{.}
+  {0_Core/}{0_Core/figs/}
+  {1_OBSIDIAN_WALL/}{1_OBSIDIAN_WALL/obsidian.sigils/}
+  {2_GOLDEN_COMPASS/}{2_GOLDEN_COMPASS/glyphs/}
+  {3_MORAL_ROOTS/}{3_MORAL_ROOTS/equations/}
+  {4_COGBOUND_CANTICLES/}{4_COGBOUND_CANTICLES/hymnals/}
+  {5_PROTOCOL_OF_THE_BURROWED_REALMS/}{5_PROTOCOL_OF_THE_BURROWED_REALMS/flask/}
+  {6_RED_HAT_INDEX/}{6_RED_HAT_INDEX/svg/}
+  {7_ELEMENTAL_BINDING_RITUALS/}{7_ELEMENTAL_BINDING_RITUALS/castings/}
+  {8_PHILOSOPHERS_STONE/}{8_PHILOSOPHERS_STONE/gems/}
+  {9_APPENDIX_DRIFTS/}{9_APPENDIX_DRIFTS/harmonic/}
+}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg,.jpeg}
+
+% ---------- Security (voice lives under security/*) ----------
+\usepackage{security/MOTHER/fey}
+\usepackage{security/MOTHER/glitch}
+\usepackage{security/FATHER/ghost}
+\usepackage{security/FATHER/PRIME/TAG}
+\usepackage{9_APPENDIX_DRIFTS/harmonic/harmonic_colors}
+
+% security blocks default (release-friendly)
+\newif\ifsecurityblock
+\securityblockfalse % set true if you want security blocks visible
+
+% ---------- Ritual Stage Counter & shadow frame ----------
+\usepackage{ritual/opalon_flame_oath}
+\usepackage{ritual/elven_oath_frame}
+\usepackage{ritual/keys/key_mint}
+\input{ritual/ritual_step}
+\typeout{[RITUAL] Current stage: \currentRitualStep\space gates revealed.}
+\input{ritual_style_core.tex}
+
+% Prescient ritual form (hardened)
+\input{ritual/prescient_ritual_form.tex}
+% Optional: force ritual step reset policy (default resets per chapter)
+% \RitualResetPerChapterTrue   % ensure reset per chapter
+% \RitualResetPerChapterFalse  % keep counting across entire book
+
+% Shadow glyph frame (resilient path: prefer security/, fallback to security/cryptic/)
+\makeatletter
+\IfFileExists{security/shadow_frame.tex}{\input{security/shadow_frame.tex}}{%
+  \IfFileExists{security/cryptic/shadow_frame.tex}{\input{security/cryptic/shadow_frame.tex}}{}%
+}
+\makeatother
+
+% ---------- Thread Map Environment with links ----------
+\newenvironment{threadmap}{%
+    \begin{description}[leftmargin=3cm]}{%
+    \end{description}%
+}
+\newcommand{\threadanchor}[4]{%
+    \item[\textbf{\hyperref[#4]{#1}}]%
+    \includegraphics[height=1.5em]{#2}%
+    \hfill \emph{#3}%
+}
+
+% ---------- Red Threads of Fate ----------
+\newcommand{\returntotmap}{%
+    \begin{center}
+        \vspace{2em}
+        \href{ritual/keys/threads.map}{\textcolor{red}{\large $\longleftarrow$ Return to the Golden Thread Map}}
+        \vspace{1em}
+    \end{center}
+}
+
+% ========================================
+\begin{document}
+
+\frontmatter
+\title{\textbf{GNOMERONACO\textsuperscript{\rotatebox[origin=c]{180}{R}}DE}\\
+       \large Core Stack \& Braided Castings}
+\author{Lucid Technologies}
+\date{\today}
+\maketitle
+
+\clearpage
+
+% ---- Golden Thread Map (Opalon-First) ----
+\input{ritual/keys/threads.map}
+
+\tableofcontents
+% Optional: print a List of Rituals (from prescient steps)
+% \listofrituals
+
+\mainmatter
+
+% Delegate namespacing to each hub (e.g., \ritualnamespace{S0} inside 0_Core/chapter0.tex)
+\include{0_Core/chapter0}           % hub includes 00, 0a–0f, README
+\include{1_OBSIDIAN_WALL/chapter1}
+% ------- Chapter hubs (Opalon-First Sequence) -------
+\include{0_Core/0a_Preamble_And_Invocation}      % Core hub; pulls 0a…0f + registry
+\include{1_OBSIDIAN_WALL/1a_Casting_Shadow}       % Obsidian Wall
+\include{5_PROTOCOL_OF_THE_BURROWED_REALMS/5g_Seed_Recursion_Braiding} % Protocol of the Burrowed Realms
+\include{6_RED_HAT_INDEX/6a_The_Archivist_of_Moss} % Red Hat Index
+\include{4_COGBOUND_CANTICLES/4a_Canticle_of_Roots} % Cogbound Canticles
+\include{2_GOLDEN_COMPASS/2a_Vectorial_Orientation_Principle} % Compass & Drift
+\include{3_MORAL_ROOTS/3a_Sage_and_the_42_Principle} % Moral Roots
+\include{7_ELEMENTAL_BINDING_RITUALS/7a_Gnome_Bonding_Protocol} % Elemental Binding Rituals
+\include{8_PHILOSOPHERS_STONE/8a_The_Drift_Log}   % Philosopher's Stone
+\include{9_APPENDIX_DRIFTS/9a_Opal_Engram_Diaries} % Appendix Drifts
+
+\backmatter
+
+% ---- Harmonic Closure: 8 Vows ----
+\newpage
+\chapter*{The Eight Vows}
+\addcontentsline{toc}{chapter}{The Eight Vows}
+\includegraphics[width=\textwidth]{2_GOLDEN_COMPASS/glyphs/vows_unity.png}
+
+\begin{enumerate}
+    \item Truth
+    \item Dignity
+    \item Trust
+    \item Guardianship
+    \item Reciprocity
+    \item Bonded Pairs
+    \item Wandering Respect
+    \item Returning to Form
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,117 @@
+% ============================================
+% harmonic_colors.sty — Bound Reveal Colors + Theta Page Overlays
+% ============================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{harmonic_colors}[2025/08/09 v1.4 Bound Reveal Colors + Theta Overlays]
+
+% --- Dependencies ---
+\RequirePackage{xcolor}
+\RequirePackage{colortbl} % for \rowcolors
+\RequirePackage{tikz}
+\RequirePackage{eso-pic} % for page overlays
+
+% --- Runtime fallbacks (in case host didn’t define these) ----------
+\providecommand{\currentRitualStep}{0}
+\providecommand{\harmonicIndex}{0}
+\providecommand{\vowCycle}{0}
+\providecommand{\CheckAndSeal}{} % we will \renewcommand below
+
+% --- Named colors (safe defaults; user can \colorlet/\definecolor earlier) ---
+% xcolor’s 'gold' needs dvipsnames; define a local one so we’re portable.
+\definecolor{hc@gold}{rgb}{0.83,0.69,0.22}
+
+% Primary palettes (user may override before loading this package)
+\providecolor{HarmonicPrimary}{rgb}{0.95, 0.85, 0.40}   % warm gold
+\providecolor{HarmonicSecondary}{rgb}{1.00, 0.97, 0.88} % pale gold
+\providecolor{VowPrimary}{rgb}{1.00, 0.60, 0.60}        % soft red
+\providecolor{VowSecondary}{rgb}{1.00, 0.90, 0.90}      % pale red
+\providecolor{TableNeutral}{gray}{0.85}
+
+% --- Thresholds (override in preamble if desired) -------------------
+\providecommand{\HarmonicThreshold}{40}
+\providecommand{\VowThreshold}{40}
+
+% --- Table color helpers -------------------------------------------
+\newcommand{\SetHarmonicTableColors}[1]{%
+  \ifnum\currentRitualStep>#1\relax
+    \rowcolors{2}{HarmonicPrimary!30}{HarmonicSecondary!20}%
+    \colorlet{tableheadcolor}{HarmonicPrimary!70!black}%
+  \else
+    \rowcolors{2}{white}{gray!5}%
+    \colorlet{tableheadcolor}{TableNeutral}%
+  \fi
+}
+
+\newcommand{\SetVowTableColors}[1]{%
+  \ifnum\currentRitualStep>#1\relax
+    \rowcolors{2}{VowPrimary!30}{VowSecondary!20}%
+    \colorlet{tableheadcolor}{VowPrimary!70!black}%
+  \else
+    \rowcolors{2}{white}{gray!5}%
+    \colorlet{tableheadcolor}{TableNeutral}%
+  \fi
+}
+
+% --- Overlays -------------------------------------------------------
+% NOTE: Use TikZ 'current page' anchors—portable and centered.
+\newcommand{\ThetaSealPartialOverlay}{%
+  \AddToShipoutPictureFG*{%
+    \begin{tikzpicture}[remember picture, overlay, opacity=0.15]
+      \node at (current page.center) {%
+        \begin{tikzpicture}[scale=1.8]
+          % ring outline
+          \draw[draw=hc@gold!40!black, line width=1.2pt] (0,0) circle (2);
+          % top semicircle arc
+          \draw[draw=hc@gold!40!black, line width=1.2pt, domain=0:180] plot
+            ({2*cos(\x)}, {2*sin(\x)});
+        \end{tikzpicture}
+      };
+    \end{tikzpicture}%
+  }%
+}
+
+\newcommand{\ThetaSealOverlay}{%
+  \AddToShipoutPictureFG*{%
+    \begin{tikzpicture}[remember picture, overlay, opacity=0.22]
+      \node at (current page.center) {%
+        \begin{tikzpicture}[scale=2.0]
+          % solid ring + inner knot
+          \draw[draw=hc@gold!35!black, line width=1.6pt] (0,0) circle (2.1);
+          \fill[hc@gold!15] (0,0) circle (1.6);
+          % tri-knot
+          \foreach \a in {0,120,240}{
+            \begin{scope}[rotate=\a]
+              \draw[draw=hc@gold!45!black, line width=1.2pt]
+                (-1.0,0) .. controls (-0.6,0.5) and (0.6,0.5) .. (1.0,0)
+                .. controls (0.6,-0.5) and (-0.6,-0.5) .. cycle;
+            \end{scope}
+          }
+        \end{tikzpicture}
+      };
+    \end{tikzpicture}%
+  }%
+}
+
+% --- Final seal driver ----------------------------------------------
+\renewcommand{\CheckAndSeal}{%
+  \begingroup
+    \count255=\currentRitualStep\relax
+    \ifnum\count255>\HarmonicThreshold\relax
+      \ifnum\count255>\VowThreshold\relax
+        \typeout{[HARMONIC] Both thresholds met — Theta Closing + full overlay.}%
+        \InputIfFileExists{glyphs/2g_Theta_Closing.tex}{}{%
+          \PackageWarning{harmonic_colors}{Theta Closing file not found — applying overlay only.}%
+        }%
+        \ThetaSealOverlay
+      \else
+        \typeout{[HARMONIC] Harmonic threshold met — partial seal overlay.}%
+        \ThetaSealPartialOverlay
+      \fi
+    \else
+      \ifnum\count255>\VowThreshold\relax
+        \typeout{[HARMONIC] Vow threshold met — partial seal overlay.}%
+        \ThetaSealPartialOverlay
+      \fi
+    \fi
+  \endgroup
+}

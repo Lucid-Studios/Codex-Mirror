@@ -1,0 +1,86 @@
+\chapter{Governance Keys}
+\label{chap:Governance_Keys}
+
+\section{Purpose}
+
+Governance Keys define the credential and capability structure for human
+and institutional actors who may influence CME behaviour.
+
+They bind:
+\begin{itemize}
+    \item identities,
+    \item roles,
+    \item permissions,
+    \item and accountability trails.
+\end{itemize}
+
+\section{Key Model}
+
+A Governance Key $G$ is:
+\[
+G = \langle id,\, principal,\, roles,\, capabilities,\, expiry,\, revocation \rangle
+\]
+
+Where:
+\begin{itemize}
+    \item id: key ID,
+    \item principal: human or organisation identity,
+    \item roles: assigned governance roles (operator, council, liaison, etc.),
+    \item capabilities: which actions/SIGILs this key may invoke,
+    \item expiry: optional end-of-validity,
+    \item revocation: state and reason if revoked.
+\end{itemize}
+
+\section{Role-Based Capabilities}
+
+Example roles:
+\begin{itemize}
+    \item \textbf{Operator}: may process OAQ items up to certain class.
+    \item \textbf{CAR Member}: may participate in Class B/C reviews.
+    \item \textbf{EAC Member}: may participate in Class A reviews and
+          mother/father handshakes.
+    \item \textbf{Auditor}: may read wide slices of HITL logs and telemetry.
+\end{itemize}
+
+Capabilities are tied to SIGIL Pathways:
+\begin{itemize}
+    \item certain SIGILs can only be invoked by specific roles,
+    \item critical SIGILs require multi-key collaboration.
+\end{itemize}
+
+\section{Key Lifecycle}
+
+\begin{enumerate}
+    \item \textbf{Issuance}  
+          \begin{itemize}
+              \item identity verification,
+              \item assignment of roles and capabilities,
+              \item recording in Governance Keys registry.
+          \end{itemize}
+    \item \textbf{Use}  
+          \begin{itemize}
+              \item authenticating actions in Operator Interface,
+              \item binding actions to identities in audit log.
+          \end{itemize}
+    \item \textbf{Rotation/Expiry}  
+          \begin{itemize}
+              \item periodic renewal,
+              \item capability updates.
+          \end{itemize}
+    \item \textbf{Revocation}  
+          \begin{itemize}
+              \item upon misuse, role change, or compromise,
+              \item log revocation reason and impact.
+          \end{itemize}
+\end{enumerate}
+
+\section{Summary}
+
+Governance Keys tie together:
+\begin{itemize}
+    \item who can act,
+    \item what they can do,
+    \item how those actions are traced,
+\end{itemize}
+ensuring that CME governance remains both powerful and accountable.
+

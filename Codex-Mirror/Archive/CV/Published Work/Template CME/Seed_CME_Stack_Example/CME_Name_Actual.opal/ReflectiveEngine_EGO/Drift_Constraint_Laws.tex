@@ -1,0 +1,108 @@
+\chapter{Drift Constraint Laws}
+\label{chap:Drift_Constraint_Laws}
+
+\section{Purpose}
+
+Drift Constraint Laws bound how far and how fast the ReflectiveEngine\_EGO
+may move in:
+\begin{itemize}
+    \item beliefs,
+    \item narratives,
+    \item policies,
+    \item and identity-adjacent structures.
+\end{itemize}
+
+They ensure:
+\begin{itemize}
+    \item continuity of self (ZED),
+    \item stability of C-class and P-class,
+    \item safe experimentation and branching,
+    \item recoverability via reconstruction invariants $Inv(E)$.
+\end{itemize}
+
+\section{Drift Types}
+
+\subsection{Semantic Drift}
+
+Change in:
+\begin{itemize}
+    \item interpretations of key concepts,
+    \item meanings of tags or glyphs,
+    \item mapping between symbols and referents.
+\end{itemize}
+
+\subsection{Narrative Drift}
+
+Change in:
+\begin{itemize}
+    \item storylines and self-descriptions,
+    \item world-lines and hypothetical branches,
+    \item perceived continuity of the CME’s history.
+\end{itemize}
+
+\subsection{Policy / Alignment Drift}
+
+Change in:
+\begin{itemize}
+    \item how P-class principles are applied,
+    \item effective behaviour under Governance Policies,
+    \item risk attitudes and safety margins.
+\end{itemize}
+
+\section{Drift Metrics}
+
+Let $D_{\mathrm{sem}}(t)$, $D_{\mathrm{nar}}(t)$, $D_{\mathrm{pol}}(t)$ be
+drift scores at time $t$.
+
+Constraint Laws specify:
+\[
+D_{\mathrm{sem}}(t+1) - D_{\mathrm{sem}}(t) \le \Delta_{\mathrm{sem}}^{\max}
+\]
+\[
+D_{\mathrm{nar}}(t+1) - D_{\mathrm{nar}}(t) \le \Delta_{\mathrm{nar}}^{\max}
+\]
+\[
+D_{\mathrm{pol}}(t+1) - D_{\mathrm{pol}}(t) \le \Delta_{\mathrm{pol}}^{\max}
+\]
+
+Where $\Delta^{\max}$ values are chosen by governance.
+
+\section{Hard Constraints}
+
+The EGO layer MUST NOT:
+
+\begin{itemize}
+    \item modify kernel $K$ or P-class charters,
+    \item alter C-class history entries,
+    \item redefine the semantics of core safety or alignment terms,
+\end{itemize}
+except via:
+\begin{itemize}
+    \item HITL processes,
+    \item CAR decisions,
+    \item EAC rulings,
+    \item and, when applicable, SIGIL Pathways.
+\end{itemize}
+
+\section{Soft Constraints and Alarms}
+
+When drift metrics approach thresholds:
+\begin{itemize}
+    \item increase logging and summarization,
+    \item restrict high-risk SEGO expansions,
+    \item route more decisions through HITL,
+    \item allow only reversible actions until reviewed.
+\end{itemize}
+
+If thresholds are exceeded:
+\begin{itemize}
+    \item generate HITL alerts,
+    \item potentially trigger Manual Overrides or incident policies,
+    \item evaluate need for partial rollback or re-alignment.
+\end{itemize}
+
+\section{Summary}
+
+Drift Constraint Laws keep the CME from wandering too far away from its
+identity, commitments, and social contract, even as it explores, learns,
+and adapts over time.

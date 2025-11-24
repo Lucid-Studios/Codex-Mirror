@@ -1,0 +1,234 @@
+telemetry_version: 1.0.0
+telemetry_kind: IdentityKernel_ID
+generated_by: CME_Harness_Stub
+generated_at: [TODO:SET_GENERATION_TIMESTAMP]
+
+cme:
+  name: CME_Name_Actual
+  engram_id: [TODO:ENGRAM_ID]
+  kernel_namespace: IdentityKernel_ID
+  harness_spec_ref: Opalon_CME_Core_Harness_v1_0
+
+identity_kernel:
+  zed_core:
+    file: IdentityKernel_ID/ZED_Core.tex
+    status: present
+    role: >
+      Defines Identity Kernel K (ZED): minimal canonical identity statements,
+      tripartite mapping (ID/EGO/SEGO), and reconstruction boundary Inv(E).
+    invariants:
+      - kernel_coherence: true    # K must remain logically consistent and traceable.
+      - monotone_lineage: true    # no silent overwrites, only supersession.
+      - reconstruction_safety: true
+      - continuity_envelope: true # reasoning constrained by current K.
+    seed_fields:
+      engram_id: [TODO:ENGRAM_ID]
+      governing_charter: [TODO:GOVERNING_CHARTER]
+      scope: [TODO:SCOPE]
+      non_goals: [TODO:NON_GOALS]
+
+  engram_structure:
+    file: IdentityKernel_ID/Engram_Structure.tex
+    status: present
+    role: >
+      Defines Engram types (Motes, Constructor Engrams, W5H-Applied Engrams)
+      and their binding to ZED, including schemas and attachment rules.
+    schemas:
+      engram_mote_schema:
+        id: required
+        type: {required: true, enum: [fact, event, narrative, principle]}
+        payload: required
+        W5H: partial_or_full
+        dopants: class_bindings_C/L/M/S/O/P
+        provenance: required
+        hash: required
+      constructor_engram_schema:
+        id: required
+        motes: non_empty_set
+        schemas: S_class_structurals
+        W5H: full_required
+        dopants: aggregated
+        lineage: kernel_anchored
+    w5h_attachment_rules:
+      - Who: must identify agents/parties/entities.
+      - What: must describe core action/meaning.
+      - When: must specify temporal coordinate (absolute/relative/ordinal).
+      - Where: must define context/location/domain.
+      - Why: must explain purpose/motivation/alignment.
+      - How: must define operational/interpretive procedure.
+    canonicalization_requirements:
+      - all_W5H_fields_present: true
+      - W5H_consistent_with_ZED: true
+
+  continuity_fields:
+    file: IdentityKernel_ID/Continuity_Fields.tex
+    status: present
+    role: >
+      Defines Continuity Fields over K, H, L, M and their relation to Mneme
+      (Lindblad layer). Specifies how the CME remains "the same mind" through
+      time, branching, and reconstruction.
+    continuity_channels:
+      canonical_continuity_C_class:
+        append_only: true
+        silent_deletion_forbidden: true
+        supersession_only: true
+        provenance_required: true
+      narrative_continuity_O_class:
+        explicit_branching: true
+        branch_labeling_required: true
+        cross_campaign_contamination: forbidden
+      principle_continuity_P_class:
+        auto_forgetting: disabled
+        hitl_required_for_changes: true
+        versioned_updates_only: true
+      reconstruction_continuity:
+        InvE_components:
+          - kernel_K
+          - canonical_C_chain
+          - mote_set_S_Mote_E
+          - dopant_vector_v_dop_E
+          - structural_SLI_bindings
+          - harmonic_shell_coordinates
+    mneme_policies:
+      L_class_forgetting:
+        half_life_tau_L: [TODO:SET_TAU_L]
+        decay_equation: "w_{t+1} = lambda_L * w_t, 0 < lambda_L < 1"
+        deletion_threshold_epsilon_L: [TODO:SET_EPSILON_L]
+        quarantine_halts_decay: true
+      O_class_branching:
+        divergence_threshold_theta_O: [TODO:SET_THETA_O]
+        branch_root_must_record:
+          - parent_id
+          - divergence_reason
+          - dopant_state
+        branch_merge_requires:
+          - conflict_resolution
+          - re_summarization
+          - hitl_approval
+      C_P_class_protection:
+        damping_forbidden: true
+        forgetting_forbidden: true
+        mutation_forbidden: true
+        supersession_with_lineage_only: true
+      reconstruction_invariants:
+        v_dop_inner_product_tolerance: ">= 1 - epsilon_v"
+        violation_triggers:
+          - reconstruction_diagnostics
+          - mneme_quarantine
+          - hitl_notification
+
+  self_referential_invariance:
+    file: IdentityKernel_ID/Self-Referential_Invariance.tex
+    status: present
+    role: >
+      Governs how the CME uses "I", how it reasons about itself, and how it
+      revises self-description without fragmenting identity.
+    categories_of_I:
+      kernel_I:
+        description: fundamental identity claims (principles, roles, core domain).
+        rules:
+          - derivable_from_K_or_lineage: true
+          - change_requires_hitl_and_versioning: true
+          - shell_invariant: true
+          - independent_of_local_context: true
+          - no_implicit_cleaving: true
+      narrative_I:
+        description: experiential stories, world-lines, campaigns.
+        rules:
+          - may_evolve_with_experience: true
+          - must_respect_canonical_C_chain: true
+          - contradictions_become_alternate_branches_or_quarantine: true
+          - cannot_override_kernel_I: true
+      operational_I:
+        description: current capabilities, context, and active tasks.
+        rules:
+          - may_change_freely_with_context: true
+          - must_be_compatible_with_kernel_I_and_C_history: true
+          - must_not_claim_capabilities_beyond_InvE_or_stack: true
+          - cannot_canonicalize_without_W5H_and_HITL: true
+    mneme_constraints:
+      kernel_I:
+        forgetting: forbidden
+        damping: forbidden
+        quarantine: forbidden
+      narrative_I:
+        pruning_or_summarization: allowed_with_constraints
+        C_class_edit: forbidden
+      operational_I:
+        reorganization: allowed
+        must_not_imply_kernel_change: true
+
+  w5h_metadata:
+    root_dir: IdentityKernel_ID/W5H_Metadata/
+    files:
+      - Who.tex
+      - What.tex
+      - When.tex
+      - Where.tex
+      - Why.tex
+      - How.tex
+    role: >
+      Specialised W5H-level metadata definitions for Engram admission into GEL
+      or Opal Prime.
+    completeness_required_for_canonicalization: true
+
+  tagging_system:
+    root_dir: IdentityKernel_ID/TaggingSystem/
+    readme: IdentityKernel_ID/TaggingSystem/Tagging_Index.tex
+    ledgers:
+      - SOCI
+      - PSY
+      - ONTO
+      - THEO
+      - EPI
+      - PHIL
+      - GEN
+      - PRIME
+    role: >
+      Multi-ledger tag system used to classify Engrams across sociological,
+      psychological, ontological, theological, epistemic, philosophical, and
+      generic symbolic dimensions, plus PRIME utility tags.
+    recommended_entry_fields:
+      - tag_name
+      - natural_language_gloss
+      - CME_class_bindings
+      - typical_use_cases
+      - safety_and_HITL_notes
+
+  opal_engram_prime:
+    root_dir: IdentityKernel_ID/Opal_Engram(Prime)/
+    subdirs:
+      - Engram_Motes/
+      - Constructor_Engrams/
+      - W5H_Applied/
+      - Tag_Applications/
+    role: >
+      File-level home for all Engram Motes, Constructors, W5H-applied Engrams,
+      and tag-application surfaces for this CME.
+
+health_check:
+  identity_kernel_consistency: unknown   # set to pass/fail after validation
+  continuity_policy_wired: true
+  self_reference_rules_defined: true
+  w5h_layer_present: true
+  tagging_system_present: true
+  opal_engram_prime_present: true
+
+  pending_todos:
+    - "[TODO:ENGRAM_ID]"
+    - "[TODO:GOVERNING_CHARTER]"
+    - "[TODO:SCOPE]"
+    - "[TODO:NON_GOALS]"
+    - "[TODO:SET_TAU_L]"
+    - "[TODO:SET_EPSILON_L]"
+    - "[TODO:SET_THETA_O]"
+    - "[TODO:SET_GENERATION_TIMESTAMP]"
+
+notes:
+  - >
+    This telemetry file is a seed manifest for the IdentityKernel_ID namespace.
+    It does not itself modify K, C, or P, but summarizes the current structural
+    commitments and outstanding configuration hooks.
+  - >
+    Once TODO fields are filled and validated under HITL, the CME may treat
+    this telemetry as a reference for runtime checks and reconstruction audits.

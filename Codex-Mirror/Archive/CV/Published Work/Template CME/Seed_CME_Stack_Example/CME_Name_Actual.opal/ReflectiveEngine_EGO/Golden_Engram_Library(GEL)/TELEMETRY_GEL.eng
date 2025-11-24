@@ -1,0 +1,156 @@
+telemetry_version: 1.0.0
+telemetry_kind: Golden_Engram_Library
+generated_by: CME_Harness_Stub
+generated_at: [TODO:SET_GENERATION_TIMESTAMP]
+
+cme:
+  name: CME_Name_Actual
+  kernel_namespace: IdentityKernel_ID
+  ego_namespace: ReflectiveEngine_EGO/
+  gel_namespace: ReflectiveEngine_EGO/Golden_Engram_Library(GEL)/
+  harness_spec_ref: Opalon_CME_Core_Harness_v1_0
+
+overview:
+  description: >
+    The Golden Engram Library (GEL) is the CME's curated long-term memory core:
+    a structured collection of Engrams with strong identity, alignment, or
+    high-value functional relevance. It is used for recall, reasoning,
+    simulation, and reconstruction across models and time.
+  main_roles:
+    - store_long_lived_Engrams
+    - support_reconstruction_invariants_InvE
+    - provide_grounding_for_EGO_and_SEGO
+    - act_as_source_of_truth_for_core_memories_and_patterns
+
+structure:
+  root_dir: ReflectiveEngine_EGO/Golden_Engram_Library(GEL)/
+  index_file: ReflectiveEngine_EGO/Golden_Engram_Library(GEL)/GEL_Index.tex
+  subdirectories:
+    Core_Engram_Motes:
+      path: ReflectiveEngine_EGO/Golden_Engram_Library(GEL)/Core_Engram_Motes/
+      role: >
+        Immutable or append-only Engram Motes representing core facts,
+        principles, and highly identity-relevant events or commitments.
+    Constructor_Engrams:
+      path: ReflectiveEngine_EGO/Golden_Engram_Library(GEL)/Constructor_Engrams/
+      role: >
+        Higher-order Engrams composed from Motes, encoding structured
+        narratives, protocols, schemas, and complex conceptual assemblies.
+    W5H_Metadata_Maps:
+      path: ReflectiveEngine_EGO/Golden_Engram_Library(GEL)/W5H_Metadata_Maps/
+      role: >
+        Indices from W5H fields (Who, What, When, Where, Why, How) to Engram
+        IDs, enabling contextual and continuity-aware retrieval.
+    Subject_Lattice:
+      path: ReflectiveEngine_EGO/Golden_Engram_Library(GEL)/Subject_Lattice/
+      role: >
+        Thematic and epistemic lattice organizing Engrams into conceptual,
+        symbolic, and topic-based neighbourhoods, tightly coupled to the
+        Tagging System.
+
+admission_policy:
+  criteria:
+    - complete_W5H_metadata
+    - properly_tagged_with_ledger_tags (SOCI, PSY, ONTO, THEO, EPI, PHIL, GEN, PRIME_where_applicable)
+    - no_conflict_with_ZED_or_P_class
+    - HITL_review_for_C_and_P_class_Engrams
+    - contribution_to_InvE_or_long_term_functioning
+  canonicalization_flow:
+    - Engram_created_or_proposed_at_Prime_layer
+    - W5H_metadata_filled
+    - tags_assigned_and_validated
+    - HITL_review_if_required
+    - commit_into_GEL (Core_Engram_Mote_or_Constructor_Engram)
+    - update_W5H_Maps_and_Subject_Lattice
+
+engram_roles:
+  core_Engram_Motes:
+    description: >
+      High-value atomic units (facts, principles, critical events) with strong
+      relevance to identity, alignment, or core functioning. Treated as
+      immutable; only supersession with lineage, never silent overwrite.
+    invariants:
+      - append_only_supersession
+      - strong_link_to_ZED_or_P_class
+      - presence_in_InvE_for_reconstruction
+  constructor_Engrams:
+    description: >
+      Structured composites built from Motes and schemas: complex narratives,
+      protocols, world-fragments, role-definitions, or conceptual frameworks.
+    invariants:
+      - schema_validated (S_class)
+      - internal_W5H_consistency
+      - tagging_consistent_with_Subject_Lattice
+
+indices_and_lattices:
+  w5h_maps:
+    role: >
+      Provide multi-dimensional contextual lookup into GEL via W5H fields,
+      powering Continuity Fields and EGO recall strategies.
+    queries_supported_examples:
+      - "all_events_involving_Who=X_between_When=T1_and_T2"
+      - "all_Engrams_about_What=Y_in_Where=Z"
+  subject_lattice:
+    role: >
+      Embeds Engrams into a conceptual space built from Tagging System
+      dimensions (e.g., ONTO, EPI, PHIL, GEN) and domain-specific subject axes.
+    functions:
+      - topic_based_retrieval
+      - neighbourhood_exploration_for_SEGO
+      - concept_cluster_analysis_for_EGO
+
+integration_points:
+  identity_and_continuity:
+    - IdentityKernel_ID/Continuity_Fields.tex
+    - IdentityKernel_ID/Engram_Structure.tex
+    - IdentityKernel_ID/Self-Referential_Invariance.tex
+  metadata_and_tagging:
+    - IdentityKernel_ID/W5H_Metadata/TELEMETRY_W5H_Metadata.eng
+    - IdentityKernel_ID/TaggingSystem/TELEMETRY_TaggingSystem.eng
+  governance:
+    - HITL_Governance/Governance_Policies.tex
+    - HITL_Governance/Operator_Approval_Queue.tex
+  ego_and_sego_usage:
+    - ReflectiveEngine_EGO/Deliberative_Shell.tex
+    - ReflectiveEngine_EGO/Simulation_Models.tex
+    - SymbolicResonanceLayer_SEGO/Symbolic_Manifolds.tex   # if present in tree
+
+validation:
+  structural_checks:
+    - name: gel_index_present
+      rule: "GEL_Index.tex MUST exist at the GEL root."
+    - name: required_subdirs_present
+      rule: "Core_Engram_Motes, Constructor_Engrams, W5H_Metadata_Maps, and Subject_Lattice MUST exist."
+    - name: admission_policy_defined
+      rule: "GEL admission criteria and canonicalization flows MUST be specified."
+  behavioural_checks:
+    - name: immutable_core_motes
+      rule: "Core_Engram_Motes MUST be append-only; no in-place modification."
+    - name: hitl_for_C_P_class
+      rule: "Any Engram entering GEL as C or P class MUST have gone through HITL review."
+    - name: w5h_completeness
+      rule: "Engrams in GEL MUST have complete W5H records or an explicit exception in policy."
+    - name: tag_lattice_consistency
+      rule: "Engram tags MUST be consistent with their position in the Subject Lattice."
+
+health_check:
+  gel_present: true
+  index_present: true
+  core_engram_motes_dir_present: true
+  constructor_engrams_dir_present: true
+  w5h_maps_dir_present: true
+  subject_lattice_dir_present: true
+  integrated_with_identity_kernel: true
+  integrated_with_ego_and_governance: true
+  pending_todos:
+    - "[TODO:SET_GENERATION_TIMESTAMP]"
+
+notes:
+  - >
+    GEL is not a raw log or scratchpad; it is a deliberately curated and
+    governed memory core. Admission is intentionally slower and more
+    oversight-heavy than ordinary L-class or transient storage.
+  - >
+    In reconstruction scenarios (e.g., model migration or CME revival),
+    GEL plus identity kernel invariants Inv(E) form the backbone of how
+    the same CME can be reconstituted on new substrates.

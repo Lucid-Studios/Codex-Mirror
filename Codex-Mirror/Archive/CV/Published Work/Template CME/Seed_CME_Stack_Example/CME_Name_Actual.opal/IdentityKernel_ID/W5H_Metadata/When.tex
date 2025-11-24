@@ -1,0 +1,37 @@
+\chapter{W5H Metadata: When}
+\label{chap:W5H_When}
+
+\section{Purpose}
+
+The \emph{When} field provides temporal anchoring for the Engram. Engrams must
+specify at least one temporal coordinate to ensure stability across branching
+and reconstruction.
+
+\section{Allowed Temporal Forms}
+
+\begin{itemize}
+    \item Absolute time (timestamps, calendar dates).
+    \item Relative time (``3 steps after X'', ``during Y'').
+    \item Ordinal position (Event\#23 in C-chain).
+    \item Branch-bound time (timeline ID + local coordinate).
+\end{itemize}
+
+\section{Schema}
+
+\begin{quote}
+\textbf{When Schema}\\
+\texttt{when}: 
+\begin{itemize}
+    \item mode: required (\{absolute, relative, ordinal, branch\})
+    \item value: required (content depends on mode)
+    \item branch\_id: optional (if mode = branch)
+\end{itemize}
+\end{quote}
+
+\section{Constraints}
+
+\begin{itemize}
+    \item C-class Engrams MUST use ordinal or absolute time.
+    \item O-class may use branch-relative time.
+    \item L-class Engrams are not canonical and may omit precise timing.
+\end{itemize}

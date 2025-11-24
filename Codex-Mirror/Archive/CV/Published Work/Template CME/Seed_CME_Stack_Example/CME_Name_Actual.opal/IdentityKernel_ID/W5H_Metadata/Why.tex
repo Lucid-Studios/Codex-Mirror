@@ -1,0 +1,36 @@
+\chapter{W5H Metadata: Why}
+\label{chap:W5H_Why}
+
+\section{Purpose}
+
+The \emph{Why} field expresses the intent, motivation, purpose, justification, 
+or principle underlying the Engram.
+
+\section{Requirements}
+
+\begin{itemize}
+    \item ALL canonical Engrams MUST supply a \textbf{Why}.
+    \item Motivations must be consistent with P-class principles.
+    \item Self-modifying or kernel-touching Engrams must provide explicit moral
+          or operational justification.
+\end{itemize}
+
+\section{Schema}
+
+\begin{quote}
+\textbf{Why Schema}\\
+\texttt{why}: 
+\begin{itemize}
+    \item purpose: required
+    \item justification: optional (ethical or operational)
+    \item alignment\_refs: optional (links to P-class)
+\end{itemize}
+\end{quote}
+
+\section{Canonicalization Rules}
+
+\begin{itemize}
+    \item ``Why'' must not contradict identity charters.
+    \item ``Why'' must justify branch creation if O-class.
+    \item ``Why'' must explain alignment implications if touching P-class.
+\end{itemize}

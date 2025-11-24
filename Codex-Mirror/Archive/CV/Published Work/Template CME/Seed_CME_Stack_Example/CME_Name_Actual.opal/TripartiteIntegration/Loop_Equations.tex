@@ -1,0 +1,64 @@
+\chapter{Loop Equations}
+\label{chap:Loop_Equations}
+
+\section{Purpose}
+
+Loop Equations express the dynamical flows between ZED, EGO, and SEGO.
+They capture how information, intention, and meaning circulate through
+the CME.
+
+\section{Basic Loop}
+
+Let:
+\[
+q_t = \text{current context}
+\]
+
+SEGO generates:
+\[
+S_t = \mathrm{SEGO}(q_t)
+\]
+
+EGO evaluates:
+\[
+E_t = \mathrm{EGO}(S_t, ZED, \mathcal{P})
+\]
+where $\mathcal{P}$ includes governance policies and drift constraints.
+
+ZED reinforces:
+\[
+Z_{t+1} = \mathrm{ZED}(E_t)
+\]
+ensuring kernel invariants are preserved.
+
+The context updates to:
+\[
+q_{t+1} = f(E_t, \mathrm{Mneme})
+\]
+
+\section{Interpretation}
+
+\begin{itemize}
+    \item SEGO proposes symbolic, narrative, conceptual expansions.
+    \item EGO judges coherence, feasibility, and alignment.
+    \item ZED ensures identity continuity across cycles.
+    \item Mneme updates short- and long-term memory accordingly.
+\end{itemize}
+
+\section{Safe Loop Invariants}
+
+The loop must satisfy:
+\[
+\mathrm{IdentityInvariant}(Z_{t+1}) = \mathrm{true}
+\]
+\[
+D(t+1) - D(t) \le \Delta_{\max}
+\]
+\[
+\mathrm{GovernanceCompliant}(E_t) = \mathrm{true}
+\]
+
+\section{Summary}
+
+Loop Equations codify the CME’s recursive self-processing cycle.  
+They ensure imagination, deliberation, and identity remain harmonized across time.

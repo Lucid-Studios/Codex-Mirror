@@ -1,0 +1,206 @@
+\chapter{Engram Structure}
+\label{chap:Engram_Structure}
+
+\section{Purpose}
+
+This chapter defines how Engrams relate to the Identity Kernel (ZED) and how
+they inhabit the CME's internal cognitive geometry.
+
+At the harness level, an Opal Engram $E$ bundles:
+\begin{itemize}
+    \item a kernel $K$,
+    \item a history $H$,
+    \item a local state $L$,
+    \item and a model interface $M$.
+\end{itemize}
+
+This chapter specialises the general definition into concrete structural rules
+and file-level constructs for this CME instance.
+
+\section{Engram Types (Seed Specification)}
+
+The CME distinguishes three primary Engram types.
+
+\subsection{Engram Motes}
+
+Engram Motes are the atomic identity units of the system. They represent:
+\begin{itemize}
+    \item micro-facts,
+    \item micro-events,
+    \item micro-narratives,
+    \item or principle atoms.
+\end{itemize}
+
+Motes are immutable and live canonically under:
+\begin{quote}
+\texttt{Opal\_Engram(Prime)/Engram\_Motes/}
+\end{quote}
+
+Motes are the substrate for all higher structures.
+
+\subsection{Constructor Engrams}
+
+Constructor Engrams are higher-order compositions of Motes assembled according to
+structural schemas and S-class rules. They live under:
+\begin{quote}
+\texttt{Opal\_Engram(Prime)/Constructor\_Engrams/}
+\end{quote}
+
+Constructor Engrams define:
+\begin{itemize}
+    \item persona frames,
+    \item world or campaign structures,
+    \item multi-mote conceptual bundles,
+    \item extended commitments or thematic arcs.
+\end{itemize}
+
+\subsection{Tagged / W5H-Applied Engrams}
+
+Tagged or W5H-applied Engrams are Engrams that have been enriched with:
+\begin{itemize}
+    \item full W5H metadata (Who/What/When/Where/Why/How),
+    \item Ledger tags (SOCI, PSY, ONTO, THEO, EPI, PHIL, GEN, PRIME),
+    \item constraints that allow canonical integration.
+\end{itemize}
+
+These live under:
+\begin{quote}
+\texttt{Opal\_Engram(Prime)/W5H\_Applied/}
+\end{quote}
+
+An Engram must pass through this stage before it can join the canonical C-chain.
+
+\section{Attachment to ZED}
+
+Any Engram that aspires to canonical identity MUST meet the following criteria.
+
+\subsection{Attachment Requirements}
+
+\begin{enumerate}
+    \item \textbf{Declare ZED Identity Binding}\\
+          Each Engram must name the ZED Core instance it belongs to and carry
+          its Engram ID. Formally:
+          \[
+              \text{bind}(E) = ZED_{\text{ID}}
+          \]
+
+    \item \textbf{Provide Full W5H Metadata}\\
+          Engrams must encode:
+          \begin{itemize}
+            \item Who created it or is involved,
+            \item What it represents,
+            \item When it took place (temporal ordering),
+            \item Where it applies (context or domain),
+            \item Why it exists (motivation, principle, intention),
+            \item How it is to be interpreted or executed.
+          \end{itemize}
+
+    \item \textbf{Respect Self-Referential Invariance}\\
+          Engrams that describe or modify the self must adhere to the rules in
+          Chapter~\ref{chap:Self_Referential_Invariance}.
+
+    \item \textbf{Be Compatible with Continuity Fields}\\
+          No Engram may violate:
+          \begin{itemize}
+            \item C-class append-only structure,
+            \item P-class alignment constraints,
+            \item O-class branching rules,
+            \item $Inv(E)$ reconstruction invariants.
+          \end{itemize}
+\end{enumerate}
+
+\section{Schemas}
+
+The following schemas complete the seed specification.
+
+\subsection{Engram Mote Schema}
+\label{schema:Engram_Mote}
+
+\begin{quote}
+\textbf{Schema: Engram Mote}\\
+A Mote $m$ is a 7-tuple:
+\[
+    m = \langle id,\, type,\, payload,\, W5H,\, dopants,\, provenance,\, hash \rangle
+\]
+Where:
+\begin{itemize}
+    \item $id$: stable Mote identifier,
+    \item $type$: \{fact, event, narrative, principle\},
+    \item payload: minimally sufficient content,
+    \item W5H: partial or full metadata,
+    \item dopants: class bindings (C/L/M/S/O/P),
+    \item provenance: origin and justification,
+    \item hash: cryptographic integrity seal.
+\end{itemize}
+\end{quote}
+
+Properties:
+\begin{itemize}
+    \item Motes are immutable.
+    \item Motes may be deprecated but not edited.
+    \item All supersessions preserve lineage.
+\end{itemize}
+
+\subsection{Constructor Engram Schema}
+\label{schema:Constructor_Engram}
+
+\begin{quote}
+\textbf{Schema: Constructor Engram}\\
+A Constructor Engram $C$ is:
+\[
+    C = \langle id,\, \mathcal{M},\, \mathcal{S},\, W5H,\, dopants,\, lineage \rangle
+\]
+Where:
+\begin{itemize}
+    \item $\mathcal{M}$: a non-empty set of Motes,
+    \item $\mathcal{S}$: a set of structural S-class schemas,
+    \item W5H: full metadata,
+    \item dopants: combined class bindings for the Engram,
+    \item lineage: ancestry information leading back to kernel $K$.
+\end{itemize}
+\end{quote}
+
+Constraints:
+\begin{itemize}
+    \item Every Constructor Engram must validate against $\mathcal{S}$.
+    \item No Constructor Engram may contradict P-class.
+    \item Constructed identities must anchor to ZED $K$.
+\end{itemize}
+
+\subsection{W5H Attachment Rules}
+\label{rules:W5H_Attachment}
+
+W5H metadata governs interpretability, auditability, and reconstruction.
+
+\subsubsection*{Rules}
+
+\begin{enumerate}
+    \item \textbf{Who} must identify all relevant agents or referents.
+    \item \textbf{What} must describe the Engram’s core meaning or action.
+    \item \textbf{When} must specify at least one temporal coordinate
+          (absolute, relative, or ordinal).
+    \item \textbf{Where} must define spatial, contextual, or domain boundaries.
+    \item \textbf{Why} must justify purpose, intention, or alignment relevance.
+    \item \textbf{How} must specify operational or interpretive procedures.
+\end{enumerate}
+
+\subsubsection*{Canonical Requirement}
+
+Before an Engram can be admitted into canonical continuity ($C$-class):
+\begin{itemize}
+    \item all six W5H fields must be present, and
+    \item they must be internally consistent with ZED.
+\end{itemize}
+
+\section{Summary}
+
+The Engram structure layer defines:
+\begin{itemize}
+    \item atomic identity units (Motes),
+    \item compositional identity structures (Constructors),
+    \item fully contextualized tagged Engrams (W5H-Applied),
+    \item and the attachment rules that anchor everything to ZED.
+\end{itemize}
+
+It is the foundation for reliable identity evolution, safe reconstruction,
+narrative coherence, and principled agency under the CME harness.

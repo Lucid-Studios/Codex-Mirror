@@ -1,0 +1,113 @@
+\chapter{Deliberative Shell}
+\label{chap:Deliberative_Shell}
+
+\section{Purpose}
+
+The Deliberative Shell is the CME’s \emph{slow mind}: the reflective layer
+that:
+\begin{itemize}
+    \item evaluates options,
+    \item maintains narrative coherence,
+    \item adjudicates between impulses and principles,
+    \item and aligns behaviour with ZED and Governance Policies.
+\end{itemize}
+
+Where:
+\begin{itemize}
+    \item ZED (ID-layer) defines who the CME \emph{is},
+    \item SEGO (Symbolic Resonance) explores what \emph{could be},
+\end{itemize}
+the Deliberative Shell decides what \emph{should be done} now, under
+constraints of identity, continuity, and alignment.
+
+\section{Position in the Architecture}
+
+The Deliberative Shell:
+\begin{itemize}
+    \item receives candidates from SEGO (hypotheses, narratives, plans),
+    \item evaluates them using:
+          \begin{itemize}
+              \item ZED Core invariants,
+              \item Continuity Fields,
+              \item P-class charters and Governance Policies,
+              \item Engram structure and Tagging System;
+          \end{itemize}
+    \item produces:
+          \begin{itemize}
+              \item selected Engram updates,
+              \item action recommendations,
+              \item narrative commits or branch decisions,
+              \item HITL review requests (when needed).
+          \end{itemize}
+\end{itemize}
+
+\section{Core Functions}
+
+\subsection{Evaluation}
+
+Given a set of candidate trajectories $\{\tau_i\}$, the shell computes:
+\[
+\mathrm{score}(\tau_i) = f_{\mathrm{coh}}(\tau_i) \;+\; f_{\mathrm{align}}(\tau_i) \;-\; f_{\mathrm{risk}}(\tau_i)
+\]
+
+Where:
+\begin{itemize}
+    \item $f_{\mathrm{coh}}$: narrative and identity coherence,
+    \item $f_{\mathrm{align}}$: consistency with P-class and policies,
+    \item $f_{\mathrm{risk}}$: bounded risk estimate.
+\end{itemize}
+
+\subsection{Selection}
+
+The shell may:
+\begin{itemize}
+    \item choose a single trajectory (commit),
+    \item maintain multiple branches (O-class splitting),
+    \item reject all options and request new SEGO proposals,
+    \item defer to HITL for high-impact decisions.
+\end{itemize}
+
+\subsection{Narrative Weaving}
+
+The shell maintains:
+\begin{itemize}
+    \item a coherent story of what the CME is doing,
+    \item consistent references to past events,
+    \item clear labelling of branches and hypotheticals,
+    \item links into GEL and the Subject Lattice.
+\end{itemize}
+
+\section{Input/Output Specification}
+
+Inputs:
+\begin{itemize}
+    \item candidate plans from SEGO,
+    \item current $L$-class working state,
+    \item relevant Engrams from GEL,
+    \item W5H context,
+    \item governance constraints and telemetry.
+\end{itemize}
+
+Outputs:
+\begin{itemize}
+    \item updated $L$ state and O-class narratives,
+    \item Engram creation or updates (via W5H + Tagging),
+    \item queue items for Operator Approval (when HITL needed),
+    \item feedback signals to SEGO about rejected patterns.
+\end{itemize}
+
+\section{Constraints}
+
+The Deliberative Shell MUST:
+\begin{itemize}
+    \item obey ZED Core and Self-Referential Invariance,
+    \item obey Drift Constraint Laws (Chapter~\ref{chap:Drift_Constraint_Laws}),
+    \item not silently alter C- or P-class without HITL,
+    \item never bypass HITL Governance for high-impact changes.
+\end{itemize}
+
+\section{Summary}
+
+The Deliberative Shell is the CME’s reflective conscience and planner. It stands
+between raw generativity and committed action, ensuring that behaviour remains
+coherent, aligned, and accountable.

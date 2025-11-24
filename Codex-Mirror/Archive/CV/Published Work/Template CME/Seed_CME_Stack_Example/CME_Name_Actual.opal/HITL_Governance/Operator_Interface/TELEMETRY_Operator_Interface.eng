@@ -1,0 +1,225 @@
+telemetry_version: 1.0.0
+telemetry_kind: Operator_Interface
+generated_by: CME_Harness_Stub
+generated_at: [TODO:SET_GENERATION_TIMESTAMP]
+
+cme:
+  name: CME_Name_Actual
+  kernel_namespace: IdentityKernel_ID
+  hitl_namespace: HITL_Governance/
+  operator_interface_namespace: HITL_Governance/Operator_Interface/
+  harness_spec_ref: Opalon_CME_Core_Harness_v1_0
+
+overview:
+  description: >
+    The Operator Interface is the human-facing control and observation
+    layer for HITL governance. It provides review guidance, emergency
+    override tools, access to audit logs, and key/role management for
+    governance actors.
+  main_responsibilities:
+    - present_approval_queue_items_for_review
+    - guide_operator_decisions (approve/reject/escalate)
+    - surface_Sigil_and_policy_actions_with_context
+    - expose_manual_override_controls
+    - show_audit_trails_and_telemetry
+    - manage_governance_keys_and_roles
+
+components:
+
+  Review_Instructions:
+    file: HITL_Governance/Operator_Interface/Review_Instructions.tex
+    status: present
+    role: >
+      Defines behavioural and procedural guidance for human operators
+      when deciding on queued requests, SIGIL invocations, and related
+      governance actions.
+    responsibilities:
+      - provide_review_checklist
+      - structure_operator_thinking (context / alignment / risk / policy)
+      - define_escalation_criteria
+      - describe_expected_operator_conduct
+    key_elements:
+      checklist:
+        - context_check
+        - alignment_check
+        - risk_check
+        - governance_check
+        - decision_and_rationale
+      escalation_guidelines:
+        - identity_or_kernel_touched
+        - large_capability_or_scope_change
+        - unclear_policy_coverage
+        - operator_uncertainty_or_discomfort
+      operator_principles:
+        - act_within_defined_authority
+        - disclose_relevant_context
+        - favour_escalation_over_guessing
+        - treat_audit_log_as_serious_record
+
+  Manual_Override_Tools:
+    file: HITL_Governance/Operator_Interface/Manual_Override_Tools.tex
+    status: present
+    role: >
+      Provides emergency tools for soft/hard overrides and emergency
+      halt, used when normal safeguard pathways are inadequate or too
+      slow to mitigate risk.
+    override_types:
+      soft_overrides:
+        description: "Temporary suspensions or dampening of specific behaviours."
+        examples:
+          - suspend_specific_SIGIL_pathway
+          - pause_Engram_canonicalization_in_a_domain
+          - restrict_access_to_selected_roles_or_contexts
+      hard_overrides:
+        description: "Stronger interventions with broader impact."
+        examples:
+          - quarantine_Engram_sets_or_memory_regions
+          - revoke_access_scopes_or_keys
+          - shut_down_a_deployment_endpoint
+      emergency_halt:
+        description: >
+          Full stop of CME active instances, freezing C- and P-class
+          writes and requiring EAC review before restart.
+    usage_conditions:
+      - clear_or_suspected_safety_risk
+      - misalignment_evidence_or_strong_signal
+      - SIGIL_or_CAR_paths_unavailable_or_too_slow
+    safeguards:
+      - all_overrides_must_be_logged
+      - emergency_halt_must_be_rare_and_well_justified
+      - post_event_review_required (EAC + CAR)
+
+  HITL_Audit_Log:
+    file: HITL_Governance/Operator_Interface/HITL_Audit_Log.tex
+    status: present
+    role: >
+      Append-only, tamper-evident record of all significant human
+      interventions and governance actions: approvals, rejections,
+      SIGIL usage, policy modifications, overrides, and council outcomes.
+    entry_schema:
+      tuple: "<id, time, actor, action, target, rationale, outcome>"
+      fields:
+        id: unique_identifier
+        time: timestamp
+        actor: bound_to_Governance_Key_principal
+        action: type_of_intervention
+        target: Engram_policy_SIGIL_or_system_context
+        rationale: short_human_explanation
+        outcome: {success, failure, partial, escalated}
+    integrity:
+      requirements:
+        - append_only_log
+        - no_in_place_edits_or_deletions
+        - corrections_by_new_entries_with_references
+        - cryptographic_integrity_checks_recommended
+    access_control:
+      views:
+        operators:
+          description: "Own actions + scoped operational views."
+        governance_roles:
+          description: "Broader views for CAR and policy maintainers."
+        eac:
+          description: "Full or near-full access for sensitive cases."
+      write_path:
+        description: "Only via harness and governance flows; no direct editing."
+
+  Governance_Keys:
+    file: HITL_Governance/Operator_Interface/Governance_Keys.tex
+    status: present
+    role: >
+      Registry for governance identities, roles, and capabilities:
+      defines who can act, what they can do, and how their actions
+      are bound into audit trails and SIGIL invocation rights.
+    key_model:
+      tuple: "<id, principal, roles, capabilities, expiry, revocation>"
+      fields:
+        id: key_identifier
+        principal: human_or_organisation
+        roles: assigned_governance_roles
+        capabilities: allowed_actions_and_SIGILs
+        expiry: optional_expiration_time
+        revocation: {state, reason}
+    roles_examples:
+      - Operator
+      - CAR_Member
+      - EAC_Member
+      - Auditor
+      - System_Admin (if defined_by_policy)
+    lifecycle:
+      steps:
+        - issuance_with_identity_verification
+        - assignment_of_roles_and_capabilities
+        - routine_use_for_auth_in_operator_interface
+        - rotation_or_expiry_on_schedule
+        - revocation_on_misuse_compromise_or_role_change
+    safeguards:
+      - principle_of_least_privilege_for_capabilities
+      - separation_of_powers_for_critical_SIGILs
+      - revocation_must_be_logged_and_reviewed
+
+ui_behaviour_expectations:
+  for_review_workflows:
+    - present_W5H_summary_of_requests
+    - show_relevant_policies_and_charter_refs
+    - surface_risk_level_and_classification (A/B/C)
+    - highlight_required_SIGILs_and_approvers
+    - prompt_for_rationale_before_final_decision
+  for_overrides:
+    - separate_visual_channel_for_emergency_controls
+    - require_additional_confirmation_for_hard_or_emergency_halt
+    - clearly_display_scope_and_potential_impact
+  for_audit_and_keys:
+    - allow_filtered_search_of_audit_entries
+    - display_role_and_capability_mappings_for_keys
+    - show_revocation_state_and_history_per_key
+
+validation:
+  structural_checks:
+    - name: core_files_present
+      rule: >
+        Review_Instructions.tex, Manual_Override_Tools.tex, HITL_Audit_Log.tex,
+        and Governance_Keys.tex MUST be present for the Operator Interface
+        to be considered structurally complete.
+    - name: binding_to_hitl_governance
+      rule: >
+        Operator Interface actions MUST bind to HITL_Governance telemetry
+        (SIGIL_Pathways, CAR/EAC flows, Governance_Policies).
+    - name: audit_logging_enabled
+      rule: >
+        All decisions, SIGIL invocations, and overrides initiated via the
+        Operator Interface MUST generate entries in the HITL Audit Log.
+    - name: key_binding
+      rule: >
+        All privileged actions MUST be authenticated via Governance Keys,
+        and the principal MUST be recorded in the audit log entry.
+
+  behavioural_checks:
+    - name: escalation_available
+      rule: "Operators MUST always have an option to escalate rather than decide alone."
+    - name: emergency_controls_guardrailed
+      rule: "Emergency halt and hard overrides MUST require a second confirmation (and often a second key)."
+    - name: visibility_of_risk
+      rule: "Risk and impact level for each action MUST be clearly visible before an operator confirms."
+    - name: least_privilege_respected
+      rule: "UI MUST NOT surface actions that the authenticated key is not allowed to perform."
+
+health_check:
+  review_instructions_defined: true
+  manual_override_defined: true
+  audit_log_defined: true
+  governance_keys_defined: true
+  integrated_with_HITL_Governance: true
+  integrated_with_ZED_and_policies: true
+  pending_todos:
+    - "[TODO:SET_GENERATION_TIMESTAMP]"
+
+notes:
+  - >
+    This telemetry manifest specifies the expected structure and behaviour
+    of the Operator Interface. Concrete implementations (web UI, CLI,
+    dashboards) may differ in layout, but MUST preserve the required
+    controls, guardrails, and binding to governance primitives.
+  - >
+    The Operator Interface should be treated as a safety-critical component:
+    any change to its behaviour should itself route through HITL governance
+    workflows and appear in the audit log.

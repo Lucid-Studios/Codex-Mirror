@@ -1,0 +1,76 @@
+\chapter{Operator Approval Queue}
+\label{chap:Operator_Approval_Queue}
+
+\section{Purpose}
+
+The Operator Approval Queue (OAQ) is the staging area where:
+\begin{itemize}
+    \item CME-proposed changes,
+    \item operator-submitted changes,
+    \item and external stakeholder requests
+\end{itemize}
+wait for human review and decision.
+
+It is the primary intake mechanism for:
+\begin{itemize}
+    \item CAR workflows,
+    \item SIGIL-based approvals,
+    \item and EAC escalations.
+\end{itemize}
+
+\section{Queue Item Structure}
+
+A queue item $Q$ is:
+\[
+Q = \langle id,\, origin,\, payload,\, impact,\, class,\, status \rangle
+\]
+
+Where:
+\begin{itemize}
+    \item id: unique request identifier,
+    \item origin: CME / operator / external / automated monitor,
+    \item payload: W5H + tag summary of proposed change,
+    \item impact: rough assessment of risk or scope,
+    \item class: suggested review class (A/B/C),
+    \item status: pending / under\_review / approved / rejected / escalated.
+\end{itemize}
+
+\section{Lifecycle}
+
+\begin{enumerate}
+    \item \textbf{Create}: CME or operator creates item with minimal W5H details.
+    \item \textbf{Enrich}: harness attaches telemetry, tags, and continuity data.
+    \item \textbf{Classify}: automatic pre-check suggests CAR class (A/B/C).
+    \item \textbf{Review}: item is picked up by appropriate HITL role.
+    \item \textbf{Decide}: decision recorded (approve / reject / escalate).
+    \item \textbf{Apply}: if approved, relevant SIGIL or policy action is executed.
+    \item \textbf{Archive}: item logged and closed, with trace to audit log.
+\end{enumerate}
+
+\section{Prioritization}
+
+The queue supports:
+\begin{itemize}
+    \item priority levels (low, normal, high, critical),
+    \item deadlines (time by which decision is needed),
+    \item grouping by origin, domain, or risk class.
+\end{itemize}
+
+Critical items (e.g.\ safety or misalignment events) are surfaced prominently
+in the Operator Interface and may bypass normal batching.
+
+\section{Interaction with Audit Log}
+
+Every queue item is cross-referenced with the HITL audit log:
+\begin{itemize}
+    \item creation entry,
+    \item review actions,
+    \item final decision,
+    \item resulting Engram or policy changes.
+\end{itemize}
+
+\section{Summary}
+
+The Operator Approval Queue ensures that no significant change occurs without
+passing through a transparent, auditable human decision process that is
+integrated into the broader governance architecture.

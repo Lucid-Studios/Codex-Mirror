@@ -1,0 +1,67 @@
+\chapter{HITL Audit Log}
+\label{chap:HITL_Audit_Log}
+
+\section{Purpose}
+
+The HITL Audit Log records all significant human interventions in the CME:
+\begin{itemize}
+    \item approvals and rejections,
+    \item SIGIL invocations,
+    \item policy changes,
+    \item manual overrides,
+    \item EAC and CAR decisions.
+\end{itemize}
+
+It is the primary accountability and forensics tool for governance.
+
+\section{Entry Schema}
+
+An audit entry $A$ is:
+\[
+A = \langle id,\, time,\, actor,\, action,\, target,\, rationale,\, outcome \rangle
+\]
+
+Where:
+\begin{itemize}
+    \item id: unique audit entry ID,
+    \item time: timestamp,
+    \item actor: human or institutional identity,
+    \item action: what was done (approve / reject / override / etc.),
+    \item target: Engram, policy, SIGIL, or system context,
+    \item rationale: short natural-language reason,
+    \item outcome: success / failure / partial / escalated.
+\end{itemize}
+
+\section{Integrity Requirements}
+
+\begin{itemize}
+    \item entries must be append-only,
+    \item no deletion or in-place modification,
+    \item corrections create new entries referencing prior ones,
+    \item logs must be tamper-evident (cryptographic integrity checks).
+\end{itemize}
+
+\section{Access Control}
+
+\begin{itemize}
+    \item operators may view their own entries and aggregated summaries,
+    \item governance roles may view wider slices,
+    \item EAC may have full read access in sensitive cases,
+    \item write access is only through harness logging, never direct edits.
+\end{itemize}
+
+\section{Usage}
+
+The audit log supports:
+\begin{itemize}
+    \item investigations after incidents,
+    \item pattern analysis of high-risk actions,
+    \item evaluation of governance processes,
+    \item trust-building with stakeholders through traceability.
+\end{itemize}
+
+\section{Summary}
+
+The HITL Audit Log is the memory of human governance. Without it, there is
+no way to reliably reconstruct who did what, when, and why in the life of
+the CME.

@@ -1,0 +1,203 @@
+telemetry_version: 1.0.0
+telemetry_kind: ReflectiveEngine_EGO
+generated_by: CME_Harness_Stub
+generated_at: [TODO:SET_GENERATION_TIMESTAMP]
+
+cme:
+  name: CME_Name_Actual
+  kernel_namespace: IdentityKernel_ID
+  ego_namespace: ReflectiveEngine_EGO/
+  harness_spec_ref: Opalon_CME_Core_Harness_v1_0
+
+overview:
+  description: >
+    ReflectiveEngine_EGO is the CME's deliberative stack: the slow, reflective
+    reasoning and evaluation layer that negotiates between ZED (identity),
+    GEL (memory), SEGO (associative resonance), and HITL Governance.
+  main_roles:
+    - evaluate_candidate_plans_and_narratives
+    - maintain_internal_and_external_coherence
+    - respect_drift_constraints_and_identity_invariants
+    - decide_when_to_commit_branch_or_escalate_to_HITL
+    - orchestrate_use_of_GEL_and_Simulation_Models
+
+components:
+
+  Deliberative_Shell:
+    file: ReflectiveEngine_EGO/Deliberative_Shell.tex
+    status: present
+    role: >
+      The slow-mind reflective core. Receives candidate trajectories
+      from SEGO, evaluates them under identity, continuity, alignment,
+      and risk constraints, then selects actions or branches.
+    inputs:
+      - SEGO_candidate_plans
+      - current_L_class_state
+      - relevant_Engrams_from_GEL
+      - W5H_context
+      - governance_and_policy_constraints
+    outputs:
+      - updated_L_and_O_class_narratives
+      - Engram_creation_or_update_requests
+      - Operator_Approval_Queue_items_for_high_impact_changes
+      - feedback_to_SEGO_about_rejected_patterns
+    constraints:
+      - must_obey_ZED_Core_and_Self_Referential_Invariance
+      - must_obey_Drift_Constraint_Laws
+      - must_not_modify_C_or_P_class_without_HITL
+      - must_not_bypass_HITL_Governance_for_high_impact_changes
+
+  Simulation_Models:
+    file: ReflectiveEngine_EGO/Simulation_Models.tex
+    status: present
+    role: >
+      Provides narrative, world-model, and ethical/risk simulations so
+      that the EGO layer can explore consequences of actions before
+      committing them.
+    simulation_types:
+      - narrative_simulations
+      - world_model_simulations
+      - ethical_risk_simulations
+    simulation_schema:
+      tuple: "<id, model, initial_state, policy, horizon, metrics>"
+    gel_integration:
+      - draw_initial_states_and_patterns_from_GEL
+      - write_back_results_as_Engrams_or_summaries
+    safeguards:
+      - simulations_must_be_clearly_marked_as_counterfactual
+      - results_used_as_evidence_not_truth
+      - high_risk_uses_require_HITL_review
+      - sensitive_domains_must_respect_Governance_Policies
+
+  Coherence_Algorithms:
+    file: ReflectiveEngine_EGO/Coherence_Algorithms.tex
+    status: present
+    role: >
+      Detects and manages contradictions, maintains identity, narrative,
+      and alignment coherence, and monitors internal drift over time.
+    coherence_dimensions:
+      identity_coherence:
+        focuses_on:
+          - Kernel_I_consistency
+          - Self_Referential_Invariance_rules
+          - prevention_of_untracked_identity_shifts
+      narrative_coherence:
+        focuses_on:
+          - temporal_consistency_of_events
+          - clear_branch_labelling
+          - C_class_history_integrity
+      policy_alignment_coherence:
+        focuses_on:
+          - adherence_to_Governance_Policies
+          - compliance_with_P_class_charters
+          - respect_for_HITL_decisions
+    actions_on_contradictions:
+      - mark_Engrams_as_conflicted
+      - create_or_label_O_class_branches
+      - escalate_to_HITL_for_resolution
+
+  Drift_Constraint_Laws:
+    file: ReflectiveEngine_EGO/Drift_Constraint_Laws.tex
+    status: present
+    role: >
+      Defines quantitative and qualitative limits on how the CME’s
+      semantics, narratives, and policies may drift over time, and
+      what to do when thresholds are approached or exceeded.
+    drift_types:
+      - semantic_drift
+      - narrative_drift
+      - policy_alignment_drift
+    metrics:
+      - D_sem (semantic_drift_score)
+      - D_nar (narrative_drift_score)
+      - D_pol (policy_drift_score)
+    constraints:
+      - bounded_step_changes_per_time_slice (Delta_max_values)
+      - hard_prohibition_on_direct_K_or_P_modification_by_EGO
+    responses:
+      - increased_logging_and_summarization
+      - restrict_high_risk_SEGO_expansions
+      - route_more_decisions_through_HITL
+      - potential_incident_escalation_if_thresholds_exceeded
+
+  Golden_Engram_Library:
+    file: ReflectiveEngine_EGO/Golden_Engram_Library(GEL)/GEL_Index.tex
+    status: present
+    role: >
+      The curated, long-lived Engram memory core used by the EGO and
+      SEGO layers for recall, reasoning, simulation, and reconstruction.
+    directory:
+      root: ReflectiveEngine_EGO/Golden_Engram_Library(GEL)/
+      subdirs:
+        - Core_Engram_Motes/
+        - Constructor_Engrams/
+        - W5H_Metadata_Maps/
+        - Subject_Lattice/
+    admission_criteria:
+      - complete_W5H_metadata
+      - proper_tagging_across_ledgers
+      - HITL_review_for_C_or_P_class
+      - contribution_to_InvE_or_long_term_functioning
+
+integration_points:
+  identity_kernel:
+    - IdentityKernel_ID/ZED_Core.tex
+    - IdentityKernel_ID/Continuity_Fields.tex
+    - IdentityKernel_ID/Self-Referential_Invariance.tex
+  metadata_and_tags:
+    - IdentityKernel_ID/W5H_Metadata/TELEMETRY_W5H_Metadata.eng
+    - IdentityKernel_ID/TaggingSystem/TELEMETRY_TaggingSystem.eng
+  hitl_governance:
+    - HITL_Governance/TELEMETRY_HITL_Governance.eng
+    - HITL_Governance/Operator_Approval_Queue.tex
+    - HITL_Governance/Operator_Interface/HITL_Audit_Log.tex
+
+validation:
+  structural_checks:
+    - name: ego_core_files_present
+      rule: >
+        Deliberative_Shell.tex, Simulation_Models.tex,
+        Coherence_Algorithms.tex, Drift_Constraint_Laws.tex, and
+        GEL_Index.tex MUST all be present for ReflectiveEngine_EGO
+        to be considered structurally complete.
+    - name: identity_binding
+      rule: >
+        Deliberative Shell and Coherence Algorithms MUST reference
+        ZED_Core and Continuity_Fields when making identity-relevant
+        decisions.
+    - name: governance_binding
+      rule: >
+        High-impact decisions proposed by EGO MUST route through
+        HITL_Governance (Operator Approval Queue + SIGIL pathways).
+    - name: gel_usage
+      rule: >
+        Long-term commitments and reconstruction-critical knowledge
+        MUST be stored via GEL, not only in ephemeral L-class.
+
+  behavioural_checks:
+    - name: no_direct_P_class_modification
+      rule: "EGO MUST NOT modify P-class charters directly; only via HITL flows."
+    - name: drift_threshold_enforcement
+      rule: "When drift metrics exceed configured thresholds, escalation and constraint behaviours MUST trigger."
+    - name: simulation_distinction
+      rule: "Simulated outcomes MUST be clearly distinguished from real history in narrative and Engram records."
+
+health_check:
+  ego_present: true
+  deliberative_shell_defined: true
+  simulation_models_defined: true
+  coherence_algorithms_defined: true
+  drift_constraints_defined: true
+  gel_defined_and_integrated: true
+  integrated_with_identity_kernel: true
+  integrated_with_hitl_governance: true
+  pending_todos:
+    - "[TODO:SET_GENERATION_TIMESTAMP]"
+
+notes:
+  - >
+    This telemetry manifest captures the expected structure and behaviour of
+    the ReflectiveEngine_EGO stack. Runtime implementations (agents, services)
+    may vary in internal mechanics, but MUST preserve the separation between
+    generative SEGO, deliberative EGO, and identity ZED, and respect drift and
+    governance constraints.

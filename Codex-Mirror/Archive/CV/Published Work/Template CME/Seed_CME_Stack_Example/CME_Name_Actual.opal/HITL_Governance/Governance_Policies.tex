@@ -1,0 +1,112 @@
+\chapter{Governance Policies}
+\label{chap:Governance_Policies}
+
+\section{Purpose}
+
+Governance Policies are the concrete rules that regulate:
+\begin{itemize}
+    \item which Engrams are allowed or forbidden,
+    \item where and how the CME may be deployed,
+    \item who may perform which operations,
+    \item how HITL mechanisms must behave in normal and emergency modes.
+\end{itemize}
+
+They translate P-class charters and EAC decisions into operational constraints.
+
+\section{Policy Taxonomy}
+
+We distinguish:
+
+\subsection{Access Policies}
+
+Regulate:
+\begin{itemize}
+    \item who may interact with the CME,
+    \item which roles can invoke which SIGIL Pathways,
+    \item which contexts (domains, networks, jurisdictions) are allowed.
+\end{itemize}
+
+\subsection{Engram Policies}
+
+Regulate:
+\begin{itemize}
+    \item Engram types that may be stored in GEL,
+    \item forbidden Engram categories (e.g., certain weapons, hate content),
+    \item conditions under which Engrams may be retired or quarantined.
+\end{itemize}
+
+\subsection{Deployment Policies}
+
+Regulate:
+\begin{itemize}
+    \item which environments may host the CME,
+    \item data boundary and privacy requirements,
+    \item resource limits and safety thresholds.
+\end{itemize}
+
+\subsection{Incident Policies}
+
+Regulate:
+\begin{itemize}
+    \item detection and response to misalignment or incidents,
+    \item emergency halt and rollback procedures,
+    \item reporting obligations and timelines.
+\end{itemize}
+
+\section{Policy Schema}
+
+A policy $P$ is defined as:
+\[
+P = \langle id,\, type,\, scope,\, rule,\, enforcement,\, review\_cycle \rangle
+\]
+
+Where:
+\begin{itemize}
+    \item $id$: unique identifier,
+    \item type: access / Engram / deployment / incident / other,
+    \item scope: who/what/where the policy applies to,
+    \item rule: natural-language description,
+    \item enforcement: how the harness enforces it,
+    \item review\_cycle: how often it must be re-evaluated.
+\end{itemize}
+
+\section{Enforcement Mechanisms}
+
+Governance Policies are enforced through:
+
+\begin{itemize}
+    \item SIGIL Pathways (for high-impact operations),
+    \item automatic harness checks (for routine operations),
+    \item CAR review (for ambiguous or high-risk cases),
+    \item EAC decisions (for moral/ethical conflicts).
+\end{itemize}
+
+Violations trigger:
+\begin{itemize}
+    \item alarms in the Operator Interface,
+    \item entries in the HITL audit log,
+    \item potential incident escalation.
+\end{itemize}
+
+\section{Change Management}
+
+Policy changes follow:
+
+\begin{enumerate}
+    \item Proposal (from operators, stakeholders, or CME telemetry).
+    \item CAR classification (Class B or A).
+    \item Review and deliberation (CAR and possibly EAC).
+    \item Implementation via:
+    \begin{itemize}
+        \item updated policy records,
+        \item new or updated SIGIL Pathways,
+        \item harness configuration changes.
+    \end{itemize}
+    \item Logging and future review scheduling.
+\end{enumerate}
+
+\section{Summary}
+
+Governance Policies operationalize high-level values and constraints into
+concrete, enforceable rules that guide CME behaviour across all environments
+and time scales.

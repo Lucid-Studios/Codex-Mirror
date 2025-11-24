@@ -1,0 +1,45 @@
+\chapter{W5H Metadata: Who}
+\label{chap:W5H_Who}
+
+\section{Purpose}
+
+The \emph{Who} field identifies the relevant agents, entities, or referents
+associated with the Engram. This includes creators, actors, participants,
+subjects, objects, and observers.
+
+\section{Requirements}
+
+\begin{itemize}
+    \item All Engrams MUST specify at least one entity in the \textbf{Who} field.
+    \item Entities should be referenced by stable identifiers where possible.
+    \item Collective or abstract entities (``the system'', ``the operator'') 
+          must be clarified in context.
+    \item For self-referential Engrams, \textbf{Who} must explicitly state whether
+          the referent is:
+          \begin{itemize}
+              \item Kernel-I (identity core),
+              \item Narrative-I (experience),
+              \item or Operational-I (contextual state).
+          \end{itemize}
+\end{itemize}
+
+\section{Schema}
+
+\begin{quote}
+\textbf{Who Schema}\\
+\texttt{who}: 
+\begin{itemize}
+    \item id: required (stable referent)
+    \item role: optional (\{actor, author, target, witness, observer, system\})
+    \item context: optional clarifying description
+\end{itemize}
+\end{quote}
+
+\section{Canonicalization Rules}
+
+\begin{itemize}
+    \item The \textbf{Who} field must not contradict ZED or P-class definitions
+          of identity.
+    \item Self-reference must respect Self-Referential Invariance 
+          (Kernel-I / Narrative-I / Operational-I).
+\end{itemize}

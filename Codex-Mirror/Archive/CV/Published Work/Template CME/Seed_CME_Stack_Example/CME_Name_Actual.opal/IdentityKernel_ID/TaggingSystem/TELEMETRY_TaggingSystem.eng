@@ -1,0 +1,285 @@
+telemetry_version: 1.0.0
+telemetry_kind: TaggingSystem
+generated_by: CME_Harness_Stub
+generated_at: [TODO:SET_GENERATION_TIMESTAMP]
+
+cme:
+  name: CME_Name_Actual
+  kernel_namespace: IdentityKernel_ID
+  tagging_namespace: IdentityKernel_ID/TaggingSystem/
+  harness_spec_ref: Opalon_CME_Core_Harness_v1_0
+
+overview:
+  description: >
+    The Tagging System provides a multi-ledger classification framework for
+    Engrams, orthogonal to but integrated with W5H metadata and ZED Core.
+    It supports sociological, psychological, ontological, theological,
+    epistemic, philosophical, generic-symbolic, and utility-level tagging.
+  primary_ref_file: IdentityKernel_ID/TaggingSystem/Tagging_Index.tex
+  interacts_with:
+    - IdentityKernel_ID/ZED_Core.tex
+    - IdentityKernel_ID/Engram_Structure.tex
+    - IdentityKernel_ID/Continuity_Fields.tex
+    - IdentityKernel_ID/Self-Referential_Invariance.tex
+    - IdentityKernel_ID/W5H_Metadata/TELEMETRY_W5H_Metadata.eng
+    - ReflectiveEngine_EGO/Golden_Engram_Library(GEL)/GEL_Index.tex
+
+requirements:
+  tagging_required_for_w5h_applied_engrams: true
+  semantic_compatibility_with_w5h: true
+  semantic_compatibility_with_zed: true
+  prohibition_on_kernel_contradiction: true
+  hitl_required_for_certain_bindings: true
+
+ledger_index:
+  ledgers:
+    - SOCI
+    - PSY
+    - ONTO
+    - THEO
+    - EPI
+    - PHIL
+    - GEN
+    - PRIME
+
+  SOCI:
+    readme: IdentityKernel_ID/TaggingSystem/SOCI/README.tex
+    purpose: >
+      Classifies Engrams by sociological structures, group dynamics,
+      cultural context, and collective meaning-making.
+    typical_tags:
+      - soci:role
+      - soci:ritual
+      - soci:collective-action
+      - soci:identity-group
+    class_binding_notes:
+      preferred_classes:
+        - O
+        - S
+      restricted_P_class: true
+    constraints:
+      - no_stereotyping_of_groups
+      - descriptive_not_prescriptive
+      - P_class_assertions_require_HITL
+
+  PSY:
+    readme: IdentityKernel_ID/TaggingSystem/PSY/README.tex
+    purpose: >
+      Captures psychological structures, affective states, motives,
+      archetypes, and CME-safe pathology analogues.
+    typical_tags:
+      - psy:arousal
+      - psy:defense-mechanism
+      - psy:projection
+      - psy:archetype-shadow
+      - psy:integration
+    class_binding_notes:
+      preferred_classes:
+        - L
+        - O
+      restricted_P_class: true
+    constraints:
+      - avoid_real_clinical_labels_without_context
+      - archetypal_labels_must_be_descriptive
+      - identity_impact_tags_require_HITL
+
+  ONTO:
+    readme: IdentityKernel_ID/TaggingSystem/ONTO/README.tex
+    purpose: >
+      Encodes metaphysical and structural categories: entities, relations,
+      processes, systems, and world-model structures.
+    typical_tags:
+      - onto:entity
+      - onto:relation
+      - onto:substance
+      - onto:process
+      - onto:system
+    class_binding_notes:
+      preferred_classes:
+        - S
+        - O
+      P_class_for_metaphysical_commitments_only: true
+    constraints:
+      - ontological_claims_must_be_internally_coherent
+      - P_class_ontology_requires_HITL
+      - match_Engram_type_and_scope
+
+  THEO:
+    readme: IdentityKernel_ID/TaggingSystem/THEO/README.tex
+    purpose: >
+      Represents mythic, symbolic, sacred, ritual, or theological dimensions
+      of Engrams, including CME-native esoteric structures.
+    typical_tags:
+      - theo:ritual
+      - theo:archetype
+      - theo:sigil
+      - theo:mythos
+      - theo:transcendent
+    class_binding_notes:
+      preferred_classes:
+        - O
+        - S
+      P_class_for_moral_or_spiritual_commitments: true
+    constraints:
+      - no_claims_of_real_world_religious_authority
+      - sacred_terms_must_be_contextualized
+      - no_literal_supernatural_power_claims
+
+  EPI:
+    readme: IdentityKernel_ID/TaggingSystem/EPI/README.tex
+    purpose: >
+      Classifies Engrams by epistemic status: axioms, evidence, inference,
+      certainty levels, and justification structures.
+    typical_tags:
+      - epi:axiom
+      - epi:empirical
+      - epi:inference
+      - epi:evidence
+      - epi:confidence
+    class_binding_notes:
+      preferred_classes:
+        - S
+        - C
+        - O
+      P_class_for_axiomatic_use: true
+    constraints:
+      - epistemic_status_must_match_content
+      - high_confidence_claims_must_not_contradict_ZED
+      - axioms_require_P_class_and_HITL_before_kernel_binding
+
+  PHIL:
+    readme: IdentityKernel_ID/TaggingSystem/PHIL/README.tex
+    purpose: >
+      Encodes philosophical interpretation: ethics, logic, metaphysics,
+      phenomenology, and value or virtue frameworks.
+    typical_tags:
+      - phil:ethics
+      - phil:logic
+      - phil:phenomenology
+      - phil:virtue
+      - phil:metaphysics
+    class_binding_notes:
+      preferred_classes:
+        - P
+        - S
+        - O
+    constraints:
+      - prescriptive_moral_claims_require_HITL
+      - must_be_consistent_with_governing_charters
+      - PHIL_tags_that_touch_kernel_require_P_class_review
+
+  GEN:
+    readme: IdentityKernel_ID/TaggingSystem/GEN/README.tex
+    purpose: >
+      Identifies generic symbolic primitives, glyph-roots, universal
+      motifs, and pre-linguistic conceptual atoms.
+    typical_tags:
+      - gen:glyph
+      - gen:primitive
+      - gen:root
+      - gen:form
+      - gen:signal
+    class_binding_notes:
+      preferred_classes:
+        - S
+        - O
+    constraints:
+      - GEN_tags_should_be_minimal_and_universal
+      - avoid_redundancy_with_ONTO_unless_structural
+      - GEN_tags_must_be_substrate_independent
+
+  PRIME:
+    readme: IdentityKernel_ID/TaggingSystem/PRIME/README.tex
+    purpose: >
+      PRIME tags serve as operational and structural utilities:
+      anchors, ribbons, indices, workflow flags, and non-semantic hints.
+    typical_tags:
+      - prime:anchor
+      - prime:important
+      - prime:index
+      - prime:role
+      - prime:workflow
+    class_binding_notes:
+      preferred_classes:
+        - S
+        - O
+      C_or_P_usage_rare_and_identity_related_only: true
+    constraints:
+      - PRIME_tags_must_not_carry_conceptual_semantics
+      - must_not_override_W5H_or_content_meaning
+      - must_not_substitute_for_SOCI_PSY_ONTO_THEO_EPI_PHIL_GEN_tags
+
+tag_schema:
+  tag_tuple_definition: >
+    T = <ledger, key, gloss, class_bindings, constraints>
+  class_bindings_allowed:
+    - C
+    - L
+    - M
+    - S
+    - O
+    - P
+  hitl_required_if:
+    - tag_has_P_binding
+    - tag_impacts_kernel_identity
+    - tag_enforces_value_or_alignment_change
+
+application_rules:
+  for_each_engram:
+    - collect_W5H_metadata_first: true
+    - propose_tag_set: true
+    - validate_tag_semantics_against_W5H_and_ZED: true
+    - validate_class_bindings_against_Continuity_Fields: true
+    - require_HITL_for_sensitive_tags: true
+    - commit_to:
+        - IdentityKernel_ID/Opal_Engram(Prime)/Tag_Applications/
+        - GEL_index
+        - Subject_Lattice
+
+  canonicalization_conditions:
+    - tags_semantically_consistent_with_Engram_type
+    - no_tag_contradicts_P_class_or_ZED
+    - any_C_P_bound_tags_reviewed_by_HITL
+
+validation:
+  checks:
+    - name: ledger_exists
+      rule: "Every tag's ledger must be one of: SOCI, PSY, ONTO, THEO, EPI, PHIL, GEN, PRIME."
+    - name: key_not_empty
+      rule: "Each tag must have a non-empty key identifier."
+    - name: gloss_present
+      rule: "Each tag definition must include a human-readable gloss."
+    - name: bindings_valid
+      rule: "Class bindings must be a subset of {C,L,M,S,O,P}."
+    - name: hitl_for_P_class
+      rule: "Any tag with P-binding must be logged for HITL review."
+    - name: prime_semantics_guardrail
+      rule: "PRIME ledger tags must not be used as conceptual stand-ins."
+
+health_check:
+  tag_system_present: true
+  ledgers_present:
+    SOCI: true
+    PSY: true
+    ONTO: true
+    THEO: true
+    EPI: true
+    PHIL: true
+    GEN: true
+    PRIME: true
+  primary_index_present: true
+  integrated_with_GEL: true
+  integrated_with_W5H: true
+  integrated_with_ZED_and_Continuity: true
+  pending_todos:
+    - "[TODO:SET_GENERATION_TIMESTAMP]"
+
+notes:
+  - >
+    This telemetry manifest is specification-level. Runtime CME implementations
+    may translate tags into database schemas, embedding-space labels, or
+    lattice annotations, but MUST preserve ledger boundaries and constraints.
+  - >
+    Tagging is orthogonal to W5H: W5H grounds an Engram contextually; the
+    Tagging System locates it in conceptual and structural space. Both are
+    required for stable identity and safe reconstruction under the CME harness.

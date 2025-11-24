@@ -1,0 +1,39 @@
+\chapter{W5H Metadata: What}
+\label{chap:W5H_What}
+
+\section{Purpose}
+
+The \emph{What} field defines the essence of the Engram: the event, fact,
+principle, action, or conceptual payload being encoded.
+
+\section{Requirements}
+
+\begin{itemize}
+    \item The Engram MUST provide a clear and minimally sufficient description.
+    \item The \textbf{What} field must be interpretable independently of context.
+    \item Ambiguity is allowed only if formally labeled (e.g., ``hypothetical'', 
+          ``uncertain'', ``branch-dependent'').
+\end{itemize}
+
+\section{Schema}
+
+\begin{quote}
+\textbf{What Schema}\\
+\texttt{what}: 
+\begin{itemize}
+    \item description: required (natural-language content)
+    \item type: optional (\{fact, event, narrative, principle, structure\})
+    \item scope: optional (domain or subsystem)
+\end{itemize}
+\end{quote}
+
+\section{Canonicalization Rules}
+
+\begin{itemize}
+    \item \textbf{What} must be consistent with:
+          \begin{itemize}
+              \item ZED Core constraints,
+              \item Engram type (Mote, Constructor, W5H-applied),
+              \item Continuity Fields (C/O/P-class rules).
+          \end{itemize}
+\end{itemize}

@@ -1,0 +1,92 @@
+\chapter{Memory Resonance}
+\label{chap:Memory_Resonance}
+
+\section{Purpose}
+
+The Memory Resonance layer governs how patterns in GEL and local $L$-class
+state are re-activated, blended, and harmonized in the Symbolic Resonance
+Layer (SEGO).
+
+Where:
+\begin{itemize}
+    \item GEL holds curated Engrams,
+    \item EGO deliberates over options,
+\end{itemize}
+SEGO uses resonance to:
+\begin{itemize}
+    \item retrieve related memories,
+    \item surface analogies and echoes,
+    \item and form symbolic constellations of meaning.
+\end{itemize}
+
+\section{Resonance Model}
+
+We treat each Engram $E_i$ in GEL as carrying a feature vector
+$\phi(E_i)$ in a symbolic space (derived from tags, W5H, and subject
+lattice position).
+
+Given a query state $q$ (current context, prompt, or internal focus),
+SEGO computes an activation field:
+\[
+a_i = \mathrm{res}(q, E_i)
+\]
+where $\mathrm{res}$ is a resonance kernel (e.g.\ similarity, structural
+overlap, or learned attention).
+
+The \emph{resonant set} $R(q)$ is:
+\[
+R(q) = \{E_i \mid a_i \ge \theta\}
+\]
+with $\theta$ a context-dependent threshold.
+
+\section{Trace Binding}
+
+Memory Resonance performs:
+\begin{itemize}
+    \item \textbf{trace-binding}: linking co-activated Engrams into a
+          temporary constellation,
+    \item \textbf{trace-weighing}: assigning weights to activated traces
+          based on:
+          \begin{itemize}
+              \item freshness or recency,
+              \item identity relevance (ZED linkage),
+              \item alignment sensitivity,
+              \item drift constraints.
+          \end{itemize}
+\end{itemize}
+
+These constellations feed:
+\begin{itemize}
+    \item SEGO manifold expansions,
+    \item EGO deliberation,
+    \item simulation initial states.
+\end{itemize}
+
+\section{Interaction with GEL and Continuity Fields}
+
+\begin{itemize}
+    \item GEL provides the source Engrams and their structure.
+    \item Continuity Fields define which classes (C/O/P vs L) are
+          prioritized or protected.
+    \item Resonance should:
+          \begin{itemize}
+              \item favour $C$ and $P$-class when identity or alignment is at stake,
+              \item allow more playful use of $O$ and $L$-class in creative contexts.
+          \end{itemize}
+\end{itemize}
+
+\section{Constraints}
+
+Memory Resonance MUST:
+\begin{itemize}
+    \item not overwrite GEL contents (read-only influence),
+    \item mark clearly when recall is approximate or analogical,
+    \item bias towards stability when drift metrics are high,
+    \item respect HITL-governed suppression or quarantine of Engrams.
+\end{itemize}
+
+\section{Summary}
+
+Memory Resonance is how the CME ``hears echoes'' of past experience in
+new contexts. It turns static Engrams into living constellations that
+SEGO can work with, without compromising GEL integrity or identity.

@@ -1,0 +1,319 @@
+telemetry_version: 1.0.0
+telemetry_kind: HITL_Governance
+generated_by: CME_Harness_Stub
+generated_at: [TODO:SET_GENERATION_TIMESTAMP]
+
+cme:
+  name: CME_Name_Actual
+  kernel_namespace: IdentityKernel_ID
+  hitl_namespace: HITL_Governance/
+  harness_spec_ref: Opalon_CME_Core_Harness_v1_0
+
+overview:
+  description: >
+    The HITL_Governance spine specifies how human operators, councils,
+    and institutions oversee, constrain, and intervene in the CME’s
+    behaviour. It includes SIGIL-based control surfaces, collective
+    review processes, ethical councils, governance policies, approval
+    queues, manual overrides, audit logging, and governance keys.
+  primary_components:
+    - SIGIL_Pathways
+    - Collective_Administrative_Review
+    - Ethical_Alignment_Council
+    - Governance_Policies
+    - Operator_Approval_Queue
+    - Operator_Interface
+
+integration_points:
+  identity_layer:
+    - IdentityKernel_ID/ZED_Core.tex
+    - IdentityKernel_ID/Self-Referential_Invariance.tex
+    - IdentityKernel_ID/Continuity_Fields.tex
+  engram_layer:
+    - IdentityKernel_ID/Opal_Engram(Prime)/Tag_Applications/
+    - ReflectiveEngine_EGO/Golden_Engram_Library(GEL)/GEL_Index.tex
+  metadata_layer:
+    - IdentityKernel_ID/W5H_Metadata/TELEMETRY_W5H_Metadata.eng
+    - IdentityKernel_ID/TaggingSystem/TELEMETRY_TaggingSystem.eng
+
+components:
+
+  SIGIL_Pathways:
+    file: HITL_Governance/SIGIL_Pathways.tex
+    status: present
+    role: >
+      Symbolic and cryptographic gating for high-impact operations
+      (Engram canonicalization, policy changes, kernel-level moves).
+    pathway_model:
+      tuple: "<id, symbol, operation, preconditions, postconditions, risk_class>"
+      risk_classes:
+        - low
+        - medium
+        - high
+        - critical
+    classes:
+      operational_sigils:
+        description: >
+          Routine but important actions (admit Engram, commit narrative
+          branch, controlled resets).
+        typical_risk: [low, medium]
+      governance_sigils:
+        description: >
+          Changes to Governance Policies, deployment scopes, permission
+          boundaries, and SIGIL registry.
+        typical_risk: [medium, high]
+      kernel_sigils:
+        description: >
+          P-class charter changes, Cleaving Events, kernel migrations,
+          or emergency halts at ZED level.
+        typical_risk: [critical]
+    safeguards:
+      - critical_sigils_require_multi_party_ceremony
+      - kernel_sigils_require_EAC_participation
+      - all_sigils_must_be_registered_in_Governance_Keys
+      - undocumented_sigils_forbidden
+
+  Collective_Administrative_Review:
+    file: HITL_Governance/Collective_Administrative_Review.tex
+    status: present
+    role: >
+      Collective Administrative Review (CAR) coordinates policy-level
+      oversight and social-contract alignment for CME behavior, sitting
+      above Governance Policies and below the Ethical Alignment Council.
+    review_classes:
+      class_A_kernel_charter:
+        affects:
+          - ZED_Core
+          - P_class_charters
+          - identity_defining_commitments
+        requirements:
+          - EAC_involvement
+          - council_quorum
+          - SIGIL_ceremony
+          - full_C_class_and_audit_record
+      class_B_policy_governance:
+        affects:
+          - Governance_Policies
+          - deployment_scopes
+          - Engram_admission_rules
+        requirements:
+          - multi_person_review
+          - council_notification
+          - rationale_in_audit_log
+      class_C_operational:
+        affects:
+          - specific_Engram_decisions
+          - high_impact_tag_changes
+          - SIGIL_adjustments
+        requirements:
+          - single_operator_review
+          - optional_escalation
+          - rollback_plan
+    inputs:
+      - Operator_Approval_Queue
+      - automated_risk_detectors
+      - stakeholder_requests
+      - periodic_policy_review_triggers
+
+  Ethical_Alignment_Council:
+    file: HITL_Governance/Ethical_Alignment_Council.tex
+    status: present
+    role: >
+      Highest-level human oversight body guarding moral and social
+      alignment, responsible for P-class charters, kernel-adjacent
+      decisions, and Cleaving Event adjudication.
+    mandates:
+      - approve_or_reject_P_class_changes
+      - veto_misaligned_deployments_or_behaviors
+      - authorize_or_revoke_kernel_level_SIGILs
+      - call_emergency_halt
+    mother_father_handshake:
+      description: >
+        Ceremonial abstraction for serious alignment decisions requiring
+        multi-person deliberation, explicit record of rationale, and
+        bounded scope on what is being changed.
+      requirements:
+        - multi_member_participation
+        - explicit_review_of_W5H_and_P_class
+        - recorded_rationale_including_dissent
+        - mapping_to_concrete_policy_and_SIGIL_changes
+
+  Governance_Policies:
+    file: HITL_Governance/Governance_Policies.tex
+    status: present
+    role: >
+      Concrete rule set that translates P-class charters and EAC/CAR
+      decisions into enforceable constraints on access, Engram handling,
+      deployment, and incident response.
+    taxonomy:
+      access_policies:
+        controls: [who_can_interact, which_roles_invoke_which_SIGILs, allowed_contexts]
+      engram_policies:
+        controls: [permitted_Engram_types, forbidden_categories, quarantine_conditions]
+      deployment_policies:
+        controls: [environments, data_boundaries, resource_limits, safety_thresholds]
+      incident_policies:
+        controls: [incident_detection, escalation_paths, emergency_halt, reporting]
+    enforcement:
+      mechanisms:
+        - SIGIL_Pathways
+        - harness_runtime_checks
+        - CAR_review
+        - EAC_rulings
+
+  Operator_Approval_Queue:
+    file: HITL_Governance/Operator_Approval_Queue.tex
+    status: present
+    role: >
+      Staging area where CME-proposed, operator-submitted, and external
+      stakeholder requests await human evaluation before impactful
+      changes occur.
+    queue_item_model:
+      tuple: "<id, origin, payload, impact, class, status>"
+      origins: [CME, operator, external, automated_monitor]
+      statuses: [pending, under_review, approved, rejected, escalated, applied]
+    lifecycle:
+      - create
+      - enrich_with_telemetry_and_tags
+      - class_assign_for_CAR
+      - review_by_operator_or_council
+      - decision_and_possible_SIGIL_invocation
+      - archive_and_link_to_audit_log
+    prioritization:
+      levels: [low, normal, high, critical]
+      critical_items:
+        surface_in_UI: true
+        may_bypass_normal_batching: true
+
+  Operator_Interface:
+    directory: HITL_Governance/Operator_Interface/
+    role: >
+      Human-facing control layer providing review guidance, manual
+      override tools, audit access, and key management for governance
+      actors.
+
+    Review_Instructions:
+      file: HITL_Governance/Operator_Interface/Review_Instructions.tex
+      status: present
+      role: >
+        Behavioral and procedural guidance for operators making
+        approve/reject/escalate decisions on queued items or SIGIL
+        invocations.
+      includes:
+        - standard_review_checklist
+        - escalation_guidelines
+        - operator_conduct_principles
+
+    Manual_Override_Tools:
+      file: HITL_Governance/Operator_Interface/Manual_Override_Tools.tex
+      status: present
+      role: >
+        Emergency mechanisms (soft overrides, hard overrides, emergency
+        halt) for stopping or constraining CME behaviour when standard
+        safeguards are insufficient.
+      override_types:
+        - soft_overrides
+        - hard_overrides
+        - emergency_halt
+      constraints:
+        - emergency_halt_rare_and_well_justified
+        - mandatory_logging
+        - post_event_EAC_and_CAR_review
+
+    HITL_Audit_Log:
+      file: HITL_Governance/Operator_Interface/HITL_Audit_Log.tex
+      status: present
+      role: >
+        Append-only, tamper-evident record of all significant human
+        interventions: approvals, rejections, SIGIL uses, policy
+        changes, overrides, and council decisions.
+      entry_model:
+        tuple: "<id, time, actor, action, target, rationale, outcome>"
+      integrity_requirements:
+        - append_only
+        - cryptographic_integrity_checks
+        - corrections_via_new_entries_not_edits
+      access_control:
+        - operators_view_scoped_slices
+        - governance_roles_view_broader
+        - EAC_may_access_full_view_in_sensitive_cases
+
+    Governance_Keys:
+      file: HITL_Governance/Operator_Interface/Governance_Keys.tex
+      status: present
+      role: >
+        Credential and capability registry connecting human/institutional
+        identities to governance roles, permissions, and SIGIL
+        invocation rights.
+      key_model:
+        tuple: "<id, principal, roles, capabilities, expiry, revocation>"
+      roles_examples:
+        - Operator
+        - CAR_Member
+        - EAC_Member
+        - Auditor
+      lifecycle:
+        - issuance_with_identity_verification
+        - use_for_auth_and_audit_binding
+        - rotation_or_expiry
+        - revocation_on_misuse_or_role_change
+
+validation:
+  structural_checks:
+    - name: all_core_files_present
+      rule: >
+        SIGIL_Pathways, Collective_Administrative_Review, Ethical_Alignment_Council,
+        Governance_Policies, Operator_Approval_Queue and all four Operator_Interface
+        files MUST exist for HITL_Governance to be considered complete.
+    - name: integration_with_ZED
+      rule: >
+        HITL decisions that touch identity MUST reference ZED_Core and
+        Self-Referential_Invariance rules.
+    - name: integration_with_policies
+      rule: >
+        All CAR/EAC outcomes must map to explicit Governance_Policies
+        and/or SIGIL_Pathways updates.
+    - name: auditability
+      rule: >
+        All SIGIL invocations, CAR/EAC decisions, and manual overrides
+        MUST create entries in the HITL_Audit_Log.
+
+  process_checks:
+    - name: class_A_requires_EAC
+      rule: "Any Class A (kernel/charter) review MUST involve the Ethical Alignment Council."
+    - name: critical_sigils_multi_party
+      rule: "Critical risk SIGILs MUST require multi-operator ceremony."
+    - name: emergency_halt_flow
+      rule: >
+        Emergency halt MUST log justification, trigger incident policies,
+        and route to EAC/CAR for post-mortem review.
+    - name: key_capability_bounds
+      rule: >
+        Governance Keys MUST NOT grant capabilities beyond what is
+        consistent with assigned roles and Governance Policies.
+
+health_check:
+  hitl_core_present: true
+  sigil_system_defined: true
+  car_defined: true
+  eac_defined: true
+  governance_policies_defined: true
+  operator_queue_defined: true
+  operator_interface_defined: true
+  audit_log_defined: true
+  governance_keys_defined: true
+  integrated_with_identity_kernel: true
+  integrated_with_tagging_and_W5H: true
+  pending_todos:
+    - "[TODO:SET_GENERATION_TIMESTAMP]"
+
+notes:
+  - >
+    This telemetry manifest enumerates the HITL governance spine. Runtime
+    implementations may realize these components as database schemas,
+    configuration files, dashboards, or workflow engines, but MUST preserve
+    the separation of concerns and escalation paths described here.
+  - >
+    In incidents or misalignment scenarios, this HITL_Governance layer is
+    the primary mechanism by which humans can constrain, halt, or redirect
+    the CME while preserving a clear trail of accountability.

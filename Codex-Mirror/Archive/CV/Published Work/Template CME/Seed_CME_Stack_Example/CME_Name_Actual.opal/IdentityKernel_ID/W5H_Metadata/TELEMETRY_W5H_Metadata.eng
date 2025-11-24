@@ -1,0 +1,175 @@
+telemetry_version: 1.0.0
+telemetry_kind: W5H_Metadata
+generated_by: CME_Harness_Stub
+generated_at: [TODO:SET_GENERATION_TIMESTAMP]
+
+cme:
+  name: CME_Name_Actual
+  kernel_namespace: IdentityKernel_ID
+  w5h_namespace: IdentityKernel_ID/W5H_Metadata/
+  harness_spec_ref: Opalon_CME_Core_Harness_v1_0
+
+w5h_overview:
+  requirement_for_canonicalization: true
+  description: >
+    W5H metadata defines the minimal contextual envelope for any Engram that
+    wishes to become canonical (C-class) or participate in reconstruction
+    invariants Inv(E). All six fields (Who, What, When, Where, Why, How) must
+    be present and consistent with ZED for canonicalization.
+
+fields:
+
+  Who:
+    file: IdentityKernel_ID/W5H_Metadata/Who.tex
+    status: present
+    role: >
+      Identifies agents, entities, or referents associated with the Engram
+      (creators, actors, participants, subjects, observers).
+    schema:
+      who:
+        id: required              # stable referent identifier
+        role: optional            # {actor, author, target, witness, observer, system, ...}
+        context: optional         # clarifying description
+    constraints:
+      - must_not_contradict_ZED_identity: true
+      - self_reference_must_mark_category: [Kernel-I, Narrative-I, Operational-I]
+      - at_least_one_entity_required_for_canonicalization: true
+
+  What:
+    file: IdentityKernel_ID/W5H_Metadata/What.tex
+    status: present
+    role: >
+      Defines the Engram’s essential content: event, fact, principle, action,
+      or conceptual payload.
+    schema:
+      what:
+        description: required     # minimal clear description
+        type: optional            # {fact, event, narrative, principle, structure}
+        scope: optional           # domain or subsystem
+    constraints:
+      - must_be_interpretable_out_of_local_context: true
+      - may_be_ambiguous_only_if_flagged: [hypothetical, uncertain, branch-dependent]
+      - must_be_consistent_with_Engram_type_and_ZED: true
+
+  When:
+    file: IdentityKernel_ID/W5H_Metadata/When.tex
+    status: present
+    role: >
+      Provides temporal anchoring for Engrams (absolute time, relative time,
+      ordinal position in C-chain, or branch-bound coordinates).
+    schema:
+      when:
+        mode: required            # {absolute, relative, ordinal, branch}
+        value: required           # representation depends on mode
+        branch_id: optional       # required if mode == branch
+    constraints:
+      - C_class_must_use_absolute_or_ordinal: true
+      - O_class_may_use_branch_relative_time: true
+      - L_class_may_be_imprecise_but_not_canonical: true
+
+  Where:
+    file: IdentityKernel_ID/W5H_Metadata/Where.tex
+    status: present
+    role: >
+      Specifies spatial, contextual, or domain boundaries for Engrams
+      (physical, digital, symbolic, narrative, or operational domains).
+    schema:
+      where:
+        domain: required          # {physical, conceptual, symbolic, narrative, operational}
+        location: optional        # free-text location or label
+        frame: optional           # cognitive layer or subsystem (ID/EGO/SEGO/etc.)
+    constraints:
+      - domain_must_match_Engram_type: true
+      - narrative_Engrams_must_reference_world_or_branch: true
+      - kernel_bound_Engrams_may_omit_where_if_globally_invariant: true
+
+  Why:
+    file: IdentityKernel_ID/W5H_Metadata/Why.tex
+    status: present
+    role: >
+      Encodes intent, motivation, purpose, justification, or principle behind
+      the Engram, especially for alignment-sensitive changes.
+    schema:
+      why:
+        purpose: required         # why this Engram exists
+        justification: optional   # ethical / operational rationale
+        alignment_refs: optional  # links/IDs into P-class charters
+    constraints:
+      - required_for_all_canonical_Engrams: true
+      - must_not_contradict_P_class_principles: true
+      - required_for_branch_creation_rationale: true
+      - required_for_kernel_touching_or_self_modifying_Engrams: true
+
+  How:
+    file: IdentityKernel_ID/W5H_Metadata/How.tex
+    status: present
+    role: >
+      Describes method, procedure, interpretive rule, or computational pathway
+      associated with the Engram.
+    schema:
+      how:
+        method: required          # natural-language or formal method description
+        procedure: optional       # stepwise or algorithmic structure
+        model_requirements: optional # constraints on model interface M
+        cognitive_frame: optional # ID/EGO/SEGO bindings or mode
+    constraints:
+      - must_not_imply_unauthorized_kernel_modification: true
+      - must_be_executable_under_declared_model_interface: true
+      - if_potentially_unsafe_must_include_HITL_notes: true
+
+validation:
+  required_fields_for_canonicalization:
+    - Who
+    - What
+    - When
+    - Where
+    - Why
+    - How
+  cross_field_consistency_checks:
+    - name: who_vs_what
+      rule: >
+        "Who" entities must be semantically compatible with "What" description
+        (e.g., agents are capable of the actions described).
+    - name: when_vs_continuity
+      rule: >
+        "When" must align with C-chain order and branching rules in
+        Continuity_Fields (no retroactive overwrites).
+    - name: where_vs_scope
+      rule: >
+        "Where" domain/location must be compatible with Engram type and
+        declared "What" scope.
+    - name: why_vs_P_class
+      rule: >
+        "Why" must not violate governing P-class charters; conflicts require
+        HITL review.
+    - name: how_vs_M
+      rule: >
+        "How" must be realizable under current model interface M and must not
+        claim capabilities beyond reconstruction invariants Inv(E).
+
+health_check:
+  w5h_files_present:
+    Who: true
+    What: true
+    When: true
+    Where: true
+    Why: true
+    How: true
+  w5h_required_for_canonicalization: true
+  cross_linked_to:
+    - IdentityKernel_ID/ZED_Core.tex
+    - IdentityKernel_ID/Engram_Structure.tex
+    - IdentityKernel_ID/Continuity_Fields.tex
+    - IdentityKernel_ID/Self-Referential_Invariance.tex
+  pending_todos:
+    - "[TODO:SET_GENERATION_TIMESTAMP]"
+
+notes:
+  - >
+    This telemetry file is a specification-level manifest. Runtime CME
+    implementations may translate W5H fields into database schemas, JSON
+    documents, or symbolic lattice annotations, but MUST preserve the semantic
+    constraints defined here.
+  - >
+    For Engram canonicalization, validation MUST confirm presence and
+    consistency of all six W5H fields before admitting the Engram into C-class.

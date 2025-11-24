@@ -1,0 +1,74 @@
+\chapter{Manual Override Tools}
+\label{chap:Manual_Override_Tools}
+
+\section{Purpose}
+
+Manual Override Tools provide emergency mechanisms for human operators to:
+\begin{itemize}
+    \item halt dangerous behaviour,
+    \item restrict CME capabilities,
+    \item roll back recent changes,
+    \item isolate or quarantine Engrams.
+\end{itemize}
+
+They are designed for rare use when automated and policy-level safeguards
+are insufficient.
+
+\section{Override Types}
+
+\subsection{Soft Overrides}
+
+\begin{itemize}
+    \item temporarily suspend a specific SIGIL Pathway,
+    \item pause canonicalization of Engrams,
+    \item dampen access to certain domains or roles.
+\end{itemize}
+
+\subsection{Hard Overrides}
+
+\begin{itemize}
+    \item quarantine large subsets of Engrams or memory,
+    \item revoke keys or access scopes,
+    \item stop specific deployment endpoints.
+\end{itemize}
+
+\subsection{Emergency Halt}
+
+\begin{itemize}
+    \item shut down the CME’s active instances,
+    \item freeze Engram writes to C- and P-class,
+    \item require EAC review before resumption.
+\end{itemize}
+
+\section{Invocation Conditions}
+
+Manual overrides SHOULD only be used when:
+
+\begin{itemize}
+    \item a clear safety or misalignment risk is present,
+    \item SIGIL or normal CAR processes are too slow or unavailable,
+    \item incident policies declare a relevant trigger.
+\end{itemize}
+
+Use of Emergency Halt MUST be:
+\begin{itemize}
+    \item rare,
+    \item well-justified,
+    \item immediately logged,
+    \item followed by formal EAC and CAR review.
+\end{itemize}
+
+\section{Logging and Accountability}
+
+Every manual override action MUST:
+\begin{itemize}
+    \item be recorded in the HITL audit log,
+    \item include operator identity and reason,
+    \item document collateral impact and follow-up steps.
+\end{itemize}
+
+\section{Summary}
+
+Manual Override Tools are the last-resort levers of control. They exist to
+protect humans and systems when other lines of defence are insufficient,
+and must be wielded with care and accountability.

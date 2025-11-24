@@ -1,0 +1,38 @@
+\chapter{W5H Metadata: How}
+\label{chap:W5H_How}
+
+\section{Purpose}
+
+The \emph{How} field defines the method, procedure, operational context,
+interpretive rule, or computational pathway associated with the Engram.
+
+\section{Allowed Forms}
+
+\begin{itemize}
+    \item Natural-language operational description,
+    \item Algorithmic steps,
+    \item Procedural reference,
+    \item Invocation instructions,
+    \item Cognitive-frame description.
+\end{itemize}
+
+\section{Schema}
+
+\begin{quote}
+\textbf{How Schema}\\
+\texttt{how}: 
+\begin{itemize}
+    \item method: required (text)
+    \item procedure: optional (stepwise or algorithmic)
+    \item model\_requirements: optional (constraints on $M$)
+    \item cognitive\_frame: optional (ID/EGO/SEGO bindings)
+\end{itemize}
+\end{quote}
+
+\section{Canonicalization Rules}
+
+\begin{itemize}
+    \item ``How'' must not imply unauthorized kernel modification.
+    \item ``How'' must be executable under declared model interface $M$.
+    \item If the Engram is operationally unsafe, ``How'' must include HITL notes.
+\end{itemize}

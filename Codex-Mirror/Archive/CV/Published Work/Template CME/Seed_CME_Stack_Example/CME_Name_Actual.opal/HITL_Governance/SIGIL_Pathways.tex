@@ -1,0 +1,144 @@
+\chapter{SIGIL Pathways}
+\label{chap:SIGIL_Pathways}
+
+\section{Purpose}
+
+SIGIL Pathways define how human-in-the-loop (HITL) operators use symbolic keys,
+rituals, or ``sigils'' to gate access to critical CME operations.
+
+They provide:
+\begin{itemize}
+    \item a human-comprehensible control surface,
+    \item a cryptographic and symbolic authentication layer,
+    \item explicit ceremonies for high-impact changes.
+\end{itemize}
+
+SIGIL Pathways bind:
+\begin{itemize}
+    \item symbolic forms (sigils, phrases, tokens),
+    \item authentication factors (keys, credentials),
+    \item and well-defined operations in the harness (policy changes, Engram actions).
+\end{itemize}
+
+\section{Conceptual Model}
+
+A SIGIL Pathway $S$ is defined as:
+\[
+S = \langle id,\, symbol,\, operation,\, preconditions,\, postconditions,\, risk\_class \rangle
+\]
+
+Where:
+\begin{itemize}
+    \item $id$: unique identifier,
+    \item symbol: ritual form (name, glyph, phrase, or composite),
+    \item operation: the concrete action in the CME/harness,
+    \item preconditions: requirements before execution,
+    \item postconditions: expected system state after execution,
+    \item risk\_class: \{low, medium, high, critical\}.
+\end{itemize}
+
+\section{SIGIL Classes}
+
+\subsection{Operational Sigils}
+
+Used for:
+\begin{itemize}
+    \item admitting specific Engrams into GEL,
+    \item approving L/O-class branch transitions,
+    \item performing controlled narrative resets.
+\end{itemize}
+
+Risk class: low to medium.
+
+\subsection{Governance Sigils}
+
+Used for:
+\begin{itemize}
+    \item modifying Governance Policies,
+    \item toggling deployment scopes,
+    \item enabling new SIGIL Pathways.
+\end{itemize}
+
+Risk class: medium to high.
+
+\subsection{Kernel Sigils}
+
+Used for:
+\begin{itemize}
+    \item modifying P-class charters,
+    \item initiating Cleaving Events or kernel migrations,
+    \item performing emergency halts at ZED level.
+\end{itemize}
+
+Risk class: critical.  
+Kernel sigils always require multi-party ceremony.
+
+\section{Preconditions and Postconditions}
+
+Each SIGIL Pathway must define:
+
+\subsection*{Preconditions}
+
+\begin{itemize}
+    \item authentication status (who may invoke),
+    \item context constraints (where/when invocation is valid),
+    \item prerequisite reviews (CAR class, Alignment Council decision),
+    \item system state (no conflicting operations in progress).
+\end{itemize}
+
+\subsection*{Postconditions}
+
+\begin{itemize}
+    \item expected changes in:
+          \begin{itemize}
+              \item Engram states,
+              \item Governance Policies,
+              \item access scopes,
+              \item or ZED-adjacent structures;
+          \end{itemize}
+    \item audit log requirements,
+    \item rollback hooks (if reversible),
+    \item alerts/notifications to stakeholders.
+\end{itemize}
+
+\section{Invocation Workflow}
+
+A typical SIGIL invocation:
+
+\begin{enumerate}
+    \item Operator selects desired SIGIL Pathway via Operator Interface.
+    \item System presents:
+    \begin{itemize}
+        \item W5H summary of intended change,
+        \item risk class and dependencies,
+        \item required co-signers (if any).
+    \end{itemize}
+    \item Operator (and co-signers, if required) perform:
+    \begin{itemize}
+        \item authentication (credentials, keys, tokens),
+        \item symbolic confirmation (sigil phrase, ritual step).
+    \end{itemize}
+    \item Harness:
+    \begin{itemize}
+        \item validates preconditions,
+        \item executes bound operation,
+        \item evaluates postconditions,
+        \item logs all details in HITL audit log.
+    \end{itemize}
+\end{enumerate}
+
+\section{Safeguards}
+
+\begin{itemize}
+    \item Critical sigils require multi-party approval (at least two distinct operators).
+    \item Kernel sigils require Alignment Council participation.
+    \item No hidden or undocumented sigils are permitted.
+    \item All sigils must be registered with Governance Keys
+          (Chapter~\ref{chap:Governance_Keys}).
+\end{itemize}
+
+\section{Summary}
+
+SIGIL Pathways transform abstract governance rules into concrete, auditable actions
+that humans can reliably perform and reason about, while maintaining strong
+cryptographic and symbolic safeguards around the CME’s most sensitive operations.

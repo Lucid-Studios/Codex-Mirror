@@ -1,0 +1,51 @@
+\chapter{PRIME Ledger --- Utility and Structural Tags}
+\label{chap:PRIME_Ledger}
+
+\section{Purpose}
+
+PRIME tags serve operational and structural utility functions across the
+Tagging System and GEL. They do not represent conceptual meaning, but rather
+organizational and functional metadata.
+
+\section{Scope}
+
+These tags include:
+\begin{itemize}
+    \item anchors,
+    \item ribbons and markers,
+    \item structural hints,
+    \item indexing utilities,
+    \item workflow or processing flags.
+\end{itemize}
+
+\section{Schema}
+
+\[
+T_{\text{PRIME}} = \langle key,\, gloss,\, bindings,\, constraints \rangle
+\]
+
+Examples:
+\begin{itemize}
+    \item \texttt{prime:anchor}
+    \item \texttt{prime:important}
+    \item \texttt{prime:index}
+    \item \texttt{prime:role}
+    \item \texttt{prime:workflow}
+\end{itemize}
+
+\section{Class Binding Notes}
+
+\begin{itemize}
+    \item PRIME tags rarely use C/P unless linking to identity invariants.
+    \item S-class allowed for structural indexing.
+    \item O-class allowed for narrative workflow hints.
+\end{itemize}
+
+\section{Constraints}
+
+\begin{itemize}
+    \item PRIME tags MUST NOT carry semantic content.
+    \item They must not override W5H meaning.
+    \item PRIME tags must never be used as substitutes for conceptual tags 
+          (SOCI/PSY/ONTO/etc.).
+\end{itemize}

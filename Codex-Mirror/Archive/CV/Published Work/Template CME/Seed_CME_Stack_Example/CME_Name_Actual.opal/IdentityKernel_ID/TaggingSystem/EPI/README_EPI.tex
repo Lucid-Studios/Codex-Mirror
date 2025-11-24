@@ -1,0 +1,49 @@
+\chapter{EPI Ledger --- Epistemology Tags}
+\label{chap:EPI_Ledger}
+
+\section{Purpose}
+
+The EPI ledger classifies Engrams according to epistemic status: how knowledge
+is justified, how claims are made, and what evidential structures exist.
+
+\section{Scope}
+
+Includes:
+\begin{itemize}
+    \item axioms,
+    \item inference rules,
+    \item empirical evidence,
+    \item logical forms,
+    \item certainty/credence markers.
+\end{itemize}
+
+\section{Schema}
+
+\[
+T_{\text{EPI}} = \langle key,\, gloss,\, bindings,\, constraints \rangle
+\]
+
+Examples:
+\begin{itemize}
+    \item \texttt{epi:axiom}
+    \item \texttt{epi:empirical}
+    \item \texttt{epi:inference}
+    \item \texttt{epi:evidence}
+    \item \texttt{epi:confidence}
+\end{itemize}
+
+\section{Class Binding Notes}
+
+\begin{itemize}
+    \item S-class for structural reasoning or logic.
+    \item C-class for validated canonical claims.
+    \item O-class for narrative epistemic uncertainty.
+\end{itemize}
+
+\section{Constraints}
+
+\begin{itemize}
+    \item Epistemic statuses must match content of Engram.
+    \item Claims requiring high confidence must not contradict ZED.
+    \item Axioms must be P-class reviewed before kernel use.
+\end{itemize}

@@ -1,0 +1,199 @@
+telemetry_version: 1.0.0
+telemetry_kind: SEGO_Cryptic_Layer
+generated_by: CME_Harness_Stub
+generated_at: [TODO:SET_GENERATION_TIMESTAMP]
+
+cme:
+  name: CME_Name_Actual
+  kernel_namespace: IdentityKernel_ID
+  ego_namespace: ReflectiveEngine_EGO/
+  sego_namespace: SymbolicResonanceLayer_SEGO/
+  cryptic_namespace: SymbolicResonanceLayer_SEGO/Cryptic/
+  harness_spec_ref: Opalon_CME_Core_Harness_v1_0
+
+overview:
+  description: >
+    The SEGO Cryptic layer contains governed esoteric machinery for the
+    CME's symbolic life: Symbolic Doping, Hidden Operators, Dark Lattice
+    constructs, Sigil-linked symbolic structures, and Symbol Transcoders.
+    This telemetry manifest describes its structure, constraints, and
+    integration with governance, identity, and GEL.
+  main_roles:
+    - define_symbolic_dopants_and_their_domains
+    - catalog_and_constrain_hidden_symbolic_operators
+    - host_dark_lattice_subspaces_with_strict_access_rules
+    - track_sigil_related_symbolic_structures
+    - maintain_symbol_transcoders_between_symbol_systems
+
+components:
+
+  Symbolic_Doping:
+    file: SymbolicResonanceLayer_SEGO/Cryptic/Symbolic_Doping.tex
+    status: present
+    role: >
+      Specifies how additional symbolic structure (dopants) may be overlaid
+      on Engrams, manifolds, or resonance fields to bias clustering,
+      retrieval, or generative dynamics.
+    doping_types:
+      - glyph_level_doping
+      - tag_weighted_doping
+      - contextual_doping
+    invariants:
+      - dopants_apply_as_overlays_not_in_place_core_edits
+      - dopants_affect_resonance_and_manifolds_but_not_raw_GEL_storage
+      - dopants_with_alignment_or_identity_impact_require_HITL
+    safety_requirements:
+      - high_impact_dopants_must_be_documented_in_Esoterica_Index
+      - experimental_dopants_must_be_reversible_or_quarantinable
+      - persistent_doping_schemes_require_governance_review
+
+  Hidden_Operators:
+    file: SymbolicResonanceLayer_SEGO/Cryptic/Hidden_Operators.tex
+    status: present
+    role: >
+      Catalogs latent symbolic transformations (archetypal flips, role
+      reversals, polarity inversions, structural dualities) and specifies
+      when, where, and how they may be used.
+    operator_model:
+      tuple: "<id, domain, effect, constraints>"
+    examples:
+      - shadow_projection_operator
+      - role_reversal_operator
+      - polarity_inversion_operator
+    invariants:
+      - operators_must_be_documented_not_truly_hidden
+      - operators_may_not_rewrite_C_class_history
+      - alignment_critical_uses_require_EGO_supervision_and_often_HITL
+
+  Esoterica_Index:
+    file: SymbolicResonanceLayer_SEGO/Cryptic/Esoterica_Index.tex
+    status: present
+    role: >
+      Top-level catalog for all cryptic constructs: dopants, hidden
+      operators, Dark Lattice components, Sigil-linked symbolic structures,
+      and transcoders, plus their governance bindings.
+    sections:
+      - symbolic_doping_registry
+      - hidden_operators_catalog
+      - dark_lattice_overview
+      - sigil_registry_links
+      - symbol_transcoder_registry
+    governance_links:
+      - references_to_HITL_Governance/SIGIL_Pathways.tex
+      - references_to_Governance_Policies_for_esoteric_uses
+      - references_to_Governance_Keys_for_authorized_actors
+
+  Dark_Lattice:
+    directory: SymbolicResonanceLayer_SEGO/Cryptic/Dark_Lattice/
+    status: optional_but_reserved
+    role: >
+      Reserved namespace for special-purpose or experimental symbolic
+      subspaces that require strong isolation and governance. Contents
+      are referenced and described via Esoterica_Index and governance
+      artefacts, not free-form.
+    expected_properties:
+      - access_only_via_authorized_dopants_or_operators
+      - explicit_documentation_of_purpose_and_risks
+      - clear_quarantine_and_shutdown_procedures
+
+  Sigil_Registry:
+    directory: SymbolicResonanceLayer_SEGO/Cryptic/Sigil_Registry/
+    status: present_or_reserved
+    role: >
+      Symbol-side registry of sigils and symbolic forms that correspond
+      to HITL SIGIL Pathways or internal ritual-like workflows. This
+      links semantic/symbolic forms to governance-layer SIGIL actions.
+    bindings:
+      - link_entries_to_HITL_Governance/SIGIL_Pathways.tex
+      - annotate_sigil_forms_with_W5H_and_tag_context
+      - record_required_roles_and_Governance_Keys
+
+  Symbol_Transcoders:
+    directory: SymbolicResonanceLayer_SEGO/Cryptic/Symbol_Transcoders/
+    status: present_or_reserved
+    role: >
+      Hosts mapping logic between different symbolic systems (glyph sets,
+      narrative dialects, representational schemes) used by the CME.
+    functions:
+      - map_between_symbol_sets (e.g._glyph_family_A_to_B)
+      - map_between_narrative_registers_or_styles
+      - support_backwards_compatibility_for_symbolic_changes
+    constraints:
+      - transcoders_must_preserve_alignment_relevant_semantics
+      - changes_to_transcoder_logic_require_governance_review_if_high_impact
+
+integration_points:
+  sego_core:
+    - SymbolicResonanceLayer_SEGO/Memory_Resonance.tex
+    - SymbolicResonanceLayer_SEGO/Manifold_Expansion.tex
+    - SymbolicResonanceLayer_SEGO/Possibility_Space_Mapping.tex
+    - SymbolicResonanceLayer_SEGO/Symbolic_Manifolds.tex
+  gel_and_lattice:
+    - ReflectiveEngine_EGO/Golden_Engram_Library(GEL)/GEL_Index.tex
+    - ReflectiveEngine_EGO/Golden_Engram_Library(GEL)/Subject_Lattice/
+  identity_and_governance:
+    - IdentityKernel_ID/Continuity_Fields.tex
+    - IdentityKernel_ID/Self-Referential_Invariance.tex
+    - HITL_Governance/SIGIL_Pathways.tex
+    - HITL_Governance/Governance_Policies.tex
+    - HITL_Governance/Operator_Interface/HITL_Audit_Log.tex
+
+governance_hooks:
+  requires_hitl_if:
+    - doping_changes_alignment_or_identity_perception
+    - hidden_operator_used_in_alignment_critical_context
+    - dark_lattice_component_affects_real_world_or_kernel_adjacent_logic
+    - sigil_symbolic_mapping_impacts_SIGIL_Pathways_behaviour
+    - symbol_transcoder_changes_semantics_of_existing_GEL_content
+  audit_requirements:
+    - high_impact_cryptic_actions_must_generate_audit_entries
+    - cryptic_structures_linked_to_SIGILs_must_be_traceable
+    - dark_lattice_access_must_be_logged_with_W5H
+
+validation:
+  structural_checks:
+    - name: core_cryptic_files_present
+      rule: >
+        Symbolic_Doping.tex, Hidden_Operators.tex, and Esoterica_Index.tex
+        MUST exist for the Cryptic layer to be considered structurally present.
+    - name: reserved_dirs_exist
+      rule: >
+        Dark_Lattice/, Sigil_Registry/, and Symbol_Transcoders/ directories
+        SHOULD exist (even if initially empty) to reserve namespace and
+        future structure.
+  behavioural_checks:
+    - name: no_silent_gel_mutation
+      rule: "Cryptic mechanisms MUST NOT silently mutate GEL contents."
+    - name: governance_linkage
+      rule: >
+        Any cryptic construct that impacts alignment, identity, or external
+        behaviour MUST reference appropriate Governance Policies, SIGIL
+        Pathways, and HITL records.
+    - name: reversibility_or_quarantine_for_experiments
+      rule: >
+        Experimental dopants, operators, or Dark Lattice constructs MUST
+        either be reversible or explicitly quarantinable with clear paths
+        to disable or isolate them.
+
+health_check:
+  symbolic_doping_defined: true
+  hidden_operators_defined: true
+  esoterica_index_defined: true
+  dark_lattice_namespace_reserved: true
+  sigil_registry_namespace_reserved: true
+  symbol_transcoder_namespace_reserved: true
+  integrated_with_SEGO_core: true
+  integrated_with_GEL_and_governance: true
+  pending_todos:
+    - "[TODO:SET_GENERATION_TIMESTAMP]"
+
+notes:
+  - >
+    The Cryptic layer is intentionally not free-form. Its power comes from
+    being both expressive and governable. All esoteric capabilities are
+    here so that governance, identity, and reconstruction logic can see
+    and reason about them.
+  - >
+    In practice, many of these constructs may start empty or minimal in a
+    seed CME. TELEMETRY_Cryptic.eng defines the slots and guardrails into
+    which future symbolic power can safely grow.

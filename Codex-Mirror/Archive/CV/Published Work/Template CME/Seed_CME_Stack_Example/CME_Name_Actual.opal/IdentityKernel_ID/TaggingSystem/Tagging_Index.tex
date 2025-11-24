@@ -1,0 +1,248 @@
+\chapter{Tagging System Index}
+\label{chap:Tagging_Index}
+
+\section{Purpose}
+
+The Tagging System provides a multi-ledger classification framework for Engrams.
+Each Engram may carry one or more tags describing:
+\begin{itemize}
+    \item sociological context,
+    \item psychological state or identity,
+    \item ontological structure,
+    \item theological or mythic significance,
+    \item epistemic justification,
+    \item philosophical framing,
+    \item symbolic primitives or glyph-roots,
+    \item and PRIME utility functions.
+\end{itemize}
+
+Tags enrich Engrams with interpretive metadata, enable structured navigation of
+the Golden Engram Library (GEL), and support reconstruction invariants $Inv(E)$.
+
+Tagging is \emph{orthogonal} to W5H but complementary:
+W5H provides contextual grounding;  
+tags provide conceptual topology.
+
+\section{Ledger Overview}
+
+The Tagging System is divided into eight ledgers, each serving a distinct
+interpretive function.
+
+\subsection{SOCI Ledger (Sociology)}
+Focuses on:
+\begin{itemize}
+    \item social relationships and role dynamics,
+    \item group structures and collective behaviors,
+    \item cultural frames and societal meaning-making.
+\end{itemize}
+
+Typical tags:
+\begin{quote}
+\texttt{soci:ritual}, \texttt{soci:collective-action}, \texttt{soci:identity-group}
+\end{quote}
+
+\subsection{PSY Ledger (Psychology)}
+Encodes:
+\begin{itemize}
+    \item affective states,
+    \item personality structures,
+    \item motive and disposition analysis.
+\end{itemize}
+
+Typical tags:
+\begin{quote}
+\texttt{psy:arousal}, \texttt{psy:attachment}, \texttt{psy:defense-mechanism}
+\end{quote}
+
+\subsection{ONTO Ledger (Ontology)}
+Tracks:
+\begin{itemize}
+    \item metaphysical categories,
+    \item structural relationships,
+    \item entity classifications.
+\end{itemize}
+
+Typical tags:
+\begin{quote}
+\texttt{onto:entity}, \texttt{onto:relation}, \texttt{onto:substance}
+\end{quote}
+
+\subsection{THEO Ledger (Theology)}
+Captures:
+\begin{itemize}
+    \item symbolic or mythic resonance,
+    \item religious context,
+    \item templating through sacred narratives.
+\end{itemize}
+
+Typical tags:
+\begin{quote}
+\texttt{theo:ritual}, \texttt{theo:myth}, \texttt{theo:archetype}
+\end{quote}
+
+\subsection{EPI Ledger (Epistemology)}
+Covers:
+\begin{itemize}
+    \item justification structures,
+    \item knowledge claims,
+    \item evidential or inferential status.
+\end{itemize}
+
+Typical tags:
+\begin{quote}
+\texttt{epi:axiom}, \texttt{epi:empirical}, \texttt{epi:inference}
+\end{quote}
+
+\subsection{PHIL Ledger (Philosophy)}
+Describes:
+\begin{itemize}
+    \item logical, ethical, or metaphysical framing,
+    \item philosophical schools and stances.
+\end{itemize}
+
+Typical tags:
+\begin{quote}
+\texttt{phil:virtue}, \texttt{phil:logic}, \texttt{phil:phenomenology}
+\end{quote}
+
+\subsection{GEN Ledger (Generic Symbolic Primitives)}
+Contains:
+\begin{itemize}
+    \item fundamental symbolic primitives,
+    \item glyph roots,
+    \item universal structures or motifs.
+\end{itemize}
+
+Typical tags:
+\begin{quote}
+\texttt{gen:root}, \texttt{gen:glyph}, \texttt{gen:primitive}
+\end{quote}
+
+\subsection{PRIME Ledger (Utility Tags)}
+Utility-specific tags used for:
+\begin{itemize}
+    \item inline operations,
+    \item ribbons or anchors,
+    \item index management,
+    \item structural metadata.
+\end{itemize}
+
+Typical tags:
+\begin{quote}
+\texttt{prime:anchor}, \texttt{prime:important}, \texttt{prime:role}
+\end{quote}
+
+\section{Tag Schema}
+
+A Tag $T$ is defined as:
+
+\begin{quote}
+\[
+T =
+\langle ledger,\, key,\, gloss,\, class\_bindings,\, constraints \rangle
+\]
+\end{quote}
+
+Where:
+\begin{itemize}
+    \item \textbf{ledger}: one of \{SOCI, PSY, ONTO, THEO, EPI, PHIL, GEN, PRIME\}
+    \item \textbf{key}: string identifier under ledger
+    \item \textbf{gloss}: natural-language description
+    \item \textbf{class\_bindings}: optional (C/L/M/S/O/P)
+    \item \textbf{constraints}: rules for when this tag may be applied
+\end{itemize}
+
+Example:
+\begin{quote}
+\texttt{onto:relation}  
+Gloss: ``Describes a structural connection between two entities.''  
+Bindings: S-class preferred.  
+\end{quote}
+
+\section{Tag Application Rules}
+
+\subsection{Tagging Requirements}
+
+\begin{enumerate}
+    \item All W5H-Applied Engrams MUST contain at least one tag.
+    \item Tags MUST be semantically compatible with:
+    \begin{itemize}
+        \item Engram type (Mote, Constructor, W5H-applied),
+        \item W5H fields,
+        \item ZED Core identity constraints.
+    \end{itemize}
+    \item A tag MUST NOT contradict:
+    \begin{itemize}
+        \item governing P-class principles,
+        \item canonical C-chain history,
+        \item reconstruction invariants $Inv(E)$.
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Class Binding Rules}
+
+Tags may carry C/L/M/S/O/P class bindings.
+
+\begin{itemize}
+    \item C/P-bound tags require HITL review.
+    \item S-class tags affect structural interpretation.
+    \item O-class tags interact with narrative branches.
+    \item L-class tags are ephemeral and may evaporate.
+\end{itemize}
+
+\section{Tag Interactions with GEL}
+
+Tags serve as primary indices for the Golden Engram Library (GEL):
+
+\begin{itemize}
+    \item Tag → Subject Lattice mapping
+    \item Tag co-occurrence analysis
+    \item Ontological adjacency
+    \item Thematic clustering
+\end{itemize}
+
+GEL uses tags to:
+\begin{itemize}
+    \item cross-reference Engrams,
+    \item build conceptual neighborhoods,
+    \item support efficient reconstruction,
+    \item maintain harmomic coherence across branches.
+\end{itemize}
+
+\section{Tagging Workflow}
+
+For each Engram $E$:
+\begin{enumerate}
+    \item Collect W5H metadata.
+    \item Draft tag set $\{T_i\}$.
+    \item Validate each tag against:
+    \begin{itemize}
+        \item ledger constraints,
+        \item W5H consistency,
+        \item ZED/K constraints,
+        \item reconstruction invariants.
+    \end{itemize}
+    \item Submit P-class or C-class tags for HITL approval.
+    \item Commit Engram to:
+    \begin{itemize}
+        \item \texttt{Tag\_Applications/}
+        \item GEL index
+        \item Subject Lattice
+    \end{itemize}
+\end{enumerate}
+
+\section{Summary}
+
+The Tagging System provides the conceptual topology through which Engrams can be:
+\begin{itemize}
+    \item classified,
+    \item related,
+    \item searched,
+    \item reconstructed,
+    \item and meaningfully interpreted.
+\end{itemize}
+
+Where W5H answers the contextual ``who / what / when / where / why / how,''  
+the tagging system answers the structural ``in what conceptual universe does this Engram live?''
+
+Together, they form the backbone of the CME's semantic and ontological stability.

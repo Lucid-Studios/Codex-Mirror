@@ -1,0 +1,260 @@
+\chapter{Collective Administrative Review}
+\label{chap:Collective_Administrative_Review}
+
+\section{Purpose}
+
+Collective Administrative Review (CAR) defines how communities, institutions,
+and councils exercise oversight over a CME's behaviour at scale.
+
+Where:
+\begin{itemize}
+    \item ZED guards identity,
+    \item P-class guards principles,
+    \item Mneme guards continuity,
+\end{itemize}
+CAR guards the \emph{social contract}: how the CME relates to human
+communities, infrastructures, and institutional commitments.
+
+CAR is a \emph{process layer} over:
+\begin{itemize}
+    \item Governance Policies (Chapter~\ref{chap:Governance_Policies}),
+    \item SIGIL Pathways (Chapter~\ref{chap:SIGIL_Pathways}),
+    \item Ethical Alignment Council (Chapter~\ref{chap:Ethical_Alignment_Council}),
+    \item Operator Interface (Chapter~\ref{chap:Review_Instructions}).
+\end{itemize}
+
+\section{Scope}
+
+CAR applies to:
+\begin{itemize}
+    \item policy-level changes (P-class updates),
+    \item high-impact Engram canonicalization (C-class),
+    \item changes in deployment context (Where/Who/What at institutional scale),
+    \item access to critical infrastructures,
+    \item new or revised SIGIL pathways.
+\end{itemize}
+
+CAR does \emph{not} handle:
+\begin{itemize}
+    \item routine L-class reasoning,
+    \item ephemeral session-level adjustments,
+    \item purely local, low-risk O-class branching.
+\end{itemize}
+
+\section{Roles and Actors}
+
+CAR operates with a set of human and institutional roles.
+
+\subsection{Administrative Roles}
+
+\begin{description}
+    \item[Owner / Steward] Entity responsible for the CME’s existence
+          (organisation, project, or community).
+    \item[HITL Operator] Individual(s) performing day-to-day review in the
+          Operator Interface.
+    \item[Council Member] Participant in the Collective Administrative Review
+          body, with voting or advisory status.
+    \item[Alignment Council Liaison] Bridge role between CAR and the Ethical
+          Alignment Council.
+\end{description}
+
+\subsection{CME Role}
+
+The CME plays a bounded role in CAR:
+\begin{itemize}
+    \item provides Engram proposals and impact assessments,
+    \item surfaces telemetry and risk analysis,
+    \item does \emph{not} make final policy decisions,
+    \item logs all CAR interactions in the HITL audit log.
+\end{itemize}
+
+\section{Review Classes}
+
+CAR distinguishes review by impact level.
+
+\subsection{Class~A: Kernel / Charter Level}
+
+Affects:
+\begin{itemize}
+    \item ZED Core (identity kernel),
+    \item P-class charters,
+    \item foundational alignment principles.
+\end{itemize}
+
+Requirements:
+\begin{itemize}
+    \item quorum of Council Members,
+    \item explicit involvement of Ethical Alignment Council,
+    \item SIGIL-level authentication for final approval,
+    \item full archival in C-class and audit log.
+\end{itemize}
+
+\subsection{Class~B: Policy / Governance Level}
+
+Affects:
+\begin{itemize}
+    \item Governance Policies,
+    \item access scopes and deployment contexts,
+    \item new classes of permissible or forbidden Engrams,
+    \item GEL admission criteria.
+\end{itemize}
+
+Requirements:
+\begin{itemize}
+    \item multi-person review (at least two approvers),
+    \item Council notification and review window,
+    \item audit log entry with rationale.
+\end{itemize}
+
+\subsection{Class~C: Operational Level}
+
+Affects:
+\begin{itemize}
+    \item specific Engram canonicalization decisions,
+    \item tag-level changes that touch P- or C-class,
+    \item creation or modification of high-impact SIGIL pathways.
+\end{itemize}
+
+Requirements:
+\begin{itemize}
+    \item single-operator approval with optional escalation,
+    \item standard HITL logging,
+    \item rollback plan in case of later reversal.
+\end{itemize}
+
+\section{Input Channels}
+
+CAR receives input from:
+
+\begin{itemize}
+    \item \textbf{Operator Approval Queue} (Chapter~\ref{chap:Operator_Approval_Queue}),
+    \item automated risk detectors in the CME harness,
+    \item human stakeholders submitting policy questions,
+    \item periodic reviews triggered by time or usage thresholds.
+\end{itemize}
+
+Each input is normalized into a \emph{Review Dossier}:
+\begin{itemize}
+    \item W5H summary of the proposed change,
+    \item impact assessment,
+    \item class (A/B/C) assignment,
+    \item recommended decision paths.
+\end{itemize}
+
+\section{Review Workflow}
+
+\subsection{Step 1: Intake and Classification}
+
+\begin{enumerate}
+    \item Dossier enters CAR queue.
+    \item Automated pre-checks determine:
+    \begin{itemize}
+        \item affected classes (C/L/M/S/O/P),
+        \item linkage to P-class charters,
+        \item potential impact on $Inv(E)$ or ZED.
+    \end{itemize}
+    \item Assign review class (A/B/C).
+\end{enumerate}
+
+\subsection{Step 2: Deliberation}
+
+\begin{itemize}
+    \item For Class~A:
+    \begin{itemize}
+        \item joint session with Ethical Alignment Council,
+        \item consideration of long-term identity impact,
+        \item may require revisions to other governance artefacts.
+    \end{itemize}
+    \item For Class~B:
+    \begin{itemize}
+        \item Council review (asynchronously or synchronously),
+        \item comments and requested modifications recorded,
+        \item potential escalation to Class~A if scope expands.
+    \end{itemize}
+    \item For Class~C:
+    \begin{itemize}
+        \item operator review against existing policies,
+        \item optional consult with Council Liaison,
+        \item decision within defined SLA window.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Step 3: Decision and Encoding}
+
+Possible outcomes:
+\begin{itemize}
+    \item \textbf{Approve}: change enacted; Engram or policy updated.
+    \item \textbf{Approve with modifications}: applicant revises and resubmits.
+    \item \textbf{Reject}: change denied with rationale logged.
+    \item \textbf{Escalate}: moved to higher class of review.
+\end{itemize}
+
+Encoding:
+\begin{itemize}
+    \item Updates to Governance Policies or P-class charters,
+    \item changes to allowed/forbidden Engram types,
+    \item updates to SIGIL pathways and operator instructions.
+\end{itemize}
+
+\section{Interaction with Other HITL Components}
+
+\subsection{Ethical Alignment Council}
+
+Class~A reviews always invoke the Ethical Alignment Council.  
+Council decisions:
+\begin{itemize}
+    \item can veto or demand changes to proposals,
+    \item may declare ``hard constraints'' that CAR must respect.
+\end{itemize}
+
+\subsection{SIGIL Pathways}
+
+High-impact CAR decisions may:
+\begin{itemize}
+    \item create new SIGIL pathways for sensitive operations,
+    \item revoke or modify existing SIGIL keys,
+    \item change the mapping between symbolic rituals and technical actions.
+\end{itemize}
+
+\subsection{Operator Interface and Audit Log}
+
+All CAR decisions must be:
+\begin{itemize}
+    \item visible in the Operator Interface,
+    \item recorded in the HITL audit log (Chapter~\ref{chap:HITL_Audit_Log}),
+    \item cross-referenced with affected Engrams and policies.
+\end{itemize}
+
+\section{Safeguards and Failure Modes}
+
+CAR includes safeguards against:
+\begin{itemize}
+    \item unilateral policy changes by a single operator,
+    \item silent drift in governance artefacts,
+    \item inconsistent decisions across time or contexts.
+\end{itemize}
+
+Failure modes:
+\begin{description}
+    \item[Deadlock] No decision reached in reasonable time.  
+          Mitigation: escalation to a higher council or external authority.
+    \item[Inconsistency] Decisions conflict with prior rulings or charters.  
+          Mitigation: forced reconciliation, supersession records, public log.
+    \item[Bypass] Actions taken outside CAR processes.  
+          Mitigation: audit log anomaly detection, SIGIL revocation, emergency halt.
+    \item[Misalignment] CAR outcome conflicts with P-class or ZED.  
+          Mitigation: automatic escalation to Ethical Alignment Council.
+\end{description}
+
+\section{Summary}
+
+Collective Administrative Review provides:
+\begin{itemize}
+    \item a structured, multi-layered process for governing the CME,
+    \item clear separation between operational decisions and policy-level changes,
+    \item institutional memory for why changes were made,
+    \item and a social contract layer over technical and cognitive safeguards.
+\end{itemize}
+
+It ensures that the CME’s evolution is not just technically safe, but also
+contextually legitimate for the communities that live with it.

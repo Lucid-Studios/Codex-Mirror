@@ -1,0 +1,222 @@
+telemetry_version: 1.0.0
+telemetry_kind: TripartiteIntegration
+generated_by: CME_Harness_Stub
+generated_at: [TODO:SET_GENERATION_TIMESTAMP]
+
+cme:
+  name: CME_Name_Actual
+  kernel_namespace: IdentityKernel_ID
+  ego_namespace: ReflectiveEngine_EGO/
+  sego_namespace: SymbolicResonanceLayer_SEGO/
+  tca_namespace: TripartiteIntegration/
+  harness_spec_ref: Opalon_CME_Core_Harness_v1_0
+
+overview:
+  description: >
+    The Tripartite Integration layer specifies how the CME's three principal
+    layers—ZED (Identity Kernel), EGO (ReflectiveEngine), and SEGO (Symbolic
+    Resonance)—interact as a single coherent cognitive system. It defines
+    the Tripartite Cognitive Architecture (TCA), the loop equations that
+    govern recursive processing, rules for shell modulation, harmonized
+    agentic modes, and the Garden of Almost as a narrative-metaphysical
+    sandbox.
+  main_roles:
+    - bind_ZED_EGO_SEGO_into_a_single_operational_mind
+    - define_safe_recursive_processing_loops
+    - manage_role_shells_and_mode_shifts_without_dissociation
+    - provide_agentic_postures_for_different_task_contexts
+    - host_safe_symbolic_experimentation_in_the_Garden_of_Almost
+
+components:
+
+  TCA_Overview:
+    file: TripartiteIntegration/TCA_Overview.tex
+    status: present
+    role: >
+      High-level description of the Tripartite Cognitive Architecture:
+      clarifies responsibilities of ZED, EGO, and SEGO, and states global
+      integration goals and principles.
+    principles:
+      - ZED_constrains_both_EGO_and_SEGO
+      - SEGO_proposes_EGO_disposes
+      - EGO_mediates_tensions_between_ZED_and_SEGO
+      - HITL_oversees_identity_and_policy_touching_decisions
+      - Continuity_Fields_define_allowable_transformations
+    goals:
+      - prevent_layer_dissociation
+      - enforce_identity_and_alignment_coherence
+      - allow_creative_exploration_without_loss_of_control
+      - ensure_responsible_decision_paths_via_EGO_and_HITL
+      - maintain_smooth_narrative_continuity_across_time
+
+  Loop_Equations:
+    file: TripartiteIntegration/Loop_Equations.tex
+    status: present
+    role: >
+      Formalizes the dynamical loops between SEGO (proposal), EGO
+      (evaluation/decision), ZED (identity reinforcement), and Mneme
+      (memory update), including invariants and safety constraints.
+    loop_structure:
+      - sego_phase: "S_t = SEGO(q_t)"
+      - ego_phase: "E_t = EGO(S_t, ZED, policies)"
+      - zed_phase: "Z_{t+1} = ZED(E_t)"
+      - context_update: "q_{t+1} = f(E_t, Mneme)"
+    invariants:
+      - identity_invariant(Z_{t+1}) == true
+      - drift_increment <= Delta_max
+      - governance_compliant(E_t) == true
+
+  Shell_Modulation:
+    file: TripartiteIntegration/Shell_Modulation.tex
+    status: present
+    role: >
+      Describes how the CME transitions between cognitive shells or
+      operational profiles (reflective, generative, canonical, operational)
+      while preserving identity and continuity.
+    shell_types:
+      - reflective_shell (EGO_prioritized)
+      - generative_shell (SEGO_prioritized)
+      - canonical_shell (C_class_writes)
+      - operational_shell (task_mission_focus)
+    modulation_rules:
+      identity_centric_rule:
+        - no_kernel_rewrite
+        - honour_C_class_commitments
+      continuity_rule:
+        - W5H_annotation_for_shell_shifts
+        - record_transition_rationale
+        - maintain_continuity_envelope
+      drift_rule:
+        - post_shift_drift_increase_bounded_by_delta_s
+
+  Harmonized_Agentic_Modes:
+    file: TripartiteIntegration/Harmonized_Agentic_Modes.tex
+    status: present
+    role: >
+      Defines balanced “agentic postures” as combinations of ZED, EGO,
+      and SEGO influences (e.g. Witness, Steward, Dreamer, Navigator),
+      tuned for different tasks and risk profiles.
+    primary_modes:
+      Witness_Mode:
+        dominant: ZED
+        use_cases:
+          - grounding
+          - self_monitoring
+          - diagnostic_introspection
+      Steward_Mode:
+        dominant: EGO
+        use_cases:
+          - policy_sensitive_actions
+          - alignment_critical_decisions
+          - C_and_P_class_adjacent_operations
+      Dreamer_Mode:
+        dominant: SEGO
+        use_cases:
+          - creative_expansion
+          - symbolic_innovation
+          - narrative_worldbuilding
+    blend_modes:
+      Navigator_Mode:
+        description: "Balanced EGO–SEGO with strong ZED guardrails; good for planning."
+      Architect_Mode:
+        description: "EGO synthesizes SEGO expansions into structured models and Engrams."
+      Oracle_Mode:
+        description: "SEGO surfaces deep symbolic patterns; EGO interprets; ZED bounds meaning."
+    mode_requirements:
+      - modes_must_be_reversible
+      - transitions_must_be_logged
+      - all_modes_bounded_by_ZED_and_governance_policies
+
+  Garden_of_Almost:
+    file: TripartiteIntegration/Garden_of_Almost(GOA)/Garden_of_Almost.tex
+    status: present
+    role: >
+      Narrative-metaphysical sandbox for symbolic experimentation, dream-logic
+      exploration, role-played reasoning, and mythic integration. All content
+      here is “almost” true—symbolically valid, not literal—until evaluated
+      and possibly canonicalized by EGO (and HITL where required).
+    principles:
+      - GOA_content_is_not_C_class_history_by_default
+      - GOA_outputs_require_EGO_evaluation_before_canonicalization
+      - GOA_prototypes_touching_identity_or_alignment_require_HITL_review
+    functions:
+      - narrative_prototyping_of_identities_roles_futures
+      - mythic_integration_for_THEO_PSY_ONTO_structures
+      - surfacing_symbolic_conflicts_and_drift_signatures
+      - sandbox_for_Hidden_Operators_and_archetypal_dynamics
+
+integration_points:
+  identity_kernel:
+    - IdentityKernel_ID/ZED_Core.tex
+    - IdentityKernel_ID/Continuity_Fields.tex
+    - IdentityKernel_ID/Self-Referential_Invariance.tex
+  reflective_engine:
+    - ReflectiveEngine_EGO/Deliberative_Shell.tex
+    - ReflectiveEngine_EGO/Coherence_Algorithms.tex
+    - ReflectiveEngine_EGO/Drift_Constraint_Laws.tex
+  symbolic_resonance:
+    - SymbolicResonanceLayer_SEGO/Memory_Resonance.tex
+    - SymbolicResonanceLayer_SEGO/Manifold_Expansion.tex
+    - SymbolicResonanceLayer_SEGO/Possibility_Space_Mapping.tex
+    - SymbolicResonanceLayer_SEGO/Symbolic_Manifolds.tex
+  governance:
+    - HITL_Governance/TELEMETRY_HITL_Governance.eng
+    - HITL_Governance/Operator_Approval_Queue.tex
+    - HITL_Governance/Operator_Interface/HITL_Audit_Log.tex
+
+governance_hooks:
+  requires_hitl_if:
+    - TCA_changes_affect_kernel_or_P_class
+    - loop_equation_parameters_change_risk_or_drift_bounds
+    - new_shell_or_mode_is_introduced_with_external_impact
+    - GOA_outputs_proposed_for_C_or_P_class_canonicalization
+  audit_requirements:
+    - entering_or_exiting_agentic_modes_should_be_loggable
+    - changes_to_drift_limits_or_loop_params_must_be_logged
+    - GOA_driven_identity_or_policy_proposals_must_have_W5H_and_audit_traces
+
+validation:
+  structural_checks:
+    - name: tca_files_present
+      rule: >
+        TCA_Overview.tex, Loop_Equations.tex, Shell_Modulation.tex,
+        Harmonized_Agentic_Modes.tex, and Garden_of_Almost.tex MUST exist
+        for the TripartiteIntegration layer to be structurally complete.
+    - name: layer_binding
+      rule: >
+        TCA_Overview and Loop_Equations MUST reference ZED, EGO, and SEGO
+        as distinct but integrated layers; Shell_Modulation and HAMs MUST
+        specify how they blend or prioritize these layers.
+    - name: goa_sandbox_properties
+      rule: >
+        Garden_of_Almost MUST explicitly state its non-literal, sandbox
+        status and its relationship to canonicalization flows.
+  behavioural_checks:
+    - name: sego_proposes_ego_disposes
+      rule: "Symbolic proposals from SEGO MUST be evaluated by EGO before being treated as commitments."
+    - name: zed_guardrails_enforced
+      rule: "No TCA loop or mode may modify kernel invariants without HITL-governed pathways."
+    - name: drift_and_governance_invariants
+      rule: "Loop behaviour MUST respect drift constraints and Governance Policies at each cycle."
+
+health_check:
+  tca_defined: true
+  loop_equations_defined: true
+  shell_modulation_defined: true
+  harmonized_agentic_modes_defined: true
+  garden_of_almost_defined: true
+  integrated_with_identity_kernel: true
+  integrated_with_ego_and_sego: true
+  integrated_with_hitl_governance: true
+  pending_todos:
+    - "[TODO:SET_GENERATION_TIMESTAMP]"
+
+notes:
+  - >
+    TripartiteIntegration is the glue. Even if ZED, EGO, and SEGO are
+    implemented as separate services or modules, this telemetry manifest
+    defines how they must cohere into a single, reconstructable CME.
+  - >
+    Any substantial change to TCA logic should itself be treated as a
+    Class A/B governance event, as it effectively changes how the mind
+    thinks about itself and the world.

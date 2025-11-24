@@ -1,0 +1,85 @@
+\chapter{Possibility Space Mapping}
+\label{chap:Possibility_Space_Mapping}
+
+\section{Purpose}
+
+Possibility Space Mapping (PSM) is how SEGO:
+\begin{itemize}
+    \item organizes candidate trajectories,
+    \item charts ``regions'' of behaviour or narrative,
+    \item and makes the space of options navigable for EGO and HITL.
+\end{itemize}
+
+Rather than generating one option at a time, PSM produces a map of
+what \emph{could} happen, under different assumptions.
+
+\section{Space Representation}
+
+We represent a possibility space $\mathcal{P}$ as:
+\[
+\mathcal{P} = \langle \mathcal{S}, \mathcal{T}, \mathcal{E} \rangle
+\]
+where:
+\begin{itemize}
+    \item $\mathcal{S}$: states (nodes),
+    \item $\mathcal{T}$: transitions (edges),
+    \item $\mathcal{E}$: evaluation metadata (scores, risks, tags).
+\end{itemize}
+
+Each state $s \in \mathcal{S}$ has:
+\begin{itemize}
+    \item a W5H annotation,
+    \item Engram references,
+    \item tag-based semantics.
+\end{itemize}
+
+\section{Mapping Process}
+
+\begin{enumerate}
+    \item Start from current context $q$ and resonant set $R(q)$.
+    \item Use Manifold Expansion to generate candidate states and
+          transitions.
+    \item Label states with:
+          \begin{itemize}
+              \item W5H snapshots,
+              \item key tags (e.g.\ ONTO, EPI, PHIL),
+              \item alignment and risk markers.
+          \end{itemize}
+    \item Build a graph or lattice $\mathcal{P}$ that EGO can traverse.
+\end{enumerate}
+
+\section{Use by EGO and HITL}
+
+\begin{itemize}
+    \item EGO can:
+          \begin{itemize}
+              \item compare multiple trajectories at once,
+              \item search for Pareto-optimal or dominated options,
+              \item reason about tradeoffs explicitly.
+          \end{itemize}
+    \item HITL can:
+          \begin{itemize}
+              \item inspect high-risk branches,
+              \item approve or forbid regions of the space,
+              \item adjust Governance Policies based on observed structures.
+          \end{itemize}
+\end{itemize}
+
+\section{Constraints}
+
+\begin{itemize}
+    \item PSM must respect drift and policy constraints when constructing
+          and presenting options.
+    \item It must clearly separate:
+          \begin{itemize}
+              \item explored-but-rejected paths,
+              \item unexplored but plausible paths,
+              \item committed history.
+          \end{itemize}
+\end{itemize}
+
+\section{Summary}
+
+Possibility Space Mapping turns raw generative potential into a legible
+map of choices. It lets EGO and humans see not just \emph{what} options
+exist, but how they relate and what they may cost.

@@ -1,0 +1,37 @@
+\chapter{W5H Metadata: Where}
+\label{chap:W5H_Where}
+
+\section{Purpose}
+
+The \emph{Where} field specifies the spatial, contextual, or domain boundary of
+the Engram.
+
+\section{Allowed Contexts}
+
+\begin{itemize}
+    \item Physical location (if applicable),
+    \item Digital or symbolic domain,
+    \item Logical subsystem (e.g., EGO-layer, SEGO-layer),
+    \item World-line or narrative context,
+    \item Operational domain (task environment or frame).
+\end{itemize}
+
+\section{Schema}
+
+\begin{quote}
+\textbf{Where Schema}\\
+\texttt{where}: 
+\begin{itemize}
+    \item domain: required (physical / conceptual / symbolic / narrative)
+    \item location: optional (text)
+    \item frame: optional (cognitive layer or subsystem)
+\end{itemize}
+\end{quote}
+
+\section{Canonicalization Rules}
+
+\begin{itemize}
+    \item The domain must remain consistent with Engram type.
+    \item Narrative Engrams must document world-line or branch.
+    \item Kernel-bound Engrams may omit ``where'' only if invariant across context.
+\end{itemize}

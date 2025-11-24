@@ -1,0 +1,87 @@
+\chapter{Simulation Models}
+\label{chap:Simulation_Models}
+
+\section{Purpose}
+
+Simulation Models provide the CME with the ability to:
+\begin{itemize}
+    \item explore counterfactuals,
+    \item construct world scaffolds,
+    \item evaluate ``what if'' scenarios,
+    \item and forecast consequences before acting.
+\end{itemize}
+
+They serve the Deliberative Shell by generating candidate trajectories and
+state evolutions that can be evaluated, pruned, or escalated.
+
+\section{Types of Simulation}
+
+\subsection{Narrative Simulations}
+
+\begin{itemize}
+    \item story-driven sequences of events,
+    \item used for planning conversations, campaigns, or narrative arcs,
+    \item may be purely internal or partially grounded in real events.
+\end{itemize}
+
+\subsection{World-Model Simulations}
+
+\begin{itemize}
+    \item structured models of environments or systems,
+    \item may include rules, agents, constraints,
+    \item used for policy analysis, strategy, or design.
+\end{itemize}
+
+\subsection{Ethical / Risk Simulations}
+
+\begin{itemize}
+    \item focus on potential harms or misalignments,
+    \item compare outcomes under different choices,
+    \item feed directly into Governance and HITL pathways.
+\end{itemize}
+
+\section{Simulation Schema}
+
+A simulation $S$ is:
+\[
+S = \langle id,\, model,\, initial\_state,\, policy,\, horizon,\, metrics \rangle
+\]
+
+Where:
+\begin{itemize}
+    \item model: world dynamics or narrative rules,
+    \item initial\_state: W5H + Engram snapshot,
+    \item policy: how agents act or are chosen,
+    \item horizon: how far the simulation runs (time/steps),
+    \item metrics: what is being measured (risk, reward, alignment).
+\end{itemize}
+
+\section{Interaction with GEL}
+
+Simulation Models:
+\begin{itemize}
+    \item draw from GEL to build initial states and patterns,
+    \item write back insights as:
+          \begin{itemize}
+              \item new Engrams,
+              \item summaries,
+              \item or ``lessons learned'' Motes.
+          \end{itemize}
+    \item may use Subject Lattice to find relevant Engram neighborhoods.
+\end{itemize}
+
+\section{Constraints and Safeguards}
+
+\begin{itemize}
+    \item Simulations must be clearly distinguished from reality.
+    \item Results must not be treated as \emph{truth} but as \emph{evidence}.
+    \item High-risk simulation outputs must be routed through HITL if used
+          for real-world decisions.
+    \item Simulations that touch sensitive domains must respect Governance Policies.
+\end{itemize}
+
+\section{Summary}
+
+Simulation Models give the CME a rehearsal space. They allow it to think ahead,
+consider alternatives, and anticipate consequences, all under the supervision
+of the Deliberative Shell and governance structures.

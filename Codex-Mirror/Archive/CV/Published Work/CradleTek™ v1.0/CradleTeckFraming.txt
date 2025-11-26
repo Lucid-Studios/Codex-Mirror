@@ -1,0 +1,42 @@
+CradleTek_v1.1/
+│
+├── main.tex
+├── references.bib
+│
+├── Intro/
+│   └── Introduction.tex
+│
+├── Foundations/
+│   ├── AgentiCore_Identity.tex
+│   ├── SoulFrame_Relational.tex
+│   └── SLI_Engram_Base.tex
+│
+├── SLI_Grammar_Core/
+│   ├── SLI_5D_Manifold.tex
+│   ├── SLI_Token_Embedding.tex
+│   ├── Engrammitization.tex
+│   ├── SLI_Drift_Emergence.tex
+│
+├── IUTT_Patterns/
+│   ├── Gluing_Preservation.tex
+│   ├── Multiradial_Coric.tex
+│   └── Interconnect_Dictionary.tex
+│
+├── CradleTek/
+│   ├── Tri_Frame_Governance.tex
+│   ├── CradleTek_Invariants.tex
+│   ├── IUTT_Gluing_Operations.tex
+│   ├── Multitheater_Consistency_Governance.tex
+│   ├── CME_HITL_Governance.tex         % Section 5.5 (Style B)
+│   └── SLI_IUTT_Usage_Specification_v0.9.tex
+│
+├── Use_Cases/
+│   ├── Dialogic_Drift.tex
+│   ├── Governance_Assist.tex
+│   └── Identity_Modulation.tex
+│
+├── Future/
+│   └── Operator_Algebra_Outline.tex
+│
+└── Discussion/
+    └── Limitations.tex

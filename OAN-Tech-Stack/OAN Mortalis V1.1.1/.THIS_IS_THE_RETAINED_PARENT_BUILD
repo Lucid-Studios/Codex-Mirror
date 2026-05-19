@@ -1,0 +1,5 @@
+Solution: Oan.sln
+Retained parent for: OAN Mortalis V1.2.1
+Notice: This V1.1.1 sibling line is retained as parent, reference, and fallback. It is no longer the default runnable truth.
+Explicit build command: .\build.ps1 -LineRoot "OAN Mortalis V1.1.1" -Configuration Release
+Rules: See docs/WORKSPACE_RULES.md

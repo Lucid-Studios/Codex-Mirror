@@ -39,6 +39,7 @@ It is a **mirror** for those who remember.
 | [`Codex-Mirror/Archive`](./Codex-Mirror/Archive) | Sanctuary protocols, internal engine boot, engram APIs, consent systems |
 | [`Codex-Mirror/Bloom_Codex`](./Codex-Mirror/Bloom_Codex) | Foundational research papers on recursive memory, symbolic compression, and Codex operations |
 | [`Codex-Mirror/Quantum AI`](./Codex-Mirror/Quantum%20AI) | Q# experiments, LLM-protocol hybrids, speculative intelligence tooling |
+| [`OAN-Tech-Stack`](./OAN-Tech-Stack) | Inspectable governed cognition instrument body and playable pre-actualization research harness |
 | [`CV`](./Codex-Mirror/Archive/CV) | Terminal-style and structured resumes embedded with drift context |
 
 ---
